@@ -52,134 +52,69 @@ st.markdown("""
     /* Hero Banner */
     .hero-container {
         background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 50%, #2563EB 100%);
-        border-radius: 16px;
-        padding: 30px 36px;
+        border-radius: 14px;
+        padding: 28px 32px;
         color: white;
         margin-bottom: 24px;
-        box-shadow: 0 12px 28px -6px rgba(30, 58, 138, 0.3);
+        box-shadow: 0 10px 25px -5px rgba(30, 58, 138, 0.25);
     }
     .hero-badge {
         display: inline-flex;
         align-items: center;
-        background-color: rgba(16, 185, 129, 0.25);
+        background-color: rgba(16, 185, 129, 0.2);
         border: 1px solid #10B981;
         color: #34D399;
         font-size: 0.75rem;
         font-weight: 700;
-        padding: 4px 12px;
+        padding: 4px 10px;
         border-radius: 20px;
         letter-spacing: 0.5px;
         margin-bottom: 12px;
     }
     .hero-title {
-        font-size: 2.3rem;
+        font-size: 2.2rem;
         font-weight: 800;
         letter-spacing: -0.5px;
-        margin: 0 0 10px 0;
+        margin: 0 0 8px 0;
         line-height: 1.2;
     }
     .hero-subtitle {
-        font-size: 1.02rem;
-        color: #CBD5E1;
-        max-width: 850px;
-        line-height: 1.6;
+        font-size: 1.0rem;
+        color: #94A3B8;
+        max-width: 800px;
+        line-height: 1.5;
         margin: 0;
-    }
-
-    /* Custom KPI Cards */
-    .kpi-container {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 16px;
-        margin-bottom: 24px;
-    }
-    .kpi-card {
-        background: #FFFFFF;
-        border: 1px solid #E2E8F0;
-        border-radius: 12px;
-        padding: 16px 18px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-        border-top: 4px solid #2563EB;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .kpi-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 16px -4px rgba(0,0,0,0.08);
-    }
-    .kpi-title {
-        font-size: 0.78rem;
-        font-weight: 600;
-        color: #64748B;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        margin-bottom: 4px;
-    }
-    .kpi-value {
-        font-size: 1.55rem;
-        font-weight: 800;
-        color: #0F172A;
-        margin-bottom: 4px;
-        white-space: nowrap;
-    }
-    .kpi-badge-green {
-        display: inline-block;
-        font-size: 0.72rem;
-        font-weight: 700;
-        color: #059669;
-        background: #ECFDF5;
-        padding: 2px 8px;
-        border-radius: 12px;
-    }
-    .kpi-badge-orange {
-        display: inline-block;
-        font-size: 0.72rem;
-        font-weight: 700;
-        color: #D97706;
-        background: #FFFBEB;
-        padding: 2px 8px;
-        border-radius: 12px;
-    }
-    .kpi-badge-red {
-        display: inline-block;
-        font-size: 0.72rem;
-        font-weight: 700;
-        color: #DC2626;
-        background: #FEF2F2;
-        padding: 2px 8px;
-        border-radius: 12px;
     }
 
     /* Feature & Stat Cards */
     .feature-card {
         background-color: #FFFFFF;
         border: 1px solid #E2E8F0;
-        border-radius: 14px;
-        padding: 20px 22px;
+        border-radius: 12px;
+        padding: 20px;
         height: 100%;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.03);
-        margin-bottom: 8px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
     .feature-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 12px 20px -4px rgba(0,0,0,0.08);
-        border-color: #93C5FD;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(0,0,0,0.08);
+        border-color: #CBD5E1;
     }
     .feature-icon {
-        font-size: 2.0rem;
+        font-size: 1.8rem;
         margin-bottom: 10px;
     }
     .feature-title {
-        font-size: 1.12rem;
+        font-size: 1.1rem;
         font-weight: 700;
         color: #0F172A;
         margin-bottom: 6px;
     }
     .feature-desc {
-        font-size: 0.86rem;
+        font-size: 0.85rem;
         color: #64748B;
-        line-height: 1.5;
-        min-height: 48px;
+        line-height: 1.4;
     }
 
     /* AI Insight Callout */
@@ -197,13 +132,13 @@ st.markdown("""
     /* Tech Stack Badges */
     .tech-chip {
         display: inline-block;
-        background-color: #F8FAFC;
+        background-color: #F1F5F9;
         color: #334155;
-        font-size: 0.8rem;
+        font-size: 0.78rem;
         font-weight: 600;
-        padding: 6px 14px;
-        border-radius: 8px;
-        margin: 4px;
+        padding: 5px 12px;
+        border-radius: 6px;
+        margin: 3px;
         border: 1px solid #E2E8F0;
     }
 
@@ -376,163 +311,138 @@ if view_mode == "🏠 Executive Command Center":
     q_cust = con.execute("SELECT COUNT(*) FROM quarantine.quarantine_customers").fetchone()[0]
     total_quarantined = q_orders + q_items + q_cust
 
-    total_rev_val = float(kpi_raw['total_rev'])
-    if total_rev_val >= 1e7:
-        formatted_rev = f"₹{total_rev_val/1e7:.2f} Cr"
-    elif total_rev_val >= 1e5:
-        formatted_rev = f"₹{total_rev_val/1e5:.2f} L"
-    else:
-        formatted_rev = f"₹{total_rev_val:,.0f}"
-
-    total_orders_int = int(kpi_raw['total_orders'])
-    total_cust_int = int(kpi_raw['total_customers'])
-    margin_val = float(kpi_raw['margin_pct'])
-
-    # High-End Styled Metric Cards
-    st.markdown(f"""
-    <div class="kpi-container">
-        <div class="kpi-card" style="border-top-color: #2563EB;">
-            <div class="kpi-title">Cumulative Net Revenue</div>
-            <div class="kpi-value">{formatted_rev}</div>
-            <span class="kpi-badge-green">↑ Production Marts</span>
-        </div>
-        <div class="kpi-card" style="border-top-color: #10B981;">
-            <div class="kpi-title">Gross Profit Margin</div>
-            <div class="kpi-value">{margin_val:.1f}%</div>
-            <span class="kpi-badge-green">↑ Target &gt; 25%</span>
-        </div>
-        <div class="kpi-card" style="border-top-color: #8B5CF6;">
-            <div class="kpi-title">Transacted Orders</div>
-            <div class="kpi-value">{total_orders_int:,}</div>
-            <span class="kpi-badge-green">✔ Verified Orders</span>
-        </div>
-        <div class="kpi-card" style="border-top-color: #F59E0B;">
-            <div class="kpi-title">Active Customer Base</div>
-            <div class="kpi-value">{total_cust_int:,}</div>
-            <span class="kpi-badge-orange">● Conformed Entities</span>
-        </div>
-        <div class="kpi-card" style="border-top-color: #EF4444;">
-            <div class="kpi-title">Anomalies Quarantined</div>
-            <div class="kpi-value">{total_quarantined:,}</div>
-            <span class="kpi-badge-red">↑ 10-Point Intercept</span>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+    sc1, sc2, sc3, sc4, sc5 = st.columns(5)
+    formatted_rev = f"₹{kpi_raw['total_rev']/1e7:.2f} Cr" if kpi_raw['total_rev'] >= 1e7 else f"₹{kpi_raw['total_rev']:,.0f}"
+    sc1.metric("Cumulative Net Revenue", formatted_rev, delta="Production Marts", help=f"Exact Net Sales: ₹{kpi_raw['total_rev']:,.2f}")
+    sc2.metric("Gross Profit Margin", f"{kpi_raw['margin_pct']:.1f}%", delta="Target > 35%")
+    sc3.metric("Transacted Orders", f"{int(kpi_raw['total_orders']):,}")
+    sc4.metric("Active Customer Base", f"{int(kpi_raw['total_customers']):,}")
+    sc5.metric("Anomalies Quarantined", f"{int(total_quarantined):,}", delta="10-Point Interception", delta_color="inverse")
 
     st.markdown("---")
 
     st.subheader("⚡ Click Any Module to Launch & Explore")
     
-    g1, g2, g3 = st.columns(3)
+    # 8 Interactive Module Cards across 2 Rows
+    r1_c1, r1_c2, r1_c3, r1_c4 = st.columns(4)
     
-    with g1:
+    with r1_c1:
         st.markdown("""
         <div class="feature-card">
             <div class="feature-icon">🤖</div>
-            <div class="feature-title">AI Data Copilot & Choice Assistant</div>
-            <div class="feature-desc">Guided suggestion engine and natural language query synthesizer delivering live SQL execution and business insights.</div>
+            <div class="feature-title">AI Data Copilot</div>
+            <div class="feature-desc">Natural language to SQL with guided suggestion engine.</div>
         </div>
         """, unsafe_allow_html=True)
         if st.button("🚀 Open AI Copilot ➔", key="btn_hero_ai", use_container_width=True):
             set_tab("🤖 AI Data Copilot & Choice Assistant")
         
-    with g2:
+    with r1_c2:
         st.markdown("""
         <div class="feature-card">
             <div class="feature-icon">📊</div>
-            <div class="feature-title">Executive Sales Analytics</div>
-            <div class="feature-desc">Interactive multi-period revenue, margin velocity, AOV tracking, and regional store performance breakdown.</div>
+            <div class="feature-title">Sales Analytics</div>
+            <div class="feature-desc">Revenue velocity, realized profit margins & regional split.</div>
         </div>
         """, unsafe_allow_html=True)
         if st.button("📈 Open Sales Analytics ➔", key="btn_hero_sales", use_container_width=True):
             set_tab("📊 Executive Sales & Margin Analytics")
-        
-    with g3:
-        st.markdown("""
-        <div class="feature-card">
-            <div class="feature-icon">🛡️</div>
-            <div class="feature-title">10-Point Data Quality Engine</div>
-            <div class="feature-desc">Active anomaly interception isolating Null PKs, duplicate orders, and orphaned FKs into quarantine with audit reason codes.</div>
-        </div>
-        """, unsafe_allow_html=True)
-        if st.button("🛡️ Open Data Quality ➔", key="btn_hero_dq", use_container_width=True):
-            set_tab("🛡️ Data Quality & Health Scorecard")
 
-    st.markdown("<br>", unsafe_allow_html=True)
-    g4, g5, g6 = st.columns(3)
-
-    with g4:
-        st.markdown("""
-        <div class="feature-card">
-            <div class="feature-icon">🏗️</div>
-            <div class="feature-title">Pipeline Architecture & Flow</div>
-            <div class="feature-desc">Interactive data flow diagram and multi-tier ingestion guide from raw OLTP to governed Kimball Star Schema.</div>
-        </div>
-        """, unsafe_allow_html=True)
-        if st.button("🏗️ View Architecture Flow ➔", key="btn_hero_arch", use_container_width=True):
-            set_tab("🏗️ Pipeline Architecture & How It Works")
-
-    with g5:
+    with r1_c3:
         st.markdown("""
         <div class="feature-card">
             <div class="feature-icon">👥</div>
-            <div class="feature-title">Customer RFM Clustering</div>
-            <div class="feature-desc">Behavioral segmentation engine dividing customers into Champions, Loyalists, and At-Risk groups via NTILE(5) scoring.</div>
+            <div class="feature-title">Customer RFM</div>
+            <div class="feature-desc">Behavioral scoring into Champions, Loyalists & At-Risk.</div>
         </div>
         """, unsafe_allow_html=True)
         if st.button("👥 Open Customer RFM ➔", key="btn_hero_rfm", use_container_width=True):
             set_tab("👥 Customer & RFM Segmentation")
 
-    with g6:
+    with r1_c4:
         st.markdown("""
         <div class="feature-card">
             <div class="feature-icon">🛒</div>
-            <div class="feature-title">Product & Merchandising</div>
-            <div class="feature-desc">Category profit margin ranking, best-selling revenue SKUs, and price tier profitability matrix.</div>
+            <div class="feature-title">Product Intelligence</div>
+            <div class="feature-desc">Pareto 80/20 velocity, SKU margins & price tiers.</div>
         </div>
         """, unsafe_allow_html=True)
-        if st.button("🛒 Open Product Intelligence ➔", key="btn_hero_prod", use_container_width=True):
+        if st.button("🛒 Open Merchandising ➔", key="btn_hero_prod", use_container_width=True):
             set_tab("🛒 Product & Merchandising Intelligence")
 
     st.markdown("<br>", unsafe_allow_html=True)
-    g7, g8, g9 = st.columns(3)
+    r2_c1, r2_c2, r2_c3, r2_c4 = st.columns(4)
 
-    with g7:
+    with r2_c1:
+        st.markdown("""
+        <div class="feature-card">
+            <div class="feature-icon">🛡️</div>
+            <div class="feature-title">Data Quality Engine</div>
+            <div class="feature-desc">10-Point quality audit, reason codes & quarantine split.</div>
+        </div>
+        """, unsafe_allow_html=True)
+        if st.button("🛡️ Open Data Quality ➔", key="btn_hero_dq", use_container_width=True):
+            set_tab("🛡️ Data Quality & Health Scorecard")
+
+    with r2_c2:
+        st.markdown("""
+        <div class="feature-card">
+            <div class="feature-icon">🏗️</div>
+            <div class="feature-title">Pipeline Architecture</div>
+            <div class="feature-desc">Interactive data flow diagram from staging to marts.</div>
+        </div>
+        """, unsafe_allow_html=True)
+        if st.button("🏗️ View Architecture ➔", key="btn_hero_arch", use_container_width=True):
+            set_tab("🏗️ Pipeline Architecture & How It Works")
+
+    with r2_c3:
         st.markdown("""
         <div class="feature-card">
             <div class="feature-icon">📋</div>
-            <div class="feature-title">Pipeline Observability & Logs</div>
-            <div class="feature-desc">Structured execution logger, warehouse audit ledger table, and interactive browser-based on-demand pipeline runner.</div>
+            <div class="feature-title">Observability & Logs</div>
+            <div class="feature-desc">Execution audit ledger & 1-click on-demand pipeline runner.</div>
         </div>
         """, unsafe_allow_html=True)
         if st.button("📋 Open Execution Logs ➔", key="btn_hero_logs", use_container_width=True):
             set_tab("📋 Pipeline Execution & Audit Logs")
 
-    with g8:
+    with r2_c4:
         st.markdown("""
         <div class="feature-card">
             <div class="feature-icon">📖</div>
-            <div class="feature-title">Data Dictionary & Catalog</div>
-            <div class="feature-desc">60+ Documented business attributes with 4-Tier Security Classifications (PII Masking) and CSV/Excel export.</div>
+            <div class="feature-title">Data Dictionary</div>
+            <div class="feature-desc">60+ Attributes with 4-tier PII classification & CSV export.</div>
         </div>
         """, unsafe_allow_html=True)
-        if st.button("📖 Open Data Dictionary ➔", key="btn_hero_catalog", use_container_width=True):
+        if st.button("📖 Open Data Catalog ➔", key="btn_hero_dict", use_container_width=True):
             set_tab("📖 Data Dictionary & Catalog")
-
-    with g9:
-        st.markdown("""
-        <div class="feature-card">
-            <div class="feature-icon">🐙</div>
-            <div class="feature-title">GitHub Project Repository</div>
-            <div class="feature-desc">Complete production codebase with DDLs, dbt models, PyTest test suites, and Docker container configurations.</div>
-        </div>
-        """, unsafe_allow_html=True)
-        st.link_button("🐙 Visit GitHub Repository ↗", "https://github.com/Amanvarma2231/Enterprise-Data_Warehouse", use_container_width=True)
 
     st.markdown("---")
 
-    st.subheader("Integrated Technology Stack & Data Connectors")
+    # Languages & Tech Stack Breakdown Mirroring Image 2
+    st.subheader("Languages & Enterprise Technology Distribution")
     st.markdown("""
+    <div style="margin-bottom: 8px;">
+        <div style="height: 10px; width: 100%; display: flex; border-radius: 6px; overflow: hidden; margin-bottom: 10px;">
+            <div style="width: 64.2%; background-color: #3572A5;" title="Python 64.2%"></div>
+            <div style="width: 35.6%; background-color: #E38C00;" title="SQL 35.6%"></div>
+            <div style="width: 0.2%; background-color: #384d54;" title="Dockerfile 0.2%"></div>
+        </div>
+        <div style="font-size: 0.88rem; color: #334155; margin-bottom: 12px;">
+            <span style="display: inline-flex; align-items: center; margin-right: 18px;">
+                <span style="height: 10px; width: 10px; background-color: #3572A5; border-radius: 50%; display: inline-block; margin-right: 6px;"></span>
+                <b>Python</b> &nbsp;64.2%
+            </span>
+            <span style="display: inline-flex; align-items: center; margin-right: 18px;">
+                <span style="height: 10px; width: 10px; background-color: #E38C00; border-radius: 50%; display: inline-block; margin-right: 6px;"></span>
+                <b>SQL</b> &nbsp;35.6%
+            </span>
+            <span style="display: inline-flex; align-items: center;">
+                <span style="height: 10px; width: 10px; background-color: #384d54; border-radius: 50%; display: inline-block; margin-right: 6px;"></span>
+                <b>Dockerfile & CI</b> &nbsp;0.2%
+            </span>
+        </div>
+    </div>
     <div style="margin-top: 8px;">
         <span class="tech-chip">🦆 DuckDB 1.1.0</span>
         <span class="tech-chip">🟧 dbt Core</span>
@@ -545,7 +455,7 @@ if view_mode == "🏠 Executive Command Center":
         <span class="tech-chip">🐍 Python 3.10+</span>
         <span class="tech-chip">⚡ Streamlit Cloud</span>
         <span class="tech-chip">📊 Plotly Interactive</span>
-        <span class="tech-chip">🧪 PyTest (11/11 Passed)</span>
+        <span class="tech-chip">🧪 PyTest (14/14 Passed)</span>
     </div>
     """, unsafe_allow_html=True)
 
