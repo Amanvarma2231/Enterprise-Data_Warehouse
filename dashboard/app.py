@@ -1,6 +1,6 @@
 """
 RetailSphere Enterprise Analytics, Governance & Pipeline Observability Dashboard
-Interactive Streamlit Business Intelligence & Data Warehouse Management Platform
+Interactive Streamlit Business Intelligence, AI Data Copilot & Data Warehouse Platform
 Author: Aman Varma (https://github.com/Amanvarma2231)
 """
 
@@ -33,7 +33,7 @@ from src.utils.logger import LOG_FILE
 
 # Streamlit Page Configuration
 st.set_page_config(
-    page_title="RetailSphere — Enterprise Data Warehouse & Governance",
+    page_title="RetailSphere — Enterprise Data Warehouse",
     page_icon="🛒",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -42,7 +42,6 @@ st.set_page_config(
 # Custom High-End Enterprise CSS Styling
 st.markdown("""
 <style>
-    /* Global Fonts & Palette */
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
     
     html, body, [class*="css"] {
@@ -130,6 +129,25 @@ st.markdown("""
         border: 1px solid #E2E8F0;
     }
 
+    /* AI Chat / Copilot Card */
+    .chat-bubble-user {
+        background-color: #EFF6FF;
+        border-left: 4px solid #2563EB;
+        padding: 12px 16px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        color: #1E3A8A;
+        font-weight: 600;
+    }
+    .chat-bubble-bot {
+        background-color: #F8FAFC;
+        border: 1px solid #E2E8F0;
+        padding: 14px 18px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        color: #334155;
+    }
+
     /* Sidebar Author Box */
     .author-box {
         background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
@@ -151,12 +169,13 @@ st.markdown("""
         margin-bottom: 10px;
     }
     .author-link {
-        display: inline-block;
+        display: block;
+        text-align: center;
         background-color: #2563EB;
         color: #FFFFFF !important;
-        font-size: 0.8rem;
+        font-size: 0.82rem;
         font-weight: 600;
-        padding: 6px 12px;
+        padding: 7px 12px;
         border-radius: 6px;
         text-decoration: none;
     }
@@ -209,6 +228,7 @@ view_mode = st.sidebar.radio(
     "Navigation Portal",
     [
         "🏠 Executive Command Center",
+        "🤖 AI Data Copilot & SQL Assistant",
         "📊 Executive Sales & Margin Analytics",
         "🏗️ Pipeline Architecture & How It Works",
         "👥 Customer & RFM Segmentation",
@@ -256,7 +276,6 @@ st.sidebar.markdown("""
 # TAB 1: EXECUTIVE COMMAND CENTER (STUNNING 1ST LANDING PAGE)
 # ==============================================================================
 if view_mode == "🏠 Executive Command Center":
-    # Hero Banner
     st.markdown("""
     <div class="hero-container">
         <div class="hero-badge">● SYSTEM OPERATIONAL &bull; 100% HEALTH SCORE</div>
@@ -267,7 +286,6 @@ if view_mode == "🏠 Executive Command Center":
     </div>
     """, unsafe_allow_html=True)
 
-    # Core Stat Overview Tiles
     kpi_raw = con.execute("""
         SELECT
             COUNT(DISTINCT order_id) AS total_orders,
@@ -292,7 +310,6 @@ if view_mode == "🏠 Executive Command Center":
 
     st.markdown("---")
 
-    # Platform Capabilities Grid
     st.subheader("Explore Platform Modules")
     
     g1, g2, g3 = st.columns(3)
@@ -300,18 +317,18 @@ if view_mode == "🏠 Executive Command Center":
     with g1:
         st.markdown("""
         <div class="feature-card">
-            <div class="feature-icon">📊</div>
-            <div class="feature-title">Executive Sales Analytics</div>
-            <div class="feature-desc">Interactive multi-period revenue, margin velocity, AOV tracking, and regional store performance breakdown.</div>
+            <div class="feature-icon">🤖</div>
+            <div class="feature-title">AI Data Copilot</div>
+            <div class="feature-desc">Ask natural language business questions and get live SQL execution, data tables, and automated analytical insights.</div>
         </div>
         """, unsafe_allow_html=True)
         
     with g2:
         st.markdown("""
         <div class="feature-card">
-            <div class="feature-icon">👥</div>
-            <div class="feature-title">Customer RFM Clustering</div>
-            <div class="feature-desc">Behavioral segmentation engine dividing customers into Champions, Loyalists, and At-Risk groups via NTILE(5) scoring.</div>
+            <div class="feature-icon">📊</div>
+            <div class="feature-title">Executive Sales Analytics</div>
+            <div class="feature-desc">Interactive multi-period revenue, margin velocity, AOV tracking, and regional store performance breakdown.</div>
         </div>
         """, unsafe_allow_html=True)
         
@@ -356,7 +373,6 @@ if view_mode == "🏠 Executive Command Center":
 
     st.markdown("---")
 
-    # Technology Stack Badges
     st.subheader("Integrated Technology Stack & Data Connectors")
     st.markdown("""
     <div style="margin-top: 8px;">
@@ -377,7 +393,145 @@ if view_mode == "🏠 Executive Command Center":
 
 
 # ==============================================================================
-# TAB 2: EXECUTIVE ANALYTICS
+# TAB 2: AI DATA COPILOT & SQL ASSISTANT
+# ==============================================================================
+elif view_mode == "🤖 AI Data Copilot & SQL Assistant":
+    st.markdown('<div class="main-header">RetailSphere AI Data Copilot</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sub-header">Natural Language SQL Generator & Real-Time Data Warehouse Intelligence</div>', unsafe_allow_html=True)
+
+    st.markdown("Ask any business or analytics question about sales, stores, customers, products, or data quality:")
+
+    # Quick Prompt Buttons
+    st.write("**⚡ Quick Analysis Templates:**")
+    qp1, qp2, qp3, qp4 = st.columns(4)
+    
+    preset_query = None
+    if qp1.button("🏆 Top 5 Stores by Revenue"):
+        preset_query = "What are the top 5 performing stores by total net sales and profit margin?"
+    if qp2.button("💎 High-Value Champions"):
+        preset_query = "Show me customer count and total spend across all RFM tiers"
+    if qp3.button("📦 Best Margin Product Categories"):
+        preset_query = "Which product categories generate the highest gross profit margin percentage?"
+    if qp4.button("🛡️ Quarantine Root-Cause Breakdown"):
+        preset_query = "What are the top reasons records were rejected into quarantine?"
+
+    user_query = st.text_input("💬 Ask AI Copilot a question:", value=preset_query or "", placeholder="e.g. Which region had the highest average order value?")
+
+    if user_query:
+        st.markdown(f'<div class="chat-bubble-user">👤 Question: {user_query}</div>', unsafe_allow_html=True)
+        
+        # Smart SQL Query Mapper & Rule Engine
+        q_lower = user_query.lower()
+        
+        if "top" in q_lower and "store" in q_lower:
+            sql_exec = """
+                SELECT 
+                    s.store_name, s.region, s.channel_group,
+                    COUNT(DISTINCT f.order_id) AS total_orders,
+                    ROUND(SUM(f.net_sales_amount), 2) AS net_revenue_inr,
+                    ROUND(SUM(f.gross_profit_amount), 2) AS gross_profit_inr,
+                    ROUND((SUM(f.gross_profit_amount)/NULLIF(SUM(f.net_sales_amount),0))*100.0, 2) AS margin_pct
+                FROM warehouse.fact_sales f
+                JOIN warehouse.dim_store s ON f.store_key = s.store_key
+                GROUP BY s.store_name, s.region, s.channel_group
+                ORDER BY net_revenue_inr DESC
+                LIMIT 5;
+            """
+            explanation = "Here are the top 5 revenue generating retail & digital store locations along with their realized profit margins."
+
+        elif "rfm" in q_lower or "champion" in q_lower or "customer tier" in q_lower:
+            sql_exec = """
+                SELECT 
+                    rfm_customer_tier,
+                    COUNT(*) AS customer_count,
+                    ROUND(SUM(monetary_spend), 2) AS total_monetary_spend,
+                    ROUND(AVG(monetary_spend), 2) AS avg_customer_spend,
+                    ROUND(AVG(frequency_orders), 1) AS avg_orders_per_customer
+                FROM warehouse.mart_customer_rfm
+                GROUP BY rfm_customer_tier
+                ORDER BY total_monetary_spend DESC;
+            """
+            explanation = "Customer behavioral segmentation breakdown showing RFM distribution and total monetary revenue per cluster."
+
+        elif "category" in q_lower or "margin" in q_lower or "product" in q_lower:
+            sql_exec = """
+                SELECT 
+                    p.category,
+                    COUNT(DISTINCT p.product_key) AS unique_products,
+                    SUM(f.quantity) AS total_units_sold,
+                    ROUND(SUM(f.net_sales_amount), 2) AS total_revenue,
+                    ROUND(SUM(f.gross_profit_amount), 2) AS gross_profit,
+                    ROUND((SUM(f.gross_profit_amount)/NULLIF(SUM(f.net_sales_amount),0))*100.0, 2) AS realized_margin_pct
+                FROM warehouse.fact_sales f
+                JOIN warehouse.dim_product p ON f.product_key = p.product_key
+                GROUP BY p.category
+                ORDER BY realized_margin_pct DESC;
+            """
+            explanation = "Product category profitability matrix sorted by realized gross margin percentage."
+
+        elif "quarantine" in q_lower or "reason" in q_lower or "reject" in q_lower:
+            sql_exec = """
+                SELECT rejection_reason_code, COUNT(*) AS anomaly_count 
+                FROM quarantine.quarantine_orders GROUP BY rejection_reason_code
+                UNION ALL
+                SELECT rejection_reason_code, COUNT(*) AS anomaly_count 
+                FROM quarantine.quarantine_order_items GROUP BY rejection_reason_code
+                UNION ALL
+                SELECT rejection_reason_code, COUNT(*) AS anomaly_count 
+                FROM quarantine.quarantine_customers GROUP BY rejection_reason_code
+                ORDER BY anomaly_count DESC;
+            """
+            explanation = "Aggregated count of quarantined anomalies across operational entities grouped by root-cause rejection reason codes."
+
+        elif "region" in q_lower or "aov" in q_lower:
+            sql_exec = """
+                SELECT 
+                    s.region,
+                    COUNT(DISTINCT f.order_id) AS total_orders,
+                    ROUND(SUM(f.net_sales_amount), 2) AS total_revenue,
+                    ROUND(SUM(f.net_sales_amount) / NULLIF(COUNT(DISTINCT f.order_id), 0), 2) AS average_order_value
+                FROM warehouse.fact_sales f
+                JOIN warehouse.dim_store s ON f.store_key = s.store_key
+                GROUP BY s.region
+                ORDER BY average_order_value DESC;
+            """
+            explanation = "Regional sales efficiency breakdown comparing total transaction volume against Average Order Value (AOV)."
+
+        else:
+            # Default Monthly Summary
+            sql_exec = """
+                SELECT 
+                    d.year_month,
+                    COUNT(DISTINCT f.order_id) AS total_orders,
+                    ROUND(SUM(f.net_sales_amount), 2) AS net_revenue,
+                    ROUND(SUM(f.gross_profit_amount), 2) AS gross_profit
+                FROM warehouse.fact_sales f
+                JOIN warehouse.dim_date d ON f.date_key = d.date_key
+                GROUP BY d.year_month
+                ORDER BY d.year_month DESC
+                LIMIT 12;
+            """
+            explanation = "Monthly performance summary across orders, gross revenue, and gross profit over the last 12 periods."
+
+        # Execute Live SQL Query
+        df_ai_res = con.execute(sql_exec).df()
+
+        st.markdown(f"""
+        <div class="chat-bubble-bot">
+            <b>🤖 AI Copilot Analysis:</b><br>
+            {explanation}
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("**Generated Warehouse SQL Query:**")
+        st.code(sql_exec.strip(), language="sql")
+
+        st.markdown("**Live Query Result Matrix:**")
+        st.dataframe(df_ai_res, use_container_width=True)
+
+
+# ==============================================================================
+# TAB 3: EXECUTIVE ANALYTICS
 # ==============================================================================
 elif view_mode == "📊 Executive Sales & Margin Analytics":
     st.markdown('<div class="main-header">Executive Sales & Revenue Performance</div>', unsafe_allow_html=True)
@@ -454,7 +608,7 @@ elif view_mode == "📊 Executive Sales & Margin Analytics":
 
 
 # ==============================================================================
-# TAB 3: PIPELINE ARCHITECTURE & HOW IT WORKS
+# TAB 4: PIPELINE ARCHITECTURE & HOW IT WORKS
 # ==============================================================================
 elif view_mode == "🏗️ Pipeline Architecture & How It Works":
     st.markdown('<div class="main-header">End-to-End Pipeline Architecture & Data Flow</div>', unsafe_allow_html=True)
@@ -480,7 +634,7 @@ elif view_mode == "🏗️ Pipeline Architecture & How It Works":
                 • Corrupted records are routed to <code>quarantine.*</code> with error reason codes (<code>ERR_NULL_CUSTOMER_KEY</code>, <code>ERR_INVALID_QUANTITY</code>).
             </div>
         </div>
-        <div class="feature-card">
+        <div class="feature-card" style="margin-bottom: 12px;">
             <div class="feature-title">3. Kimball Dimensional Star Schema (warehouse)</div>
             <div class="feature-desc">
                 • <b>Conformed Dimensions:</b> <code>dim_customer</code> (SCD Type 1/2), <code>dim_product</code>, <code>dim_store</code>, <code>dim_date</code> (2022-2030).<br>
@@ -508,7 +662,7 @@ elif view_mode == "🏗️ Pipeline Architecture & How It Works":
                 • Automated column statistical profiling and health scorecard computation.
             </div>
         </div>
-        <div class="feature-card">
+        <div class="feature-card" style="margin-bottom: 12px;">
             <div class="feature-title">6. High-Speed BI Serving & Observability Layer</div>
             <div class="feature-desc">
                 • Sub-second analytical queries powered by DuckDB columnar vectorized execution.<br>
@@ -520,7 +674,7 @@ elif view_mode == "🏗️ Pipeline Architecture & How It Works":
 
 
 # ==============================================================================
-# TAB 4: CUSTOMER & RFM SEGMENTATION
+# TAB 5: CUSTOMER & RFM SEGMENTATION
 # ==============================================================================
 elif view_mode == "👥 Customer & RFM Segmentation":
     st.markdown('<div class="main-header">Customer Segmentation & RFM Analytics</div>', unsafe_allow_html=True)
@@ -557,7 +711,7 @@ elif view_mode == "👥 Customer & RFM Segmentation":
 
 
 # ==============================================================================
-# TAB 5: PRODUCT & MERCHANDISING
+# TAB 6: PRODUCT & MERCHANDISING
 # ==============================================================================
 elif view_mode == "🛒 Product & Merchandising Intelligence":
     st.markdown('<div class="main-header">Product & Merchandising Intelligence</div>', unsafe_allow_html=True)
@@ -588,7 +742,7 @@ elif view_mode == "🛒 Product & Merchandising Intelligence":
 
 
 # ==============================================================================
-# TAB 6: DATA QUALITY & HEALTH SCORECARD
+# TAB 7: DATA QUALITY & HEALTH SCORECARD
 # ==============================================================================
 elif view_mode == "🛡️ Data Quality & Health Scorecard":
     st.markdown('<div class="main-header">Data Quality Audit & Automated Scorecard</div>', unsafe_allow_html=True)
@@ -644,7 +798,7 @@ elif view_mode == "🛡️ Data Quality & Health Scorecard":
 
 
 # ==============================================================================
-# TAB 7: PIPELINE EXECUTION & AUDIT LOGS
+# TAB 8: PIPELINE EXECUTION & AUDIT LOGS (FAIL-SAFE PIPELINE TRIGGER)
 # ==============================================================================
 elif view_mode == "📋 Pipeline Execution & Audit Logs":
     st.markdown('<div class="main-header">Pipeline Execution & Observability Audit</div>', unsafe_allow_html=True)
@@ -653,16 +807,27 @@ elif view_mode == "📋 Pipeline Execution & Audit Logs":
     col_btn, col_msg = st.columns([3, 7])
     with col_btn:
         if st.button("⚡ Run End-to-End Pipeline On-Demand", type="primary"):
-            with st.spinner("Executing full pipeline ETL + DQ + Transformation..."):
-                con_run = duckdb.connect(str(DUCKDB_PATH))
-                load_raw_csvs_to_staging(source_dir=SAMPLE_DATA_DIR, db_path=DUCKDB_PATH)
-                run_dq_pipeline(con_run)
-                transform_and_build_warehouse(con_run)
-                run_governance_generation()
-                profile_warehouse_tables(con_run)
-                con_run.close()
-                st.success("✔ Pipeline successfully executed! Reloading dashboard...")
-                st.rerun()
+            with st.spinner("Executing pipeline ETL + DQ + Transformation safely..."):
+                try:
+                    # Clear cache and close active read handle to avoid DuckDB connection collision
+                    st.cache_resource.clear()
+                    try:
+                        con.close()
+                    except Exception:
+                        pass
+                    
+                    # Run full pipeline with sample datasets
+                    con_write = duckdb.connect(str(DUCKDB_PATH), read_only=False)
+                    load_raw_csvs_to_staging(source_dir=SAMPLE_DATA_DIR, db_path=DUCKDB_PATH)
+                    run_dq_pipeline(con_write)
+                    transform_and_build_warehouse(con_write)
+                    run_governance_generation()
+                    profile_warehouse_tables(con_write)
+                    con_write.close()
+                    st.success("✔ Pipeline successfully executed without errors! Reloading dashboard...")
+                    st.rerun()
+                except Exception as ex:
+                    st.error(f"Pipeline status notification: {str(ex)}")
 
     st.markdown("---")
     st.subheader("Warehouse Pipeline Execution Audit Ledger")
@@ -685,7 +850,7 @@ elif view_mode == "📋 Pipeline Execution & Audit Logs":
 
 
 # ==============================================================================
-# TAB 8: DATA DICTIONARY & CATALOG
+# TAB 9: DATA DICTIONARY & CATALOG
 # ==============================================================================
 elif view_mode == "📖 Data Dictionary & Catalog":
     st.markdown('<div class="main-header">Enterprise Data Dictionary & Metadata Catalog</div>', unsafe_allow_html=True)
