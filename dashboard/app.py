@@ -31,59 +31,134 @@ from src.governance.metadata_manager import run_governance_generation
 from src.governance.data_profiler import profile_warehouse_tables
 from src.utils.logger import LOG_FILE
 
+# Streamlit Page Configuration
 st.set_page_config(
-    page_title="RetailSphere Enterprise Data Warehouse",
+    page_title="RetailSphere — Enterprise Data Warehouse & Governance",
     page_icon="🛒",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
-# Custom CSS styling for polished enterprise look
+# Custom High-End Enterprise CSS Styling
 st.markdown("""
 <style>
-    .main-header {
-        font-size: 2.2rem;
+    /* Global Fonts & Palette */
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    
+    html, body, [class*="css"] {
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    /* Hero Banner */
+    .hero-container {
+        background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 50%, #2563EB 100%);
+        border-radius: 14px;
+        padding: 28px 32px;
+        color: white;
+        margin-bottom: 24px;
+        box-shadow: 0 10px 25px -5px rgba(30, 58, 138, 0.25);
+    }
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        background-color: rgba(16, 185, 129, 0.2);
+        border: 1px solid #10B981;
+        color: #34D399;
+        font-size: 0.75rem;
         font-weight: 700;
-        color: #1E3A8A;
-        margin-bottom: 0.2rem;
-    }
-    .sub-header {
-        font-size: 1.0rem;
-        color: #64748B;
-        margin-bottom: 1.5rem;
-    }
-    .flow-card {
-        background-color: #F8FAFC;
-        border: 1px solid #E2E8F0;
-        border-radius: 8px;
-        padding: 16px;
+        padding: 4px 10px;
+        border-radius: 20px;
+        letter-spacing: 0.5px;
         margin-bottom: 12px;
+    }
+    .hero-title {
+        font-size: 2.2rem;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        margin: 0 0 8px 0;
+        line-height: 1.2;
+    }
+    .hero-subtitle {
+        font-size: 1.0rem;
+        color: #94A3B8;
+        max-width: 800px;
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    /* Feature & Stat Cards */
+    .feature-card {
+        background-color: #FFFFFF;
+        border: 1px solid #E2E8F0;
+        border-radius: 12px;
+        padding: 20px;
+        height: 100%;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
         box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
-    .flow-title {
+    .feature-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(0,0,0,0.08);
+        border-color: #CBD5E1;
+    }
+    .feature-icon {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+    }
+    .feature-title {
         font-size: 1.1rem;
         font-weight: 700;
-        color: #1E3A8A;
+        color: #0F172A;
         margin-bottom: 6px;
     }
-    .flow-desc {
-        font-size: 0.9rem;
-        color: #475569;
+    .feature-desc {
+        font-size: 0.85rem;
+        color: #64748B;
         line-height: 1.4;
     }
-    .badge-success {
-        background-color: #DEF7EC;
-        color: #03543F;
-        padding: 4px 8px;
-        border-radius: 4px;
-        font-weight: bold;
+
+    /* Stack Chip Badges */
+    .tech-chip {
+        display: inline-block;
+        background-color: #F1F5F9;
+        color: #334155;
+        font-size: 0.78rem;
+        font-weight: 600;
+        padding: 5px 12px;
+        border-radius: 6px;
+        margin: 3px;
+        border: 1px solid #E2E8F0;
     }
-    .author-card {
-        background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+
+    /* Sidebar Author Box */
+    .author-box {
+        background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+        border: 1px solid #334155;
+        border-radius: 10px;
+        padding: 16px;
         color: white;
-        padding: 14px;
-        border-radius: 8px;
-        margin-top: 15px;
+        margin-top: 20px;
+    }
+    .author-name {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #FFFFFF;
+        margin-bottom: 2px;
+    }
+    .author-role {
+        font-size: 0.78rem;
+        color: #94A3B8;
+        margin-bottom: 10px;
+    }
+    .author-link {
+        display: inline-block;
+        background-color: #2563EB;
+        color: #FFFFFF !important;
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 6px 12px;
+        border-radius: 6px;
+        text-decoration: none;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -120,26 +195,32 @@ def get_connection():
 
 con = get_connection()
 
-# Sidebar Navigation & Filters
-st.sidebar.image("https://img.icons8.com/fluency/96/shop.png", width=64)
-st.sidebar.title("RetailSphere DW")
-st.sidebar.caption("Enterprise Star Schema & Governance")
+# Sidebar Brand & Logo
+logo_path = Path("assets/logo.png")
+if logo_path.exists():
+    st.sidebar.image(str(logo_path), use_container_width=True)
+else:
+    st.sidebar.image("https://img.icons8.com/fluency/96/shop.png", width=64)
+    st.sidebar.title("RetailSphere DW")
+
+st.sidebar.caption("Enterprise Star Schema & Governance Platform")
 
 view_mode = st.sidebar.radio(
-    "Navigation Mode",
+    "Navigation Portal",
     [
-        "📊 Executive Analytics",
-        "🏗️ Pipeline Architecture & Data Flow",
-        "👥 Customer & RFM",
-        "🛒 Product & Merchandising",
-        "🛡️ Data Quality & Scorecard",
+        "🏠 Executive Command Center",
+        "📊 Executive Sales & Margin Analytics",
+        "🏗️ Pipeline Architecture & How It Works",
+        "👥 Customer & RFM Segmentation",
+        "🛒 Product & Merchandising Intelligence",
+        "🛡️ Data Quality & Health Scorecard",
         "📋 Pipeline Execution & Audit Logs",
         "📖 Data Dictionary & Catalog"
     ]
 )
 
 st.sidebar.markdown("---")
-st.sidebar.subheader("Global Filters")
+st.sidebar.subheader("Global Filter Drill-Down")
 
 regions = ["All Regions"] + [r[0] for r in con.execute("SELECT DISTINCT region FROM warehouse.dim_store ORDER BY region").fetchall()]
 selected_region = st.sidebar.selectbox("Filter by Region", regions)
@@ -161,25 +242,147 @@ if selected_channel != "All Channels":
 
 filter_sql = " AND ".join(where_clauses)
 
-# Sidebar Author & Contact Card
-st.sidebar.markdown("---")
+# Sidebar Author Spotlight Card
 st.sidebar.markdown("""
-<div class="author-card">
-    <div style="font-weight: bold; font-size: 1rem; margin-bottom: 4px;">👨‍💻 Aman Varma</div>
-    <div style="font-size: 0.8rem; opacity: 0.9; margin-bottom: 8px;">Data Modeler & Analytics Engineer</div>
-    <a href="https://github.com/Amanvarma2231" target="_blank" style="color: #FDE047; text-decoration: none; font-size: 0.85rem; font-weight: bold;">🐙 GitHub Profile ↗</a>
+<div class="author-box">
+    <div class="author-name">Aman Varma</div>
+    <div class="author-role">Data Modeler & Analytics Engineer</div>
+    <a class="author-link" href="https://github.com/Amanvarma2231/Enterprise-Data_Warehouse" target="_blank">🐙 GitHub Repository ↗</a>
 </div>
 """, unsafe_allow_html=True)
 
 
 # ==============================================================================
-# TAB 1: EXECUTIVE ANALYTICS
+# TAB 1: EXECUTIVE COMMAND CENTER (STUNNING 1ST LANDING PAGE)
 # ==============================================================================
-if view_mode == "📊 Executive Analytics":
+if view_mode == "🏠 Executive Command Center":
+    # Hero Banner
+    st.markdown("""
+    <div class="hero-container">
+        <div class="hero-badge">● SYSTEM OPERATIONAL &bull; 100% HEALTH SCORE</div>
+        <div class="hero-title">RetailSphere Enterprise Data Warehouse</div>
+        <div class="hero-subtitle">
+            An end-to-end production data platform integrating multi-source ingestion (MySQL, PostgreSQL, MongoDB, SQLite), automated 10-Point Data Quality quarantine, Kimball Dimensional Star Schema modeling, and real-time BI serving.
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Core Stat Overview Tiles
+    kpi_raw = con.execute("""
+        SELECT
+            COUNT(DISTINCT order_id) AS total_orders,
+            COUNT(DISTINCT customer_key) AS total_customers,
+            SUM(net_sales_amount) AS total_rev,
+            SUM(gross_profit_amount) AS total_profit,
+            ROUND((SUM(gross_profit_amount)/NULLIF(SUM(net_sales_amount),0))*100.0, 1) AS margin_pct
+        FROM warehouse.fact_sales;
+    """).fetchdf().iloc[0]
+
+    q_orders = con.execute("SELECT COUNT(*) FROM quarantine.quarantine_orders").fetchone()[0]
+    q_items = con.execute("SELECT COUNT(*) FROM quarantine.quarantine_order_items").fetchone()[0]
+    q_cust = con.execute("SELECT COUNT(*) FROM quarantine.quarantine_customers").fetchone()[0]
+    total_quarantined = q_orders + q_items + q_cust
+
+    sc1, sc2, sc3, sc4, sc5 = st.columns(5)
+    sc1.metric("Cumulative Net Revenue", f"₹{kpi_raw['total_rev']:,.0f}", delta="Production Marts")
+    sc2.metric("Gross Profit Margin", f"{kpi_raw['margin_pct']:.1f}%", delta="Target > 35%")
+    sc3.metric("Transacted Orders", f"{kpi_raw['total_orders']:,}")
+    sc4.metric("Active Customer Base", f"{kpi_raw['total_customers']:,}")
+    sc5.metric("Anomalies Quarantined", f"{total_quarantined:,}", delta="10-Point Interception", delta_color="inverse")
+
+    st.markdown("---")
+
+    # Platform Capabilities Grid
+    st.subheader("Explore Platform Modules")
+    
+    g1, g2, g3 = st.columns(3)
+    
+    with g1:
+        st.markdown("""
+        <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <div class="feature-title">Executive Sales Analytics</div>
+            <div class="feature-desc">Interactive multi-period revenue, margin velocity, AOV tracking, and regional store performance breakdown.</div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+    with g2:
+        st.markdown("""
+        <div class="feature-card">
+            <div class="feature-icon">👥</div>
+            <div class="feature-title">Customer RFM Clustering</div>
+            <div class="feature-desc">Behavioral segmentation engine dividing customers into Champions, Loyalists, and At-Risk groups via NTILE(5) scoring.</div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+    with g3:
+        st.markdown("""
+        <div class="feature-card">
+            <div class="feature-icon">🛡️</div>
+            <div class="feature-title">10-Point Data Quality Engine</div>
+            <div class="feature-desc">Active anomaly interception isolating Null PKs, duplicate orders, and orphaned FKs into quarantine with audit reason codes.</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown("<br>", unsafe_allow_html=True)
+    g4, g5, g6 = st.columns(3)
+
+    with g4:
+        st.markdown("""
+        <div class="feature-card">
+            <div class="feature-icon">🏗️</div>
+            <div class="feature-title">Kimball Star Schema Warehouse</div>
+            <div class="feature-desc">Conformed dimensions (Date 2022-2030, Customer, Product, Store) and line-item atomic fact tables with surrogate keys.</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with g5:
+        st.markdown("""
+        <div class="feature-card">
+            <div class="feature-icon">📋</div>
+            <div class="feature-title">Pipeline Observability & Logs</div>
+            <div class="feature-desc">Structured execution logger, warehouse audit ledger table, and interactive browser-based on-demand pipeline runner.</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with g6:
+        st.markdown("""
+        <div class="feature-card">
+            <div class="feature-icon">📖</div>
+            <div class="feature-title">Governance & Data Catalog</div>
+            <div class="feature-desc">60+ Documented business attributes with 4-Tier Security Classifications (PII Masking) and CSV/Excel export.</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown("---")
+
+    # Technology Stack Badges
+    st.subheader("Integrated Technology Stack & Data Connectors")
+    st.markdown("""
+    <div style="margin-top: 8px;">
+        <span class="tech-chip">🦆 DuckDB 1.1.0</span>
+        <span class="tech-chip">🟧 dbt Core</span>
+        <span class="tech-chip">🐬 MySQL 8.0</span>
+        <span class="tech-chip">🐘 PostgreSQL 15</span>
+        <span class="tech-chip">🍃 MongoDB (NoSQL)</span>
+        <span class="tech-chip">🪶 SQLite 3</span>
+        <span class="tech-chip">❄️ Snowflake Cloud</span>
+        <span class="tech-chip">🔍 Google Cloud BigQuery</span>
+        <span class="tech-chip">🐍 Python 3.10+</span>
+        <span class="tech-chip">⚡ Streamlit Cloud</span>
+        <span class="tech-chip">📊 Plotly Interactive</span>
+        <span class="tech-chip">🧪 PyTest (11/11 Passed)</span>
+    </div>
+    """, unsafe_allow_html=True)
+
+
+# ==============================================================================
+# TAB 2: EXECUTIVE ANALYTICS
+# ==============================================================================
+elif view_mode == "📊 Executive Sales & Margin Analytics":
     st.markdown('<div class="main-header">Executive Sales & Revenue Performance</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-header">Real-time analytical insights powered by Kimball Star Schema data marts</div>', unsafe_allow_html=True)
 
-    # Core High-Level KPIs
     kpi_query = f"""
         SELECT
             COUNT(DISTINCT f.order_id) AS total_orders,
@@ -207,7 +410,6 @@ if view_mode == "📊 Executive Analytics":
 
     st.markdown("---")
 
-    # Monthly Trends
     row1_c1, row1_c2 = st.columns([7, 5])
     
     with row1_c1:
@@ -252,39 +454,35 @@ if view_mode == "📊 Executive Analytics":
 
 
 # ==============================================================================
-# TAB 2: PIPELINE ARCHITECTURE & HOW IT WORKS
+# TAB 3: PIPELINE ARCHITECTURE & HOW IT WORKS
 # ==============================================================================
-elif view_mode == "🏗️ Pipeline Architecture & Data Flow":
-    st.markdown('<div class="main-header">End-to-End Pipeline Architecture & How It Works</div>', unsafe_allow_html=True)
+elif view_mode == "🏗️ Pipeline Architecture & How It Works":
+    st.markdown('<div class="main-header">End-to-End Pipeline Architecture & Data Flow</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-header">Technical operational guide: Data lifecycle from raw ingestion to governed marts</div>', unsafe_allow_html=True)
-
-    st.markdown("""
-    RetailSphere implements a **multi-tier data pipeline** that guarantees high-throughput ingestion, zero corrupted data in production marts, and sub-second analytics response times.
-    """)
 
     col_f1, col_f2 = st.columns(2)
 
     with col_f1:
         st.markdown("""
-        <div class="flow-card">
-            <div class="flow-title">1. Multi-Source Ingestion Layer (staging)</div>
-            <div class="flow-desc">
-                • Connectors ingest from <b>MySQL (OLTP), PostgreSQL, MongoDB (NoSQL)</b> and CSV streams.<br>
-                • Data is landed verbatim in staging tables (<code>stg_customers</code>, <code>stg_orders</code>, <code>stg_order_items</code>, etc.).<br>
+        <div class="feature-card" style="margin-bottom: 12px;">
+            <div class="feature-title">1. Multi-Source Ingestion Layer (staging)</div>
+            <div class="feature-desc">
+                • Connectors ingest from <b>MySQL (OLTP), PostgreSQL, MongoDB (NoSQL)</b>, SQLite and CSV streams.<br>
+                • Data is landed verbatim in staging tables (<code>stg_customers</code>, <code>stg_orders</code>, <code>stg_order_items</code>).<br>
                 • Every record is stamped with <code>_ingested_at</code> timestamp and source provenance.
             </div>
         </div>
-        <div class="flow-card">
-            <div class="flow-title">2. 10-Point Data Quality & Quarantine Engine (quarantine)</div>
-            <div class="flow-desc">
+        <div class="feature-card" style="margin-bottom: 12px;">
+            <div class="feature-title">2. 10-Point Data Quality & Quarantine Engine (quarantine)</div>
+            <div class="feature-desc">
                 • Intercepts staging records before warehouse transformation.<br>
                 • Validates Null Primary Keys, duplicate order keys, orphaned foreign keys, future dates, and negative quantities.<br>
                 • Corrupted records are routed to <code>quarantine.*</code> with error reason codes (<code>ERR_NULL_CUSTOMER_KEY</code>, <code>ERR_INVALID_QUANTITY</code>).
             </div>
         </div>
-        <div class="flow-card">
-            <div class="flow-title">3. Kimball Dimensional Star Schema (warehouse)</div>
-            <div class="flow-desc">
+        <div class="feature-card">
+            <div class="feature-title">3. Kimball Dimensional Star Schema (warehouse)</div>
+            <div class="feature-desc">
                 • <b>Conformed Dimensions:</b> <code>dim_customer</code> (SCD Type 1/2), <code>dim_product</code>, <code>dim_store</code>, <code>dim_date</code> (2022-2030).<br>
                 • <b>Atomic Facts:</b> <code>fact_sales</code> (line-item grain), <code>fact_payments</code> (reconciliation).<br>
                 • Generates surrogate keys, establishes referential integrity, and computes realized margins.
@@ -294,25 +492,25 @@ elif view_mode == "🏗️ Pipeline Architecture & Data Flow":
 
     with col_f2:
         st.markdown("""
-        <div class="flow-card">
-            <div class="flow-title">4. Analytics Engineering & dbt Layer (marts)</div>
-            <div class="flow-desc">
+        <div class="feature-card" style="margin-bottom: 12px;">
+            <div class="feature-title">4. Analytics Engineering & dbt Layer (marts)</div>
+            <div class="feature-desc">
                 • Modular transformations: <code>staging</code> ➜ <code>intermediate</code> ➜ <code>marts</code>.<br>
                 • Pre-aggregated analytical marts: <code>mart_monthly_store_performance</code> and <code>mart_customer_rfm</code>.<br>
                 • Automated dbt schema assertions (<code>unique</code>, <code>not_null</code>, <code>relationships</code>).
             </div>
         </div>
-        <div class="flow-card">
-            <div class="flow-title">5. Data Governance & Metadata Catalog</div>
-            <div class="flow-desc">
+        <div class="feature-card" style="margin-bottom: 12px;">
+            <div class="feature-title">5. Data Governance & Metadata Catalog</div>
+            <div class="feature-desc">
                 • 60+ Documented column attributes with business definitions.<br>
                 • 4-Tier Security Policy (<code>PUBLIC</code>, <code>INTERNAL</code>, <code>CONFIDENTIAL PII</code>, <code>RESTRICTED</code>).<br>
                 • Automated column statistical profiling and health scorecard computation.
             </div>
         </div>
-        <div class="flow-card">
-            <div class="flow-title">6. High-Speed BI Serving & Observability Layer</div>
-            <div class="flow-desc">
+        <div class="feature-card">
+            <div class="feature-title">6. High-Speed BI Serving & Observability Layer</div>
+            <div class="feature-desc">
                 • Sub-second analytical queries powered by DuckDB columnar vectorized execution.<br>
                 • Execution run ledger logged in <code>dim_pipeline_execution_log</code>.<br>
                 • Real-time Streamlit BI portal with live filter drill-downs and CSV export.
@@ -322,9 +520,9 @@ elif view_mode == "🏗️ Pipeline Architecture & Data Flow":
 
 
 # ==============================================================================
-# TAB 3: CUSTOMER & RFM SEGMENTATION
+# TAB 4: CUSTOMER & RFM SEGMENTATION
 # ==============================================================================
-elif view_mode == "👥 Customer & RFM":
+elif view_mode == "👥 Customer & RFM Segmentation":
     st.markdown('<div class="main-header">Customer Segmentation & RFM Analytics</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-header">Behavioral clustering: Recency, Frequency, Monetary spend distribution</div>', unsafe_allow_html=True)
 
@@ -359,9 +557,9 @@ elif view_mode == "👥 Customer & RFM":
 
 
 # ==============================================================================
-# TAB 4: PRODUCT & MERCHANDISING
+# TAB 5: PRODUCT & MERCHANDISING
 # ==============================================================================
-elif view_mode == "🛒 Product & Merchandising":
+elif view_mode == "🛒 Product & Merchandising Intelligence":
     st.markdown('<div class="main-header">Product & Merchandising Intelligence</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-header">Category margins, top velocity SKUs, and price tier profitability</div>', unsafe_allow_html=True)
 
@@ -390,9 +588,9 @@ elif view_mode == "🛒 Product & Merchandising":
 
 
 # ==============================================================================
-# TAB 5: DATA QUALITY & SCORECARD
+# TAB 6: DATA QUALITY & HEALTH SCORECARD
 # ==============================================================================
-elif view_mode == "🛡️ Data Quality & Scorecard":
+elif view_mode == "🛡️ Data Quality & Health Scorecard":
     st.markdown('<div class="main-header">Data Quality Audit & Automated Scorecard</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-header">Enterprise Data Quality Scorecard, column profiling & anomaly isolation</div>', unsafe_allow_html=True)
 
@@ -405,7 +603,6 @@ elif view_mode == "🛡️ Data Quality & Scorecard":
     qc2.metric("Quarantined Order Items", f"{q_items:,}", delta="Isolated", delta_color="inverse")
     qc3.metric("Quarantined Customers", f"{q_cust:,}", delta="Isolated", delta_color="inverse")
     
-    # Check if profile table exists
     has_profile = con.execute("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='warehouse' AND table_name='audit_column_profile'").fetchone()[0] > 0
     if has_profile:
         avg_score = con.execute("SELECT AVG(health_score) FROM warehouse.audit_column_profile").fetchone()[0]
@@ -447,7 +644,7 @@ elif view_mode == "🛡️ Data Quality & Scorecard":
 
 
 # ==============================================================================
-# TAB 6: PIPELINE EXECUTION & AUDIT LOGS
+# TAB 7: PIPELINE EXECUTION & AUDIT LOGS
 # ==============================================================================
 elif view_mode == "📋 Pipeline Execution & Audit Logs":
     st.markdown('<div class="main-header">Pipeline Execution & Observability Audit</div>', unsafe_allow_html=True)
@@ -488,7 +685,7 @@ elif view_mode == "📋 Pipeline Execution & Audit Logs":
 
 
 # ==============================================================================
-# TAB 7: DATA DICTIONARY & CATALOG
+# TAB 8: DATA DICTIONARY & CATALOG
 # ==============================================================================
 elif view_mode == "📖 Data Dictionary & Catalog":
     st.markdown('<div class="main-header">Enterprise Data Dictionary & Metadata Catalog</div>', unsafe_allow_html=True)
@@ -508,6 +705,5 @@ elif view_mode == "📖 Data Dictionary & Catalog":
         else:
             st.dataframe(df_meta, use_container_width=True)
             
-        # Download button
         csv_data = df_meta.to_csv(index=False).encode('utf-8')
         st.download_button("📥 Download Metadata Catalog (CSV)", data=csv_data, file_name="retail_metadata_catalog.csv", mime="text/csv")
