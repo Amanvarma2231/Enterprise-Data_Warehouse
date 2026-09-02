@@ -88,32 +88,31 @@ st.markdown("""
 
     /* Feature & Stat Cards */
     .feature-card {
-        background-color: #FFFFFF;
-        border: 1px solid #E2E8F0;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(226, 232, 240, 0.2);
         border-radius: 12px;
-        padding: 20px;
-        height: 100%;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        padding: 18px 16px;
+        margin-bottom: 8px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     }
     .feature-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 15px -3px rgba(0,0,0,0.08);
-        border-color: #CBD5E1;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px -3px rgba(37, 99, 235, 0.15);
+        border-color: #3B82F6;
     }
     .feature-icon {
         font-size: 1.8rem;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
     }
     .feature-title {
-        font-size: 1.1rem;
+        font-size: 1.05rem;
         font-weight: 700;
-        color: #0F172A;
-        margin-bottom: 6px;
+        margin-bottom: 4px;
     }
     .feature-desc {
-        font-size: 0.85rem;
-        color: #64748B;
+        font-size: 0.82rem;
+        color: #94A3B8;
         line-height: 1.4;
     }
 
@@ -132,14 +131,14 @@ st.markdown("""
     /* Tech Stack Badges */
     .tech-chip {
         display: inline-block;
-        background-color: #F1F5F9;
-        color: #334155;
+        background-color: #1E293B;
+        color: #F8FAFC;
         font-size: 0.78rem;
         font-weight: 600;
         padding: 5px 12px;
         border-radius: 6px;
         margin: 3px;
-        border: 1px solid #E2E8F0;
+        border: 1px solid #334155;
     }
 
     /* Sidebar Author Box */
@@ -231,23 +230,19 @@ NAV_OPTIONS = [
     "📖 Data Dictionary & Catalog"
 ]
 
-if "nav_portal" not in st.session_state:
-    st.session_state.nav_portal = NAV_OPTIONS[0]
+if "nav_radio" not in st.session_state:
+    st.session_state.nav_radio = NAV_OPTIONS[0]
 
 def set_tab(tab_name: str):
     """Programmatically switch active navigation tab."""
-    st.session_state.nav_portal = tab_name
+    st.session_state.nav_radio = tab_name
     st.rerun()
 
 view_mode = st.sidebar.radio(
     "Navigation Portal",
     NAV_OPTIONS,
-    index=NAV_OPTIONS.index(st.session_state.nav_portal) if st.session_state.nav_portal in NAV_OPTIONS else 0,
     key="nav_radio"
 )
-
-if view_mode != st.session_state.nav_portal:
-    st.session_state.nav_portal = view_mode
 
 st.sidebar.markdown("---")
 st.sidebar.subheader("Global Filter Drill-Down")
