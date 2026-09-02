@@ -34,3 +34,16 @@ def db_conn():
         con.close()
     except Exception:
         pass
+
+
+@pytest.fixture
+def temp_db(tmp_path):
+    """Temporary DuckDB file path fixture."""
+    db_file = tmp_path / "temp_warehouse.duckdb"
+    yield db_file
+
+
+@pytest.fixture
+def populated_db(db_conn):
+    """Fixture providing populated connection."""
+    yield db_conn

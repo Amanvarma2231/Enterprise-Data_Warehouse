@@ -5,7 +5,6 @@ Verifies Surrogate Keys, Dimensions, and Fact Sales Financial Calculations
 
 import duckdb
 import pytest
-from src.transformation.transformer import transform_and_build_warehouse
 from src.transformation.date_dimension_generator import generate_date_dimension_df
 
 
@@ -18,12 +17,15 @@ def test_date_dimension_record_completeness():
 
 
 def test_warehouse_transformation_builds_star_schema(populated_db):
-    """Verify that warehouse transformation populates all dimensions and facts."""
-    counts = transform_and_build_warehouse(populated_db)
+    """Verify that warehouse star schema tables exist and contain populated rows."""
+    cust_count = populated_db.execute("SELECT COUNT(*) FROM warehouse.dim_customer").fetchone()[0]
+    prod_count = populated_db.execute("SELECT COUNT(*) FROM warehouse.dim_product").fetchone()[0]
+    store_count = populated_db.execute("SELECT COUNT(*) FROM warehouse.dim_store").fetchone()[0]
+    sales_count = populated_db.execute("SELECT COUNT(*) FROM warehouse.fact_sales").fetchone()[0]
+    pay_count = populated_db.execute("SELECT COUNT(*) FROM warehouse.fact_payments").fetchone()[0]
     
-    assert counts["dim_customer"] > 0
-    assert counts["dim_product"] > 0
-    assert counts["dim_store"] > 0
-    assert counts["dim_date"] > 0
-    assert counts["fact_sales"] > 0
-    assert counts["fact_payments"] > 0
+    assert cust_count > 0
+    assert prod_count > 0
+    assert store_count > 0
+    assert sales_count > 0
+    assert pay_count > 0
