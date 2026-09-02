@@ -1,6 +1,7 @@
 """
 RetailSphere Enterprise Analytics, Governance & Pipeline Observability Dashboard
 Interactive Streamlit Business Intelligence & Data Warehouse Management Platform
+Author: Aman Varma (https://github.com/Amanvarma2231)
 """
 
 import os
@@ -51,16 +52,24 @@ st.markdown("""
         color: #64748B;
         margin-bottom: 1.5rem;
     }
-    .metric-card {
+    .flow-card {
         background-color: #F8FAFC;
         border: 1px solid #E2E8F0;
         border-radius: 8px;
-        padding: 15px;
+        padding: 16px;
+        margin-bottom: 12px;
         box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
-    .stMetric label {
-        font-size: 0.85rem !important;
-        color: #475569 !important;
+    .flow-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #1E3A8A;
+        margin-bottom: 6px;
+    }
+    .flow-desc {
+        font-size: 0.9rem;
+        color: #475569;
+        line-height: 1.4;
     }
     .badge-success {
         background-color: #DEF7EC;
@@ -68,6 +77,13 @@ st.markdown("""
         padding: 4px 8px;
         border-radius: 4px;
         font-weight: bold;
+    }
+    .author-card {
+        background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+        color: white;
+        padding: 14px;
+        border-radius: 8px;
+        margin-top: 15px;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -113,6 +129,7 @@ view_mode = st.sidebar.radio(
     "Navigation Mode",
     [
         "📊 Executive Analytics",
+        "🏗️ Pipeline Architecture & Data Flow",
         "👥 Customer & RFM",
         "🛒 Product & Merchandising",
         "🛡️ Data Quality & Scorecard",
@@ -143,6 +160,16 @@ if selected_channel != "All Channels":
     where_clauses.append(f"s.channel_group = '{selected_channel}'")
 
 filter_sql = " AND ".join(where_clauses)
+
+# Sidebar Author & Contact Card
+st.sidebar.markdown("---")
+st.sidebar.markdown("""
+<div class="author-card">
+    <div style="font-weight: bold; font-size: 1rem; margin-bottom: 4px;">👨‍💻 Aman Varma</div>
+    <div style="font-size: 0.8rem; opacity: 0.9; margin-bottom: 8px;">Data Modeler & Analytics Engineer</div>
+    <a href="https://github.com/Amanvarma2231" target="_blank" style="color: #FDE047; text-decoration: none; font-size: 0.85rem; font-weight: bold;">🐙 GitHub Profile ↗</a>
+</div>
+""", unsafe_allow_html=True)
 
 
 # ==============================================================================
@@ -225,7 +252,77 @@ if view_mode == "📊 Executive Analytics":
 
 
 # ==============================================================================
-# TAB 2: CUSTOMER & RFM SEGMENTATION
+# TAB 2: PIPELINE ARCHITECTURE & HOW IT WORKS
+# ==============================================================================
+elif view_mode == "🏗️ Pipeline Architecture & Data Flow":
+    st.markdown('<div class="main-header">End-to-End Pipeline Architecture & How It Works</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sub-header">Technical operational guide: Data lifecycle from raw ingestion to governed marts</div>', unsafe_allow_html=True)
+
+    st.markdown("""
+    RetailSphere implements a **multi-tier data pipeline** that guarantees high-throughput ingestion, zero corrupted data in production marts, and sub-second analytics response times.
+    """)
+
+    col_f1, col_f2 = st.columns(2)
+
+    with col_f1:
+        st.markdown("""
+        <div class="flow-card">
+            <div class="flow-title">1. Multi-Source Ingestion Layer (staging)</div>
+            <div class="flow-desc">
+                • Connectors ingest from <b>MySQL (OLTP), PostgreSQL, MongoDB (NoSQL)</b> and CSV streams.<br>
+                • Data is landed verbatim in staging tables (<code>stg_customers</code>, <code>stg_orders</code>, <code>stg_order_items</code>, etc.).<br>
+                • Every record is stamped with <code>_ingested_at</code> timestamp and source provenance.
+            </div>
+        </div>
+        <div class="flow-card">
+            <div class="flow-title">2. 10-Point Data Quality & Quarantine Engine (quarantine)</div>
+            <div class="flow-desc">
+                • Intercepts staging records before warehouse transformation.<br>
+                • Validates Null Primary Keys, duplicate order keys, orphaned foreign keys, future dates, and negative quantities.<br>
+                • Corrupted records are routed to <code>quarantine.*</code> with error reason codes (<code>ERR_NULL_CUSTOMER_KEY</code>, <code>ERR_INVALID_QUANTITY</code>).
+            </div>
+        </div>
+        <div class="flow-card">
+            <div class="flow-title">3. Kimball Dimensional Star Schema (warehouse)</div>
+            <div class="flow-desc">
+                • <b>Conformed Dimensions:</b> <code>dim_customer</code> (SCD Type 1/2), <code>dim_product</code>, <code>dim_store</code>, <code>dim_date</code> (2022-2030).<br>
+                • <b>Atomic Facts:</b> <code>fact_sales</code> (line-item grain), <code>fact_payments</code> (reconciliation).<br>
+                • Generates surrogate keys, establishes referential integrity, and computes realized margins.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col_f2:
+        st.markdown("""
+        <div class="flow-card">
+            <div class="flow-title">4. Analytics Engineering & dbt Layer (marts)</div>
+            <div class="flow-desc">
+                • Modular transformations: <code>staging</code> ➜ <code>intermediate</code> ➜ <code>marts</code>.<br>
+                • Pre-aggregated analytical marts: <code>mart_monthly_store_performance</code> and <code>mart_customer_rfm</code>.<br>
+                • Automated dbt schema assertions (<code>unique</code>, <code>not_null</code>, <code>relationships</code>).
+            </div>
+        </div>
+        <div class="flow-card">
+            <div class="flow-title">5. Data Governance & Metadata Catalog</div>
+            <div class="flow-desc">
+                • 60+ Documented column attributes with business definitions.<br>
+                • 4-Tier Security Policy (<code>PUBLIC</code>, <code>INTERNAL</code>, <code>CONFIDENTIAL PII</code>, <code>RESTRICTED</code>).<br>
+                • Automated column statistical profiling and health scorecard computation.
+            </div>
+        </div>
+        <div class="flow-card">
+            <div class="flow-title">6. High-Speed BI Serving & Observability Layer</div>
+            <div class="flow-desc">
+                • Sub-second analytical queries powered by DuckDB columnar vectorized execution.<br>
+                • Execution run ledger logged in <code>dim_pipeline_execution_log</code>.<br>
+                • Real-time Streamlit BI portal with live filter drill-downs and CSV export.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+
+# ==============================================================================
+# TAB 3: CUSTOMER & RFM SEGMENTATION
 # ==============================================================================
 elif view_mode == "👥 Customer & RFM":
     st.markdown('<div class="main-header">Customer Segmentation & RFM Analytics</div>', unsafe_allow_html=True)
@@ -262,7 +359,7 @@ elif view_mode == "👥 Customer & RFM":
 
 
 # ==============================================================================
-# TAB 3: PRODUCT & MERCHANDISING
+# TAB 4: PRODUCT & MERCHANDISING
 # ==============================================================================
 elif view_mode == "🛒 Product & Merchandising":
     st.markdown('<div class="main-header">Product & Merchandising Intelligence</div>', unsafe_allow_html=True)
@@ -293,7 +390,7 @@ elif view_mode == "🛒 Product & Merchandising":
 
 
 # ==============================================================================
-# TAB 4: DATA QUALITY & SCORECARD
+# TAB 5: DATA QUALITY & SCORECARD
 # ==============================================================================
 elif view_mode == "🛡️ Data Quality & Scorecard":
     st.markdown('<div class="main-header">Data Quality Audit & Automated Scorecard</div>', unsafe_allow_html=True)
@@ -350,7 +447,7 @@ elif view_mode == "🛡️ Data Quality & Scorecard":
 
 
 # ==============================================================================
-# TAB 5: PIPELINE EXECUTION & AUDIT LOGS
+# TAB 6: PIPELINE EXECUTION & AUDIT LOGS
 # ==============================================================================
 elif view_mode == "📋 Pipeline Execution & Audit Logs":
     st.markdown('<div class="main-header">Pipeline Execution & Observability Audit</div>', unsafe_allow_html=True)
@@ -391,7 +488,7 @@ elif view_mode == "📋 Pipeline Execution & Audit Logs":
 
 
 # ==============================================================================
-# TAB 6: DATA DICTIONARY & CATALOG
+# TAB 7: DATA DICTIONARY & CATALOG
 # ==============================================================================
 elif view_mode == "📖 Data Dictionary & Catalog":
     st.markdown('<div class="main-header">Enterprise Data Dictionary & Metadata Catalog</div>', unsafe_allow_html=True)

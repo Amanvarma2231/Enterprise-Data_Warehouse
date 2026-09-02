@@ -1,225 +1,262 @@
-# 🛒 RetailSphere: Enterprise Sales & Customer Data Warehouse + Data Governance Platform
+# RetailSphere: Enterprise Sales & Customer Data Warehouse + Data Governance Platform
 
-[![CI/CD Pipeline](https://img.shields.io/badge/CI%2FCD-Passing-brightgreen?style=flat-square&logo=githubactions)](.github/workflows/ci.yml)
-[![Database Engine](https://img.shields.io/badge/Engine-DuckDB%20%7C%20PostgreSQL%20%7C%20BigQuery-blue?style=flat-square&logo=duckdb)](https://duckdb.org/)
-[![Transformation](https://img.shields.io/badge/Transformation-dbt%20Core%20%2B%20SQL-orange?style=flat-square&logo=dbt)](dbt_retail_dw/)
-[![Data Quality](https://img.shields.io/badge/Data%20Quality-10--Point%20Framework-emerald?style=flat-square)](docs/data_quality_report.md)
-[![Tests](https://img.shields.io/badge/PyTest-11%2F11%20Passed-success?style=flat-square)](tests/)
-[![Governance](https://img.shields.io/badge/Governance-Metadata%20%26%20PII%20Catalog-purple?style=flat-square)](metadata/)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![DuckDB](https://img.shields.io/badge/duckdb-v1.1.0-orange.svg)](https://duckdb.org/)
+[![dbt-Core](https://img.shields.io/badge/dbt-core-FF694B.svg)](https://www.getdbt.com/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-Live%20App-FF4B4B.svg)](https://enterprise-datawarehouse-amhwlzks6yuybmcbxtls2v.streamlit.app/)
+[![SQL](https://img.shields.io/badge/SQL-MySQL%20|%20Postgres%20|%20Snowflake%20|%20BigQuery-4479A1.svg)](https://github.com/Amanvarma2231/Enterprise-Data_Warehouse)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-> **Targeted Interview Role:** Associate Data Modeller / Analytics Engineer / Data Warehouse Engineer (Capgemini, Accenture, Deloitte).  
-> **Core Deliverables:** Conceptual, Logical & Physical Modelling, Kimball Star Schema, Python ETL Pipeline, 10-Point Data Quality & Quarantine Framework, dbt Transformation Layer, Enterprise Data Dictionary, Data Lineage, Cloud BigQuery DDL, and Interactive BI Dashboard.
+> **Live Interactive BI Portal:** [https://enterprise-datawarehouse-amhwlzks6yuybmcbxtls2v.streamlit.app/](https://enterprise-datawarehouse-amhwlzks6yuybmcbxtls2v.streamlit.app/)  
+> **Author & Lead Architect:** **Aman Varma** ([GitHub Profile](https://github.com/Amanvarma2231))
 
 ---
 
-## 🏗️ 1. Enterprise Architecture Overview
+## 🌟 Executive Overview
 
-```mermaid
-flowchart TD
-    subgraph S1 [Operational Data Sources]
-        C[customers.csv 10k+]
-        P[products.csv 1k+]
-        S[stores.csv 50+]
-        O[orders.csv 50k+]
-        OI[order_items.csv 90k+]
-        PY[payments.csv 50k+]
-    end
+**RetailSphere** is an end-to-end, production-grade **Enterprise Data Warehouse and Data Governance Platform** designed to solve complex analytical and governance challenges in high-velocity omnichannel retail operations. 
 
-    subgraph S2 [Ingestion & Staging Layer]
-        L[Python + Pandas Ingestion Engine]
-        STG[(Staging Schema / Raw Landing)]
-    end
+Moving beyond basic transactional databases, this platform ingests raw transactional streams from multiple sources (**MySQL, PostgreSQL, MongoDB, SQLite, and Flat CSV Feeds**), subjects them to an automated **10-Point Data Quality & Anomaly Quarantine Engine**, normalizes them into a **Kimball Dimensional Star Schema**, and serves high-impact executive dashboards and analytical data marts.
 
-    subgraph S3 [Data Quality & Governance Layer]
-        DQ{10-Point DQ Engine\\nNull | PK | FK | Range | Date}
-        QR[(Quarantine Isolation\\nErr Codes)]
-    end
+---
 
-    subgraph S4 [Transformation Engine: dbt + SQL]
-        STG_M[dbt Staging Models]
-        INT_M[dbt Intermediate Models]
-        MART_M[dbt Marts Models]
-    end
+## ⚙️ How the Pipeline Works (End-to-End Data Flow)
 
-    subgraph S5 [Enterprise Dimensional Warehouse]
-        DC[dim_customer]
-        DP[dim_product]
-        DS[dim_store]
-        DD[dim_date]
-        FS[fact_sales]
-        FP[fact_payments]
-    end
+The RetailSphere architecture follows a structured, multi-tier data pipeline designed for zero data loss, sub-second query performance, and strict data governance:
 
-    subgraph S6 [Serving, Analytics & Cloud]
-        BI[Streamlit BI Dashboard]
-        DICT[Data Dictionary XLSX/MD]
-        LIN[Data Lineage Docs]
-        BQ[(Google BigQuery Cloud DW)]
-    end
-
-    C & P & S & O & OI & PY --> L --> STG
-    STG --> DQ
-    DQ -- "Invalid Records" --> QR
-    DQ -- "Cleansed Records" --> STG_M --> INT_M --> MART_M
-    MART_M --> DC & DP & DS & DD & FS & FP
-    DC & DP & DS & DD & FS & FP --> BI & DICT & LIN & BQ
+```
++----------------------------------------------------------------------------------------------------+
+|                                    OPERATIONAL SOURCE SYSTEMS                                      |
+|   +----------------+  +-------------------+  +------------------+  +----------------------------+  |
+|   |  MySQL (OLTP)  |  | PostgreSQL (OLTP) |  | MongoDB (NoSQL)  |  | CSV / SFTP Batch Feeds     |  |
+|   +-------+--------+  +---------+---------+  +--------+---------+  +-------------+--------------+  |
++-----------|---------------------|---------------------|--------------------------|-----------------+
+            |                     |                     |                          |
+            v                     v                     v                          v
++----------------------------------------------------------------------------------------------------+
+| 1. INGESTION & STAGING LAYER (schema: staging)                                                     |
+|    - Raw operational tables landed verbatim with ingestion timestamps & source provenance tags.    |
+|    - stg_customers, stg_products, stg_stores, stg_orders, stg_order_items, stg_payments          |
++--------------------------------------------------+-------------------------------------------------+
+                                                   |
+                                                   v
++----------------------------------------------------------------------------------------------------+
+| 2. 10-POINT DATA QUALITY & QUARANTINE ENGINE (schema: quarantine)                                  |
+|    - Null Primary Key Checks, Duplicate Record Detection, Orphaned Foreign Key Validation          |
+|    - Range Checks (Quantity > 0, Price > 0), Date Feasibility (Order Date <= CURRENT_DATE)        |
+|    - Corrupted records isolated into quarantine tables with explicit reason codes                  |
++--------------------------------------------------+-------------------------------------------------+
+                                                   |
+                                                   | [Clean Validated Streams]
+                                                   v
++----------------------------------------------------------------------------------------------------+
+| 3. KIMBALL DIMENSIONAL STAR SCHEMA (schema: warehouse)                                             |
+|    - Conformed Dimensions: dim_customer (SCD Type 1/2), dim_product, dim_store, dim_date (2022-30)|
+|    - Atomic Grain Facts:   fact_sales (Line-Item Atomic Grain), fact_payments (Reconciliation)     |
+|    - Surrogate Keys, Referential Integrity, Financial Math & Realized Margin Calculation          |
++--------------------------------------------------+-------------------------------------------------+
+                                                   |
+                                                   v
++----------------------------------------------------------------------------------------------------+
+| 4. ANALYTICS MARTS & dbt TRANSFORMATION (schema: analytics / marts)                                |
+|    - mart_monthly_store_performance: Store-level MoM revenue, margin %, realized profitability    |
+|    - mart_customer_rfm: Recency, Frequency, Monetary (RFM) behavioral scoring (NTILE 1-5)         |
++--------------------------------------------------+-------------------------------------------------+
+                                                   |
+            +--------------------------------------+--------------------------------------+
+            |                                                                             |
+            v                                                                             v
++------------------------------------------+                 +--------------------------------------------+
+| 5. GOVERNANCE & OBSERVABILITY            |                 | 6. REAL-TIME BI SERVING LAYER              |
+|    - 60+ Documented Column Metadata      |                 |    - Executive Sales & Margin KPIs         |
+|    - 4-Tier Security Classification      |                 |    - Regional & Category Revenue Trends    |
+|    - Pipeline Execution Audit Ledger     |                 |    - Real-Time Data Quality Scorecard      |
+|    - Column Statistical Health Profiler  |                 |    - On-Demand Pipeline Trigger Runner     |
++------------------------------------------+                 +--------------------------------------------+
 ```
 
 ---
 
-## 📊 2. Comprehensive Data Modeling Layers
+## 🏛️ Key Platform Capabilities
 
-### 🟢 Phase 3 — Conceptual Data Model
-High-level view of retail entities (`CUSTOMER`, `ORDER`, `PRODUCT`, `STORE`, `PAYMENT`) and their fundamental cardinality.
+### 1. Multi-Tier Data Modeling
+- **Conceptual Model:** Business entity relationships and cardinality.
+- **Logical Data Model (3NF):** Normalized operational staging layer.
+- **Physical Star Schema:** Surrogate keys, conformed dimensions, atomic grain facts, and dimension role-playing.
+- **Conformed Date Dimension:** 2022–2030 calendar with fiscal periods, quarter names, and holiday flags.
 
-![Conceptual Model](docs/conceptual-model.png)
+### 2. Multi-Database Ingestion Connectors (`src/ingestion/`)
+- **MySQL / MariaDB:** Direct ingestion via `SQLAlchemy` and `PyMySQL`.
+- **PostgreSQL:** High-throughput transactional table extraction via `psycopg2`.
+- **MongoDB:** Extraction and automatic schema flattening of nested NoSQL JSON documents.
+- **SQLite:** Embedded database ingestion for local and edge environments.
+- **Portable SQL DDLs:** Dedicated DDL scripts for **MySQL 8.0**, **PostgreSQL 15**, **SQLite 3**, **Snowflake**, and **Google Cloud BigQuery**.
 
----
+### 3. 10-Point Data Quality & Quarantine Framework
+- **Primary Key Uniqueness & Nullability:** Enforces zero nulls on identifier columns.
+- **Referential Integrity Constraints:** Catches orphaned foreign keys (`product_id`, `customer_id`, `store_id`).
+- **Domain & Range Validations:** Prevents non-positive quantities and zero unit prices.
+- **Business Logic Rules:** Mathematical reconciliation (`line_total = quantity * unit_price - discount`).
+- **Quarantine Isolation:** Isolates anomalies into `quarantine.*` with explicit reason codes (`ERR_NULL_CUSTOMER_KEY`, `ERR_INVALID_QUANTITY`, `ERR_FUTURE_ORDER_DATE`).
 
-### 🟡 Phase 4 — Logical Data Model
-Technology-agnostic relational specification with attributes, Primary Keys, Foreign Keys, and business constraints.
+### 4. Analytics Engineering with dbt
+- Modular multi-layer transformations:
+  - `models/staging/`: Source cleansing and data type casting.
+  - `models/intermediate/`: Customer aggregation and order-item financial enrichment.
+  - `models/marts/`: Business-ready dimensional tables and analytical marts.
+- Automated dbt schema tests (`unique`, `not_null`, `relationships`, `accepted_values`).
 
-![Logical Model](docs/logical-model.png)
-
----
-
-### 🔵 Phase 5 — Physical Ingestion & Staging Model
-Physical implementation schema optimized for high-throughput operational data ingestion.
-
-![Physical Model](docs/physical-model.png)
-
----
-
-### ⭐ Phase 6 — Dimensional Star Schema (Kimball Methodology)
-Centralized fact tables (`fact_sales`, `fact_payments`) surrounded by conformed dimensions (`dim_customer`, `dim_product`, `dim_store`, `dim_date`).
-
-![Dimensional Model](docs/dimensional-model.png)
-
----
-
-## 🧪 3. 10-Point Data Quality & Quarantine Framework
-
-Our automated validation engine actively isolates anomalies before warehouse ingestion:
-
-| # | Check Category | Target Table & Column | Severity | Enforcement Action |
-| :-: | :--- | :--- | :-: | :--- |
-| **1** | **Null Check** | `stg_orders.customer_id`, `stg_products.sku` | `CRITICAL` | Quarantine (`ERR_NULL_CUSTOMER_KEY`) |
-| **2** | **Duplicate Check** | `stg_orders.order_id`, `stg_customers.customer_id` | `CRITICAL` | Deduplicate / Quarantine (`ERR_DUPLICATE_ORDER`) |
-| **3** | **Primary Key Uniqueness** | `dim_customer.customer_key`, `dim_product.product_key` | `CRITICAL` | Reject duplicate PKs |
-| **4** | **Referential Integrity** | `stg_order_items.product_id` -> `products.product_id` | `CRITICAL` | Quarantine orphan records (`ERR_ORPHAN_PRODUCT_KEY`) |
-| **5** | **Range Validation** | `stg_order_items.quantity > 0`, `unit_price > 0` | `HIGH` | Quarantine non-positive items (`ERR_INVALID_QUANTITY`) |
-| **6** | **Business Logic Math** | `line_total == (qty * unit_price) - discount` | `HIGH` | Quarantine math discrepancies (`ERR_MATH_MISMATCH`) |
-| **7** | **Date Consistency** | `stg_orders.order_date <= CURRENT_DATE` | `HIGH` | Quarantine future orders (`ERR_FUTURE_ORDER_DATE`) |
-| **8** | **Syntax / Format** | `stg_customers.email` (Regex `%@%.%`) | `MEDIUM` | Quarantine malformed emails (`ERR_MALFORMED_EMAIL_SYNTAX`) |
-| **9** | **Payment Reconciliation**| `fact_payments.payment_amount >= 0` | `HIGH` | Audit log flag |
-| **10**| **Completeness Audit** | Mandatory attributes across dimensions | `MEDIUM` | Audit logging |
+### 5. Enterprise Governance, Profiling & Audit Logging
+- **Data Dictionary:** Formatted Excel [`docs/data_dictionary.xlsx`](docs/data_dictionary.xlsx) and Markdown [`docs/data_dictionary.md`](docs/data_dictionary.md) documenting 60+ attributes.
+- **4-Tier Data Classification:** `PUBLIC`, `INTERNAL`, `CONFIDENTIAL PII`, `RESTRICTED`.
+- **Automated Column Profiler:** Generates comprehensive statistical quality scorecards [`docs/data_profiling_report.md`](docs/data_profiling_report.md).
+- **Execution Audit Ledger:** Every pipeline execution is logged in `warehouse.dim_pipeline_execution_log` with row counts and duration.
 
 ---
 
-## 🟣 4. dbt Transformation Layer Structure
+## 📊 Interactive BI Dashboard (Streamlit Cloud)
 
-```text
-dbt_retail_dw/
-├── dbt_project.yml
-├── profiles.yml
-├── models/
-│   ├── staging/
-│   │   ├── stg_customers.sql
-│   │   ├── stg_products.sql
-│   │   ├── stg_stores.sql
-│   │   ├── stg_orders.sql
-│   │   ├── stg_order_items.sql
-│   │   ├── stg_payments.sql
-│   │   └── schema.yml
-│   ├── intermediate/
-│   │   ├── int_order_items_enriched.sql
-│   │   ├── int_orders_aggregated.sql
-│   │   ├── int_customer_metrics.sql
-│   │   └── schema.yml
-│   └── marts/
-│       ├── dim_customer.sql
-│       ├── dim_product.sql
-│       ├── dim_store.sql
-│       ├── dim_date.sql
-│       ├── fact_sales.sql
-│       ├── fact_payments.sql
-│       ├── mart_monthly_store_performance.sql
-│       ├── mart_customer_rfm.sql
-│       └── schema.yml
+The interactive dashboard is live deployed on Streamlit Community Cloud:
+👉 **[https://enterprise-datawarehouse-amhwlzks6yuybmcbxtls2v.streamlit.app/](https://enterprise-datawarehouse-amhwlzks6yuybmcbxtls2v.streamlit.app/)**
+
+### Dashboard Modules:
+1. **Executive Analytics:** High-level KPI cards (Revenue, Gross Profit, Margin %, AOV), Monthly trends, Regional revenue split.
+2. **Customer & RFM:** RFM behavioral clustering (Champions, Loyal, At Risk) with interactive spending distribution.
+3. **Product Intelligence:** Best-selling SKUs, category margins, and unit sales velocity.
+4. **Data Quality & Scorecard:** Quarantine reason breakdown, anomaly volume tracking, and column health scores.
+5. **Pipeline Execution & Observability:** Live streaming application logs, execution run history ledger, and an interactive **"Run Pipeline On-Demand"** trigger.
+6. **Data Dictionary & Catalog:** Live searchable metadata catalog with CSV export capability.
+
+---
+
+## 📁 Repository Structure
+
+```
+Enterprise-Data-Warehouse/
+├── .github/workflows/ci.yml       # GitHub Actions Automated CI/CD Pipeline
+├── .gitattributes                 # GitHub Linguist SQL Language Configuration
+├── .gitignore                     # Git ignore rules for runtime files
+├── README.md                      # Production Documentation & Architecture Guide
+├── requirements.txt               # Complete Python & Database Driver Dependencies
+├── pytest.ini                     # PyTest configuration
+│
+├── dashboard/
+│   └── app.py                     # Streamlit Interactive BI & Observability App
+│
+├── data/
+│   ├── sample/                    # Lightweight sample CSV datasets
+│   └── quarantine/                # Isolated anomaly records with reason codes
+│
+├── dbt_retail_dw/                 # Complete dbt Project
+│   ├── dbt_project.yml            # dbt configuration
+│   ├── profiles.yml               # Connection profiles
+│   ├── models/
+│   │   ├── staging/               # Staging transformation models
+│   │   ├── intermediate/          # Business logic enrichment models
+│   │   └── marts/                 # Star schema facts, dimensions & marts
+│   └── tests/                     # Singular schema validation tests
+│
+├── docs/                          # Architectural Assets & Governance
+│   ├── architecture_decision_records.md # Production ADRs & design rationales
+│   ├── data_dictionary.md         # Full Markdown Data Dictionary
+│   ├── data_dictionary.xlsx       # Multi-tab Styled Excel Data Dictionary
+│   ├── data_profiling_report.md   # Automated Column Health Scorecard
+│   ├── data-lineage.md            # Column-level Data Lineage Map
+│   ├── governance.md              # 4-Tier Security & PII Classification Policy
+│   ├── modelling-standards.md     # Dimensional Modeling Naming Standards
+│   ├── semantic_layer.md          # Standardized Business Metric Definitions
+│   └── *.png                      # High-Resolution Architectural Diagrams
+│
+├── logs/
+│   └── retailsphere_pipeline.log  # Structured Application & Execution Logs
+│
+├── metadata/
+│   └── metadata.csv               # 60+ Attribute Governance Catalog
+│
+├── sql/
+│   ├── ddl/                       # DDL Scripts for MySQL, Postgres, SQLite, Snowflake, BigQuery
+│   ├── transformations/           # Production SQL ELT & Quarantine Scripts
+│   └── analytics/                 # 20+ Production BI & Window Function Queries
+│
+├── src/
+│   ├── config.py                  # Central Environment Paths & Constants
+│   ├── data_generator.py          # Synthetic Data Generator with Injected Anomalies
+│   ├── pipeline.py                # Master Pipeline Orchestrator & Audit Runner
+│   ├── governance/
+│   │   ├── data_profiler.py       # Column Statistical Profiling & Scorecard Engine
+│   │   └── metadata_manager.py    # Governance & Data Dictionary Generator
+│   ├── ingestion/
+│   │   ├── load_csv.py            # High-Speed Staging CSV Loader
+│   │   ├── mysql_connector.py     # MySQL Ingestion Connector
+│   │   ├── postgres_connector.py  # PostgreSQL Ingestion Connector
+│   │   ├── mongodb_connector.py   # MongoDB NoSQL Document Flattening Connector
+│   │   └── sqlite_connector.py    # SQLite Embedded Database Connector
+│   ├── transformation/
+│   │   ├── transformer.py         # Star Schema Transformation Engine
+│   │   └── date_dimension_generator.py # Conformed Date Dimension (2022-2030)
+│   ├── utils/
+│   │   └── logger.py              # Structured Enterprise Logging Utility
+│   └── validation/
+│       ├── data_quality_engine.py # 10-Point DQ Engine & Quarantine Dispatcher
+│       ├── null_checks.py         # PK & Column Null Verification
+│       ├── duplicate_checks.py    # Duplicate Record Detection
+│       ├── integrity_checks.py    # Referential Integrity & Orphaned FK Checks
+│       └── business_rules.py      # Range, Date, Email Regex & Math Validation
+│
 └── tests/
-    ├── assert_positive_sales_amount.sql
-    ├── assert_valid_order_dates.sql
-    └── assert_payment_order_reconciliation.sql
+    ├── conftest.py                # Resilient PyTest Connection Fixtures
+    ├── test_data_quality.py       # Data Quality & Quarantine Tests
+    ├── test_data_models.py        # Dimensional Schema & Financial Math Tests
+    └── test_pipeline.py           # End-to-End Pipeline Execution Tests
 ```
 
 ---
 
-## 📚 5. Governance, Metadata & Data Lineage
+## 🚀 Quick Start Guide
 
-- **Data Dictionary:** Documented 60+ business attributes in [Markdown](docs/data_dictionary.md) and [Styled Excel](docs/data_dictionary.xlsx).
-- **Metadata Repository:** Master catalog in [`metadata/metadata.csv`](metadata/metadata.csv) tracking ownership, refresh SLAs, and PII sensitivity tiers.
-- **Data Lineage:** Field-level and table-level lineage map in [`docs/data-lineage.md`](docs/data-lineage.md).
-- **Security & PII Classification:** 4-tier policy (PUBLIC, INTERNAL, CONFIDENTIAL PII, RESTRICTED) in [`docs/governance.md`](docs/governance.md).
-- **Modelling Standards:** Kimball conventions & surrogate key standards in [`docs/modelling-standards.md`](docs/modelling-standards.md).
-- **Semantic Layer:** Standardized business formulas in [`docs/semantic_layer.md`](docs/semantic_layer.md).
-
----
-
-## 📈 6. Sample Analytical Queries (from 20+ BI Queries)
-
-### Query: Monthly Revenue Trend & MoM Growth
-```sql
-WITH monthly_revenue AS (
-    SELECT
-        d.year_month,
-        ROUND(SUM(f.net_sales_amount), 2) AS monthly_net_revenue,
-        COUNT(DISTINCT f.order_id) AS monthly_orders
-    FROM warehouse.fact_sales f
-    JOIN warehouse.dim_date d ON f.date_key = d.date_key
-    GROUP BY d.year_month
-)
-SELECT
-    year_month,
-    monthly_net_revenue,
-    monthly_orders,
-    LAG(monthly_net_revenue, 1) OVER (ORDER BY year_month) AS prev_month_revenue,
-    ROUND(
-        ((monthly_net_revenue - LAG(monthly_net_revenue, 1) OVER (ORDER BY year_month)) /
-        NULLIF(LAG(monthly_net_revenue, 1) OVER (ORDER BY year_month), 0)) * 100.0, 2
-    ) AS mom_growth_pct
-FROM monthly_revenue
-ORDER BY year_month;
+### 1. Clone the Repository
+```bash
+git clone https://github.com/Amanvarma2231/Enterprise-Data_Warehouse.git
+cd Enterprise-Data_Warehouse
 ```
 
----
-
-## 🚀 7. Quickstart & Execution Guide
-
-### Prerequisites
-- Python 3.10+
-- Dependencies in `requirements.txt`
-
-### 1. Install Dependencies
+### 2. Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Run End-to-End Pipeline (ETL + DQ + Star Schema + Metadata)
+### 3. Run the End-to-End Pipeline
 ```bash
+# Execute full pipeline with sample data
+python src/pipeline.py --mode all --sample
+
+# Or generate full-scale 200k+ enterprise dataset
 python src/pipeline.py --mode all
 ```
 
-### 3. Run Automated Tests
+### 4. Run Automated Test Suite
 ```bash
 pytest tests/ -v
 ```
 
-### 4. Launch Interactive Streamlit BI Dashboard
+### 5. Launch Local BI Dashboard
 ```bash
 streamlit run dashboard/app.py
 ```
 
 ---
 
-## 🎤 8. Technical Interview Preparation Guide
-Read [`docs/interview_qa_guide.md`](docs/interview_qa_guide.md) for detailed scenario defense questions, architectural trade-off rationales, and exact model interview answers.
+## 👨‍💻 Author & Contact Details
+
+**Aman Varma**  
+*Data Engineer & Analytics Modeler*  
+
+- **GitHub:** [https://github.com/Amanvarma2231](https://github.com/Amanvarma2231)  
+- **Live App:** [https://enterprise-datawarehouse-amhwlzks6yuybmcbxtls2v.streamlit.app/](https://enterprise-datawarehouse-amhwlzks6yuybmcbxtls2v.streamlit.app/)  
+- **Project Repository:** [https://github.com/Amanvarma2231/Enterprise-Data_Warehouse](https://github.com/Amanvarma2231/Enterprise-Data_Warehouse)  
+- **Contact:** Open for collaboration and opportunities in Data Engineering, Data Modeling, and Analytics Architecture.
+
+---
+
+## 📄 License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
