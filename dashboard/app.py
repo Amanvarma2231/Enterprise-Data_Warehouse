@@ -230,19 +230,27 @@ NAV_OPTIONS = [
     "📖 Data Dictionary & Catalog"
 ]
 
-if "nav_radio" not in st.session_state:
-    st.session_state.nav_radio = NAV_OPTIONS[0]
+# Use a SEPARATE sentinel variable — never write to widget key directly (Streamlit rule)
+if "_nav_page" not in st.session_state:
+    st.session_state["_nav_page"] = NAV_OPTIONS[0]
 
 def set_tab(tab_name: str):
-    """Programmatically switch active navigation tab."""
-    st.session_state.nav_radio = tab_name
+    """Programmatically switch active navigation tab without widget-key conflict."""
+    if tab_name in NAV_OPTIONS:
+        st.session_state["_nav_page"] = tab_name
     st.rerun()
+
+_nav_idx = NAV_OPTIONS.index(st.session_state["_nav_page"]) if st.session_state["_nav_page"] in NAV_OPTIONS else 0
 
 view_mode = st.sidebar.radio(
     "Navigation Portal",
     NAV_OPTIONS,
+    index=_nav_idx,
     key="nav_radio"
 )
+
+# Keep sentinel in sync when user clicks sidebar directly
+st.session_state["_nav_page"] = view_mode
 
 st.sidebar.markdown("---")
 st.sidebar.subheader("Global Filter Drill-Down")

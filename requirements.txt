@@ -1,23 +1,25 @@
-# Streamlit Web App & Visualizations
+# ─── Streamlit Web App & Visualizations ───────────────────────────────────
 streamlit>=1.30.0
 plotly>=5.18.0
 openpyxl>=3.1.0
 matplotlib>=3.8.0
 
-# Multi-Database Connectors & SQL Engines
+# ─── DuckDB Embedded Warehouse (Primary Engine) ────────────────────────────
 duckdb>=1.1.0
 pandas>=2.0.0
 numpy>=1.24.0
 SQLAlchemy>=2.0.0
-psycopg2-binary>=2.9.0
-pymysql>=1.1.0
-pymongo>=4.6.0
 
-# Data Quality & Synthetic Data Generation
+# ─── Data Quality & Synthetic Data Generation ──────────────────────────────
 faker>=30.0.0
 pytest>=8.0.0
 tabulate>=0.9.0
 pyyaml>=6.0.0
 
-# Terminal UI & Logging
+# ─── Terminal UI & Structured Logging ──────────────────────────────────────
 rich>=13.0.0
+
+# ─── Optional: Multi-DB Connectors (install manually for local dev) ────────
+# psycopg2-binary>=2.9.0   # PostgreSQL — requires libpq-dev, skip on CI
+# pymysql>=1.1.0            # MySQL
+# pymongo>=4.6.0            # MongoDB
