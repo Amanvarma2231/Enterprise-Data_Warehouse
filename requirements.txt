@@ -1,3 +1,8 @@
+# Streamlit Web App & Visualizations
+streamlit>=1.30.0
+plotly>=5.18.0
+openpyxl>=3.1.0
+
 # Core Data Warehouse & Ingestion Engine
 duckdb>=1.1.0
 pandas>=2.0.0
@@ -13,3 +18,4 @@ pyyaml>=6.0.0
 
 # Terminal UI & Formatting
 rich>=13.0.0
+matplotlib>=3.8.0
