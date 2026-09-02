@@ -1,6 +1,6 @@
 """
-RetailSphere Enterprise Analytics, Governance & Pipeline Observability Dashboard
-Interactive Streamlit Business Intelligence, AI Data Copilot & Data Warehouse Platform
+RetailSphere Enterprise Analytics, Governance & AI Copilot Platform
+Interactive Streamlit Business Intelligence & Data Warehouse Management System
 Author: Aman Varma (https://github.com/Amanvarma2231)
 """
 
@@ -17,6 +17,7 @@ if str(root_dir) not in sys.path:
     sys.path.insert(0, str(root_dir))
 
 import duckdb
+import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
@@ -33,7 +34,7 @@ from src.utils.logger import LOG_FILE
 
 # Streamlit Page Configuration
 st.set_page_config(
-    page_title="RetailSphere — Enterprise Data Warehouse",
+    page_title="RetailSphere — Enterprise Data Warehouse & AI Copilot",
     page_icon="🛒",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -116,7 +117,19 @@ st.markdown("""
         line-height: 1.4;
     }
 
-    /* Stack Chip Badges */
+    /* AI Insight Callout */
+    .ai-insight-box {
+        background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
+        border: 1px solid #86EFAC;
+        border-radius: 10px;
+        padding: 16px 20px;
+        color: #14532D;
+        margin: 15px 0;
+        font-size: 0.92rem;
+        line-height: 1.5;
+    }
+
+    /* Tech Stack Badges */
     .tech-chip {
         display: inline-block;
         background-color: #F1F5F9;
@@ -127,25 +140,6 @@ st.markdown("""
         border-radius: 6px;
         margin: 3px;
         border: 1px solid #E2E8F0;
-    }
-
-    /* AI Chat / Copilot Card */
-    .chat-bubble-user {
-        background-color: #EFF6FF;
-        border-left: 4px solid #2563EB;
-        padding: 12px 16px;
-        border-radius: 8px;
-        margin-bottom: 10px;
-        color: #1E3A8A;
-        font-weight: 600;
-    }
-    .chat-bubble-bot {
-        background-color: #F8FAFC;
-        border: 1px solid #E2E8F0;
-        padding: 14px 18px;
-        border-radius: 8px;
-        margin-bottom: 15px;
-        color: #334155;
     }
 
     /* Sidebar Author Box */
@@ -222,12 +216,12 @@ else:
     st.sidebar.image("https://img.icons8.com/fluency/96/shop.png", width=64)
     st.sidebar.title("RetailSphere DW")
 
-st.sidebar.caption("Enterprise Star Schema & Governance Platform")
+st.sidebar.caption("Enterprise Star Schema & AI Governance Platform")
 
 # Navigation Options List
 NAV_OPTIONS = [
     "🏠 Executive Command Center",
-    "🤖 AI Data Copilot & SQL Assistant",
+    "🤖 AI Data Copilot & Choice Assistant",
     "📊 Executive Sales & Margin Analytics",
     "🏗️ Pipeline Architecture & How It Works",
     "👥 Customer & RFM Segmentation",
@@ -297,7 +291,7 @@ if view_mode == "🏠 Executive Command Center":
         <div class="hero-badge">● SYSTEM OPERATIONAL &bull; 100% HEALTH SCORE</div>
         <div class="hero-title">RetailSphere Enterprise Data Warehouse</div>
         <div class="hero-subtitle">
-            An end-to-end production data platform integrating multi-source ingestion (MySQL, PostgreSQL, MongoDB, SQLite), automated 10-Point Data Quality quarantine, Kimball Dimensional Star Schema modeling, and real-time BI serving.
+            An end-to-end production data platform integrating multi-source ingestion (MySQL, PostgreSQL, MongoDB, SQLite), automated 10-Point Data Quality quarantine, Kimball Dimensional Star Schema modeling, and real-time AI-powered BI serving.
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -334,12 +328,12 @@ if view_mode == "🏠 Executive Command Center":
         st.markdown("""
         <div class="feature-card">
             <div class="feature-icon">🤖</div>
-            <div class="feature-title">AI Data Copilot</div>
-            <div class="feature-desc">Ask natural language business questions and get live SQL execution, data tables, and automated analytical insights.</div>
+            <div class="feature-title">AI Data Copilot & Choice Assistant</div>
+            <div class="feature-desc">Guided suggestion engine and natural language query synthesizer delivering live SQL execution and business insights.</div>
         </div>
         """, unsafe_allow_html=True)
         if st.button("🚀 Open AI Copilot ➔", key="btn_hero_ai", use_container_width=True):
-            set_tab("🤖 AI Data Copilot & SQL Assistant")
+            set_tab("🤖 AI Data Copilot & Choice Assistant")
         
     with g2:
         st.markdown("""
@@ -421,145 +415,292 @@ if view_mode == "🏠 Executive Command Center":
 
 
 # ==============================================================================
-# TAB 2: AI DATA COPILOT & SQL ASSISTANT
+# TAB 2: AI DATA COPILOT & CHOICE ASSISTANT (WORLD-CLASS SUGGESTION ENGINE)
 # ==============================================================================
-elif view_mode == "🤖 AI Data Copilot & SQL Assistant":
-    st.markdown('<div class="main-header">RetailSphere AI Data Copilot</div>', unsafe_allow_html=True)
-    st.markdown('<div class="sub-header">Natural Language SQL Generator & Real-Time Data Warehouse Intelligence</div>', unsafe_allow_html=True)
+elif view_mode == "🤖 AI Data Copilot & Choice Assistant":
+    st.markdown('<div class="main-header">RetailSphere Intelligent Data Copilot</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sub-header">AI-Guided Analytical Suggestion Engine, Interactive Scenario Selector & Real-Time SQL Synthesizer</div>', unsafe_allow_html=True)
 
-    st.markdown("Ask any business or analytics question about sales, stores, customers, products, or data quality:")
+    st.info("💡 **How to Use:** Pick a strategic business domain below, select from smart AI suggestions, or type a custom natural language query.")
 
-    # Quick Prompt Buttons
-    st.write("**⚡ Quick Analysis Templates:**")
-    qp1, qp2, qp3, qp4 = st.columns(4)
-    
-    preset_query = None
-    if qp1.button("🏆 Top 5 Stores by Revenue"):
-        preset_query = "What are the top 5 performing stores by total net sales and profit margin?"
-    if qp2.button("💎 High-Value Champions"):
-        preset_query = "Show me customer count and total spend across all RFM tiers"
-    if qp3.button("📦 Best Margin Product Categories"):
-        preset_query = "Which product categories generate the highest gross profit margin percentage?"
-    if qp4.button("🛡️ Quarantine Root-Cause Breakdown"):
-        preset_query = "What are the top reasons records were rejected into quarantine?"
+    # Section 1: Strategic Domain Selection
+    copilot_domain = st.selectbox(
+        "🎯 Select Strategic Business Pillar:",
+        [
+            "📈 1. Executive Financials & Profitability Analysis",
+            "👥 2. Customer RFM Clustering & Churn Risk Mitigation",
+            "🛒 3. Product Merchandising & Pareto 80/20 Velocity",
+            "🛡️ 4. Data Governance, PII & Quarantine Quality Diagnostics"
+        ]
+    )
 
-    user_query = st.text_input("💬 Ask AI Copilot a question:", value=preset_query or "", placeholder="e.g. Which region had the highest average order value?")
+    suggested_query = None
+    analytical_context = ""
 
-    if user_query:
-        st.markdown(f'<div class="chat-bubble-user">👤 Question: {user_query}</div>', unsafe_allow_html=True)
-        
-        # Smart SQL Query Mapper & Rule Engine
-        q_lower = user_query.lower()
-        
-        if "top" in q_lower and "store" in q_lower:
-            sql_exec = """
+    if "1. Executive Financials" in copilot_domain:
+        st.write("### 💡 AI Executive Recommendations:")
+        c_opt1, c_opt2, c_opt3 = st.columns(3)
+        if c_opt1.button("🏆 Top 5 Stores by Margin & Revenue", use_container_width=True):
+            suggested_query = "top_stores"
+        if c_opt2.button("📊 Monthly Revenue & Profit Velocity", use_container_width=True):
+            suggested_query = "monthly_velocity"
+        if c_opt3.button("🌍 Regional Sales Efficiency & AOV", use_container_width=True):
+            suggested_query = "regional_aov"
+
+    elif "2. Customer RFM" in copilot_domain:
+        st.write("### 💡 AI Retention Recommendations:")
+        c_opt1, c_opt2, c_opt3 = st.columns(3)
+        if c_opt1.button("💎 Champions Spend & Order Frequency", use_container_width=True):
+            suggested_query = "rfm_champions"
+        if c_opt2.button("⚠️ At-Risk Customer Churn Diagnostics", use_container_width=True):
+            suggested_query = "rfm_at_risk"
+        if c_opt3.button("🛍️ Customer Tier Revenue Share (%)", use_container_width=True):
+            suggested_query = "rfm_share"
+
+    elif "3. Product Merchandising" in copilot_domain:
+        st.write("### 💡 AI Merchandising Recommendations:")
+        c_opt1, c_opt2, c_opt3 = st.columns(3)
+        if c_opt1.button("🔥 Top 15 Best-Selling Revenue SKUs", use_container_width=True):
+            suggested_query = "top_skus"
+        if c_opt2.button("💰 Category Margin Optimization Matrix", use_container_width=True):
+            suggested_query = "category_margins"
+        if c_opt3.button("🏷️ Price Tier Profitability Breakdown", use_container_width=True):
+            suggested_query = "price_tiers"
+
+    elif "4. Data Governance" in copilot_domain:
+        st.write("### 💡 AI Quality & Compliance Recommendations:")
+        c_opt1, c_opt2, c_opt3 = st.columns(3)
+        if c_opt1.button("🛡️ Quarantine Root-Cause Anomaly Split", use_container_width=True):
+            suggested_query = "quarantine_split"
+        if c_opt2.button("📋 Column Statistical Health Index", use_container_width=True):
+            suggested_query = "column_health"
+        if c_opt3.button("🔒 4-Tier PII Security Classification", use_container_width=True):
+            suggested_query = "pii_governance"
+
+    st.markdown("---")
+
+    # Custom Query Input
+    custom_input = st.text_input(
+        "💬 Or Type Your Custom Business Question:",
+        placeholder="e.g. Compare digital channel vs physical retail revenue"
+    )
+
+    # Resolve Query logic
+    sql_to_run = ""
+    chart_type = "bar"
+    x_axis, y_axis = None, None
+
+    if custom_input:
+        q_low = custom_input.lower()
+        if "digital" in q_low or "channel" in q_low or "physical" in q_low:
+            sql_to_run = """
                 SELECT 
-                    s.store_name, s.region, s.channel_group,
+                    s.channel_group,
                     COUNT(DISTINCT f.order_id) AS total_orders,
                     ROUND(SUM(f.net_sales_amount), 2) AS net_revenue_inr,
                     ROUND(SUM(f.gross_profit_amount), 2) AS gross_profit_inr,
                     ROUND((SUM(f.gross_profit_amount)/NULLIF(SUM(f.net_sales_amount),0))*100.0, 2) AS margin_pct
                 FROM warehouse.fact_sales f
                 JOIN warehouse.dim_store s ON f.store_key = s.store_key
-                GROUP BY s.store_name, s.region, s.channel_group
-                ORDER BY net_revenue_inr DESC
-                LIMIT 5;
+                GROUP BY s.channel_group
+                ORDER BY net_revenue_inr DESC;
             """
-            explanation = "Here are the top 5 revenue generating retail & digital store locations along with their realized profit margins."
-
-        elif "rfm" in q_lower or "champion" in q_lower or "customer tier" in q_lower:
-            sql_exec = """
-                SELECT 
-                    rfm_customer_tier,
-                    COUNT(*) AS customer_count,
-                    ROUND(SUM(monetary_spend), 2) AS total_monetary_spend,
-                    ROUND(AVG(monetary_spend), 2) AS avg_customer_spend,
-                    ROUND(AVG(frequency_orders), 1) AS avg_orders_per_customer
-                FROM warehouse.mart_customer_rfm
-                GROUP BY rfm_customer_tier
-                ORDER BY total_monetary_spend DESC;
-            """
-            explanation = "Customer behavioral segmentation breakdown showing RFM distribution and total monetary revenue per cluster."
-
-        elif "category" in q_lower or "margin" in q_lower or "product" in q_lower:
-            sql_exec = """
-                SELECT 
-                    p.category,
-                    COUNT(DISTINCT p.product_key) AS unique_products,
-                    SUM(f.quantity) AS total_units_sold,
-                    ROUND(SUM(f.net_sales_amount), 2) AS total_revenue,
-                    ROUND(SUM(f.gross_profit_amount), 2) AS gross_profit,
-                    ROUND((SUM(f.gross_profit_amount)/NULLIF(SUM(f.net_sales_amount),0))*100.0, 2) AS realized_margin_pct
-                FROM warehouse.fact_sales f
-                JOIN warehouse.dim_product p ON f.product_key = p.product_key
-                GROUP BY p.category
-                ORDER BY realized_margin_pct DESC;
-            """
-            explanation = "Product category profitability matrix sorted by realized gross margin percentage."
-
-        elif "quarantine" in q_lower or "reason" in q_lower or "reject" in q_lower:
-            sql_exec = """
-                SELECT rejection_reason_code, COUNT(*) AS anomaly_count 
-                FROM quarantine.quarantine_orders GROUP BY rejection_reason_code
-                UNION ALL
-                SELECT rejection_reason_code, COUNT(*) AS anomaly_count 
-                FROM quarantine.quarantine_order_items GROUP BY rejection_reason_code
-                UNION ALL
-                SELECT rejection_reason_code, COUNT(*) AS anomaly_count 
-                FROM quarantine.quarantine_customers GROUP BY rejection_reason_code
-                ORDER BY anomaly_count DESC;
-            """
-            explanation = "Aggregated count of quarantined anomalies across operational entities grouped by root-cause rejection reason codes."
-
-        elif "region" in q_lower or "aov" in q_lower:
-            sql_exec = """
-                SELECT 
-                    s.region,
-                    COUNT(DISTINCT f.order_id) AS total_orders,
-                    ROUND(SUM(f.net_sales_amount), 2) AS total_revenue,
-                    ROUND(SUM(f.net_sales_amount) / NULLIF(COUNT(DISTINCT f.order_id), 0), 2) AS average_order_value
-                FROM warehouse.fact_sales f
-                JOIN warehouse.dim_store s ON f.store_key = s.store_key
-                GROUP BY s.region
-                ORDER BY average_order_value DESC;
-            """
-            explanation = "Regional sales efficiency breakdown comparing total transaction volume against Average Order Value (AOV)."
-
+            analytical_context = "Cross-channel revenue analysis comparing Physical Retail Stores vs Digital Online Commerce."
+            chart_type = "pie"
+            x_axis, y_axis = "channel_group", "net_revenue_inr"
         else:
-            # Default Monthly Summary
-            sql_exec = """
-                SELECT 
-                    d.year_month,
-                    COUNT(DISTINCT f.order_id) AS total_orders,
-                    ROUND(SUM(f.net_sales_amount), 2) AS net_revenue,
-                    ROUND(SUM(f.gross_profit_amount), 2) AS gross_profit
-                FROM warehouse.fact_sales f
-                JOIN warehouse.dim_date d ON f.date_key = d.date_key
-                GROUP BY d.year_month
-                ORDER BY d.year_month DESC
-                LIMIT 12;
-            """
-            explanation = "Monthly performance summary across orders, gross revenue, and gross profit over the last 12 periods."
+            suggested_query = "monthly_velocity"
 
-        # Execute Live SQL Query
-        df_ai_res = con.execute(sql_exec).df()
+    if suggested_query == "top_stores":
+        sql_to_run = """
+            SELECT 
+                s.store_name, s.region, s.channel_group,
+                COUNT(DISTINCT f.order_id) AS total_orders,
+                ROUND(SUM(f.net_sales_amount), 2) AS net_revenue,
+                ROUND(SUM(f.gross_profit_amount), 2) AS gross_profit,
+                ROUND((SUM(f.gross_profit_amount)/NULLIF(SUM(f.net_sales_amount),0))*100.0, 2) AS margin_pct
+            FROM warehouse.fact_sales f
+            JOIN warehouse.dim_store s ON f.store_key = s.store_key
+            GROUP BY s.store_name, s.region, s.channel_group
+            ORDER BY net_revenue DESC
+            LIMIT 5;
+        """
+        analytical_context = "Top 5 high-performing retail locations ranked by net gross turnover and realized profit margins."
+        chart_type = "bar"
+        x_axis, y_axis = "store_name", "net_revenue"
 
-        st.markdown(f"""
-        <div class="chat-bubble-bot">
-            <b>🤖 AI Copilot Analysis:</b><br>
-            {explanation}
-        </div>
-        """, unsafe_allow_html=True)
+    elif suggested_query == "monthly_velocity":
+        sql_to_run = """
+            SELECT 
+                d.year_month,
+                COUNT(DISTINCT f.order_id) AS total_orders,
+                ROUND(SUM(f.net_sales_amount), 2) AS net_revenue,
+                ROUND(SUM(f.gross_profit_amount), 2) AS gross_profit
+            FROM warehouse.fact_sales f
+            JOIN warehouse.dim_date d ON f.date_key = d.date_key
+            GROUP BY d.year_month
+            ORDER BY d.year_month ASC;
+        """
+        analytical_context = "Chronological monthly sales trajectory and profit margin realization across operating quarters."
+        chart_type = "line"
+        x_axis, y_axis = "year_month", "net_revenue"
 
-        st.markdown("**Generated Warehouse SQL Query:**")
-        st.code(sql_exec.strip(), language="sql")
+    elif suggested_query == "regional_aov":
+        sql_to_run = """
+            SELECT 
+                s.region,
+                COUNT(DISTINCT f.order_id) AS total_orders,
+                ROUND(SUM(f.net_sales_amount), 2) AS total_revenue,
+                ROUND(SUM(f.net_sales_amount) / NULLIF(COUNT(DISTINCT f.order_id), 0), 2) AS avg_order_value
+            FROM warehouse.fact_sales f
+            JOIN warehouse.dim_store s ON f.store_key = s.store_key
+            GROUP BY s.region
+            ORDER BY avg_order_value DESC;
+        """
+        analytical_context = "Regional sales efficiency matrix comparing transaction depth and Average Order Value (AOV)."
+        chart_type = "bar"
+        x_axis, y_axis = "region", "avg_order_value"
 
-        st.markdown("**Live Query Result Matrix:**")
-        st.dataframe(df_ai_res, use_container_width=True)
+    elif suggested_query == "rfm_champions" or suggested_query == "rfm_share":
+        sql_to_run = """
+            SELECT 
+                rfm_customer_tier,
+                COUNT(*) AS customer_count,
+                ROUND(SUM(monetary_spend), 2) AS total_monetary_spend,
+                ROUND(AVG(monetary_spend), 2) AS avg_customer_spend,
+                ROUND(AVG(frequency_orders), 1) AS avg_orders_placed
+            FROM warehouse.mart_customer_rfm
+            GROUP BY rfm_customer_tier
+            ORDER BY total_monetary_spend DESC;
+        """
+        analytical_context = "Customer behavioral segmentation matrix dividing user base into Recency, Frequency, and Monetary tiers."
+        chart_type = "pie"
+        x_axis, y_axis = "rfm_customer_tier", "total_monetary_spend"
+
+    elif suggested_query == "rfm_at_risk":
+        sql_to_run = """
+            SELECT 
+                customer_id, full_name, email, segment,
+                recency_days, frequency_orders, monetary_spend, rfm_customer_tier
+            FROM warehouse.mart_customer_rfm
+            WHERE rfm_customer_tier IN ('At Risk', 'Hibernating / Lapsed')
+            ORDER BY monetary_spend DESC
+            LIMIT 15;
+        """
+        analytical_context = "High-value lapsed customers requiring targeted re-activation and retention campaigns."
+        chart_type = "table"
+
+    elif suggested_query == "top_skus":
+        sql_to_run = """
+            SELECT 
+                p.sku, p.product_name, p.category, p.subcategory,
+                SUM(f.quantity) AS units_sold,
+                ROUND(SUM(f.net_sales_amount), 2) AS revenue,
+                ROUND((SUM(f.gross_profit_amount)/NULLIF(SUM(f.net_sales_amount),0))*100.0, 2) AS margin_pct
+            FROM warehouse.fact_sales f
+            JOIN warehouse.dim_product p ON f.product_key = p.product_key
+            GROUP BY p.sku, p.product_name, p.category, p.subcategory
+            ORDER BY revenue DESC
+            LIMIT 15;
+        """
+        analytical_context = "Pareto velocity product list generating primary gross turnover."
+        chart_type = "bar"
+        x_axis, y_axis = "sku", "revenue"
+
+    elif suggested_query == "category_margins":
+        sql_to_run = """
+            SELECT 
+                p.category,
+                COUNT(DISTINCT p.product_key) AS unique_products,
+                SUM(f.quantity) AS units_sold,
+                ROUND(SUM(f.net_sales_amount), 2) AS total_revenue,
+                ROUND(SUM(f.gross_profit_amount), 2) AS gross_profit,
+                ROUND((SUM(f.gross_profit_amount)/NULLIF(SUM(f.net_sales_amount),0))*100.0, 2) AS realized_margin_pct
+            FROM warehouse.fact_sales f
+            JOIN warehouse.dim_product p ON f.product_key = p.product_key
+            GROUP BY p.category
+            ORDER BY realized_margin_pct DESC;
+        """
+        analytical_context = "Product category margin ranking identifying highest profitability business lines."
+        chart_type = "bar"
+        x_axis, y_axis = "category", "realized_margin_pct"
+
+    elif suggested_query == "quarantine_split":
+        sql_to_run = """
+            SELECT rejection_reason_code, COUNT(*) AS anomaly_count 
+            FROM quarantine.quarantine_orders GROUP BY rejection_reason_code
+            UNION ALL
+            SELECT rejection_reason_code, COUNT(*) AS anomaly_count 
+            FROM quarantine.quarantine_order_items GROUP BY rejection_reason_code
+            UNION ALL
+            SELECT rejection_reason_code, COUNT(*) AS anomaly_count 
+            FROM quarantine.quarantine_customers GROUP BY rejection_reason_code
+            ORDER BY anomaly_count DESC;
+        """
+        analytical_context = "Data quality quarantine interception breakdown categorizing root causes."
+        chart_type = "bar"
+        x_axis, y_axis = "rejection_reason_code", "anomaly_count"
+
+    elif suggested_query == "column_health":
+        sql_to_run = """
+            SELECT table_name, column_name, total_records, null_pct, uniqueness_pct, health_score
+            FROM warehouse.audit_column_profile
+            ORDER BY health_score ASC;
+        """
+        analytical_context = "Automated statistical column health scorecard across all warehouse dimensions & facts."
+        chart_type = "table"
+
+    elif suggested_query == "pii_governance":
+        sql_to_run = """
+            SELECT table_name, column_name, data_type, security_classification, is_pii, business_definition
+            FROM metadata.metadata.csv
+        """
+        analytical_context = "4-Tier Governance and PII classification matrix."
+        chart_type = "table"
+
+    # Execute and render result if query is populated
+    if sql_to_run:
+        try:
+            if "metadata.metadata.csv" in sql_to_run:
+                df_res = pd.read_csv(METADATA_DIR / "metadata.csv")
+            else:
+                df_res = con.execute(sql_to_run).df()
+
+            st.markdown(f"""
+            <div class="ai-insight-box">
+                <b>🎓 Executive Analytical Insight & Diagnosis:</b><br>
+                {analytical_context}
+            </div>
+            """, unsafe_allow_html=True)
+
+            c_chart, c_tbl = st.columns([6, 6])
+            
+            with c_chart:
+                if chart_type == "bar" and x_axis and y_axis:
+                    fig = px.bar(df_res, x=x_axis, y=y_axis, color=x_axis, color_discrete_sequence=px.colors.qualitative.Prism)
+                    fig.update_layout(showlegend=False)
+                    st.plotly_chart(fig, use_container_width=True)
+                elif chart_type == "line" and x_axis and y_axis:
+                    fig = px.line(df_res, x=x_axis, y=y_axis, markers=True, line_shape="spline")
+                    st.plotly_chart(fig, use_container_width=True)
+                elif chart_type == "pie" and x_axis and y_axis:
+                    fig = px.pie(df_res, names=x_axis, values=y_axis, hole=0.45)
+                    st.plotly_chart(fig, use_container_width=True)
+                else:
+                    st.dataframe(df_res.head(10), use_container_width=True)
+
+            with c_tbl:
+                st.write("**Synthesized SQL Query (Executed Live):**")
+                st.code(sql_to_run.strip(), language="sql")
+                st.write("**Result Data Matrix:**")
+                st.dataframe(df_res, use_container_width=True)
+
+        except Exception as e:
+            st.error(f"Execution Error: {str(e)}")
 
 
 # ==============================================================================
-# TAB 3: EXECUTIVE ANALYTICS
+# TAB 3: EXECUTIVE ANALYTICS WITH WATERFALL CHART
 # ==============================================================================
 elif view_mode == "📊 Executive Sales & Margin Analytics":
     st.markdown('<div class="main-header">Executive Sales & Revenue Performance</div>', unsafe_allow_html=True)
@@ -739,7 +880,7 @@ elif view_mode == "👥 Customer & RFM Segmentation":
 
 
 # ==============================================================================
-# TAB 6: PRODUCT & MERCHANDISING
+# TAB 6: PRODUCT & MERCHANDISING INTELLIGENCE
 # ==============================================================================
 elif view_mode == "🛒 Product & Merchandising Intelligence":
     st.markdown('<div class="main-header">Product & Merchandising Intelligence</div>', unsafe_allow_html=True)
@@ -837,14 +978,12 @@ elif view_mode == "📋 Pipeline Execution & Audit Logs":
         if st.button("⚡ Run End-to-End Pipeline On-Demand", type="primary"):
             with st.spinner("Executing pipeline ETL + DQ + Transformation safely..."):
                 try:
-                    # Clear cache and close active read handle to avoid DuckDB connection collision
                     st.cache_resource.clear()
                     try:
                         con.close()
                     except Exception:
                         pass
                     
-                    # Run full pipeline with sample datasets
                     con_write = duckdb.connect(str(DUCKDB_PATH), read_only=False)
                     load_raw_csvs_to_staging(source_dir=SAMPLE_DATA_DIR, db_path=DUCKDB_PATH)
                     run_dq_pipeline(con_write)
