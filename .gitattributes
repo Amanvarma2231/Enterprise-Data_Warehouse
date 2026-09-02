@@ -1,0 +1,7 @@
+# GitHub Linguist Language Override
+*.sql linguist-detectable=true
+*.sql linguist-language=SQL
+
+# Documentation and sample data tracking
+*.mermaid linguist-documentation=true
+*.csv linguist-documentation=true
