@@ -1,0 +1,11 @@
+```mermaid
+erDiagram
+    CUSTOMER ||--o{ ORDER : "places"
+    ORDER ||--|{ ORDER_ITEM : "contains"
+    PRODUCT ||--o{ ORDER_ITEM : "ordered in"
+    CATEGORY ||--|{ PRODUCT : "classifies"
+    ORDER ||--o{ PAYMENT : "settled via"
+    STORE ||--o{ ORDER : "fulfills"
+    REGION ||--|{ STORE : "located in"
+    DATE ||--o{ ORDER : "occurs on"
+```

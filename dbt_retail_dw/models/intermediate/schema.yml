@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: int_order_items_enriched
+    description: "Order items joined with product costs and line-level profitability"
+    columns:
+      - name: order_item_id
+        tests:
+          - unique
+          - not_null
+
+  - name: int_orders_aggregated
+    description: "Order header level financial rollup"
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+
+  - name: int_customer_metrics
+    description: "Aggregated customer lifetime order counts and monetary totals"
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null

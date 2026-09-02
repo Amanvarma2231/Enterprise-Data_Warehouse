@@ -1,0 +1,16 @@
+retail_warehouse:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: '../data/warehouse/retailsphere_dw.duckdb'
+      threads: 4
+    prod:
+      type: postgres
+      host: localhost
+      user: postgres
+      password: "{{ env_var('POSTGRES_PASSWORD', 'postgres') }}"
+      port: 5432
+      dbname: retailsphere_dw
+      schema: warehouse
+      threads: 4

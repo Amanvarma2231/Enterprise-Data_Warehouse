@@ -1,0 +1,301 @@
+product_id,sku,product_name,category,subcategory,unit_cost,unit_price,reorder_level,is_discontinued
+501,SKU-ELE-10001,Smartwatches - Repellat Model 657,Electronics,Smartwatches,33872.49,45292.52,22,False
+502,SKU-SPO-10002,Team Sports - Fuga Model 972,Sports & Fitness,Team Sports,9728.69,15084.04,63,False
+503,SKU-BEA-10003,Men's Grooming - Impedit Model 580,Beauty & Personal Care,Men's Grooming,811.67,1376.24,25,False
+504,SKU-BEA-10004,Makeup - Reiciendis Model 903,Beauty & Personal Care,Makeup,1823.35,3910.83,60,False
+505,SKU-HOM-10005,Small Appliances - Iusto Model 774,Home & Kitchen,Small Appliances,4183.6,5998.46,43,False
+506,SKU-BEA-10006,Oral Care - Perferendis Model 524,Beauty & Personal Care,Oral Care,543.78,1305.17,14,False
+507,SKU-APP-10007,Kids' Fashion - Temporibus Model 859,Apparel,Kids' Fashion,2966.58,5384.85,86,False
+508,SKU-APP-10008,Sportswear - Illo Model 500,Apparel,Sportswear,3475.98,5538.85,34,False
+509,SKU-BEA-10009,Skincare - Doloremque Model 231,Beauty & Personal Care,Skincare,1618.56,3363.13,91,False
+510,SKU-GRO-10010,Beverages - Beatae Model 262,Grocery & Gourmet,Beverages,507.62,640.28,65,False
+511,SKU-GRO-10011,Beverages - Suscipit Model 903,Grocery & Gourmet,Beverages,624.94,856.8,60,False
+512,SKU-GRO-10012,Snacks & Confectionery - Quod Model 430,Grocery & Gourmet,Snacks & Confectionery,1011.31,1219.3,36,False
+513,SKU-ELE-10013,Smartwatches - Quibusdam Model 256,Electronics,Smartwatches,1013.45,1399.58,13,False
+514,SKU-SPO-10014,Gym Equipment - In Model 851,Sports & Fitness,Gym Equipment,6989.99,8817.04,26,True
+515,SKU-GRO-10015,Gourmet Oils - Dolorum Model 768,Grocery & Gourmet,Gourmet Oils,942.0,1144.81,38,False
+516,SKU-SPO-10016,Yoga & Pilates - Sunt Model 487,Sports & Fitness,Yoga & Pilates,8797.86,14192.65,43,False
+517,SKU-HOM-10017,Cookware - In Model 753,Home & Kitchen,Cookware,7496.06,12096.53,84,False
+518,SKU-ELE-10018,Smartwatches - Minus Model 245,Electronics,Smartwatches,41760.36,49561.42,46,False
+519,SKU-APP-10019,Men's Wear - Ex Model 958,Apparel,Men's Wear,409.23,849.44,36,False
+520,SKU-BEA-10020,Skincare - Quae Model 740,Beauty & Personal Care,Skincare,874.39,1736.99,19,False
+521,SKU-BEA-10021,Makeup - Culpa Model 561,Beauty & Personal Care,Makeup,1788.25,3815.32,30,False
+522,SKU-ELE-10022,Laptops - Maiores Model 975,Electronics,Laptops,29855.15,39986.91,14,False
+523,SKU-HOM-10023,Furniture - Autem Model 659,Home & Kitchen,Furniture,4000.31,6428.51,10,False
+524,SKU-GRO-10024,Snacks & Confectionery - Dolorem Model 130,Grocery & Gourmet,Snacks & Confectionery,1114.84,1357.31,78,False
+525,SKU-SPO-10025,Yoga & Pilates - Soluta Model 322,Sports & Fitness,Yoga & Pilates,2830.79,4003.31,13,False
+526,SKU-APP-10026,Men's Wear - Culpa Model 374,Apparel,Men's Wear,2587.94,5568.93,45,False
+527,SKU-ELE-10027,Audio & Headphones - Cupiditate Model 578,Electronics,Audio & Headphones,32009.72,43071.55,73,False
+528,SKU-BEA-10028,Haircare - Nemo Model 966,Beauty & Personal Care,Haircare,560.18,951.12,45,True
+529,SKU-ELE-10029,Cameras - Fugit Model 269,Electronics,Cameras,35795.32,47474.39,36,True
+530,SKU-BEA-10030,Makeup - Porro Model 865,Beauty & Personal Care,Makeup,1775.09,3414.81,44,False
+531,SKU-SPO-10031,Gym Equipment - Temporibus Model 680,Sports & Fitness,Gym Equipment,7405.36,10687.35,55,False
+532,SKU-GRO-10032,Organic Foods - Similique Model 623,Grocery & Gourmet,Organic Foods,561.31,820.25,42,False
+533,SKU-HOM-10033,Bedding - Doloribus Model 643,Home & Kitchen,Bedding,6656.82,10801.02,55,False
+534,SKU-ELE-10034,Laptops - Explicabo Model 290,Electronics,Laptops,36502.3,46679.73,55,False
+535,SKU-APP-10035,Winter Wear - Ut Model 421,Apparel,Winter Wear,1395.06,2114.96,25,False
+536,SKU-GRO-10036,Organic Foods - Molestias Model 681,Grocery & Gourmet,Organic Foods,871.49,1067.42,51,False
+537,SKU-SPO-10037,Gym Equipment - Illo Model 639,Sports & Fitness,Gym Equipment,4811.41,7317.24,37,False
+538,SKU-HOM-10038,Kitchen Storage - Dolorum Model 980,Home & Kitchen,Kitchen Storage,4961.26,8640.93,95,False
+539,SKU-GRO-10039,Baking Supplies - Repudiandae Model 932,Grocery & Gourmet,Baking Supplies,831.27,1082.58,50,False
+540,SKU-ELE-10040,Smartwatches - Saepe Model 531,Electronics,Smartwatches,22689.97,32834.15,25,False
+541,SKU-APP-10041,Sportswear - Provident Model 690,Apparel,Sportswear,1245.03,2124.38,12,False
+542,SKU-GRO-10042,Dairy Alternatives - Numquam Model 391,Grocery & Gourmet,Dairy Alternatives,1186.03,1742.37,26,False
+543,SKU-BEA-10043,Skincare - Doloribus Model 140,Beauty & Personal Care,Skincare,1799.99,4352.44,53,False
+544,SKU-ELE-10044,Smartwatches - Explicabo Model 840,Electronics,Smartwatches,4732.83,6582.2,48,False
+545,SKU-HOM-10045,Home Decor - Nulla Model 605,Home & Kitchen,Home Decor,868.2,1464.92,88,False
+546,SKU-HOM-10046,Kitchen Storage - Enim Model 756,Home & Kitchen,Kitchen Storage,7875.74,12181.16,25,False
+547,SKU-SPO-10047,Gym Equipment - Iste Model 110,Sports & Fitness,Gym Equipment,642.67,817.17,27,False
+548,SKU-HOM-10048,Kitchen Storage - Error Model 190,Home & Kitchen,Kitchen Storage,5862.96,8285.36,34,False
+549,SKU-HOM-10049,Bedding - Totam Model 988,Home & Kitchen,Bedding,7919.13,13993.54,16,False
+550,SKU-ELE-10050,Smartphones - Soluta Model 370,Electronics,Smartphones,2636.15,3272.22,52,False
+551,SKU-BEA-10051,Fragrances - Sit Model 697,Beauty & Personal Care,Fragrances,1421.44,3446.79,68,False
+552,SKU-HOM-10052,Small Appliances - Quia Model 523,Home & Kitchen,Small Appliances,6086.02,10613.41,91,False
+553,SKU-ELE-10053,Cameras - Possimus Model 777,Electronics,Cameras,23977.71,31731.27,72,True
+554,SKU-HOM-10054,Kitchen Storage - Minima Model 884,Home & Kitchen,Kitchen Storage,3990.97,5371.45,47,False
+555,SKU-HOM-10055,Bedding - Tenetur Model 762,Home & Kitchen,Bedding,6725.45,9558.13,36,False
+556,SKU-ELE-10056,Smartwatches - Reiciendis Model 321,Electronics,Smartwatches,3181.88,3671.69,69,False
+557,SKU-APP-10057,Footwear - Cumque Model 704,Apparel,Footwear,500.19,783.76,77,False
+558,SKU-HOM-10058,Furniture - Magni Model 968,Home & Kitchen,Furniture,5740.97,9344.26,74,False
+559,SKU-APP-10059,Women's Wear - Excepturi Model 563,Apparel,Women's Wear,3220.94,5502.85,89,False
+560,SKU-BEA-10060,Haircare - A Model 802,Beauty & Personal Care,Haircare,211.79,407.29,49,True
+561,SKU-SPO-10061,Supplements - Assumenda Model 209,Sports & Fitness,Supplements,1494.15,2177.62,24,False
+562,SKU-BEA-10062,Haircare - Officiis Model 643,Beauty & Personal Care,Haircare,592.17,1170.27,67,False
+563,SKU-ELE-10063,Cameras - Ipsam Model 254,Electronics,Cameras,4240.97,5426.08,60,False
+564,SKU-SPO-10064,Outdoor Recreation - Cumque Model 200,Sports & Fitness,Outdoor Recreation,921.94,1265.51,16,False
+565,SKU-GRO-10065,Baking Supplies - Facilis Model 280,Grocery & Gourmet,Baking Supplies,264.96,322.27,86,False
+566,SKU-SPO-10066,Cycling - Maxime Model 151,Sports & Fitness,Cycling,6367.84,8272.67,92,False
+567,SKU-ELE-10067,Laptops - Totam Model 689,Electronics,Laptops,5625.86,7980.38,44,False
+568,SKU-SPO-10068,Gym Equipment - Autem Model 816,Sports & Fitness,Gym Equipment,3522.88,5802.78,61,False
+569,SKU-ELE-10069,Laptops - Quia Model 374,Electronics,Laptops,33159.63,46883.02,73,False
+570,SKU-APP-10070,Kids' Fashion - Est Model 394,Apparel,Kids' Fashion,2283.61,4486.57,10,False
+571,SKU-SPO-10071,Supplements - Hic Model 973,Sports & Fitness,Supplements,7578.78,11994.11,98,False
+572,SKU-HOM-10072,Kitchen Storage - Perferendis Model 566,Home & Kitchen,Kitchen Storage,788.27,1098.59,28,True
+573,SKU-GRO-10073,Baking Supplies - Reiciendis Model 370,Grocery & Gourmet,Baking Supplies,536.39,620.76,19,False
+574,SKU-ELE-10074,Cameras - Dolorum Model 101,Electronics,Cameras,16170.39,20894.55,72,False
+575,SKU-BEA-10075,Skincare - Vitae Model 796,Beauty & Personal Care,Skincare,166.74,253.01,47,False
+576,SKU-SPO-10076,Team Sports - Ex Model 196,Sports & Fitness,Team Sports,2257.47,2970.75,22,False
+577,SKU-GRO-10077,Snacks & Confectionery - Architecto Model 658,Grocery & Gourmet,Snacks & Confectionery,565.03,795.1,42,False
+578,SKU-HOM-10078,Furniture - Labore Model 408,Home & Kitchen,Furniture,3805.32,6521.84,100,False
+579,SKU-SPO-10079,Supplements - Omnis Model 710,Sports & Fitness,Supplements,10326.39,17100.24,71,False
+580,SKU-GRO-10080,Dairy Alternatives - Quos Model 520,Grocery & Gourmet,Dairy Alternatives,884.73,1023.86,38,False
+581,SKU-APP-10081,Kids' Fashion - Dolores Model 858,Apparel,Kids' Fashion,1817.74,2900.19,99,True
+582,SKU-HOM-10082,Small Appliances - Facilis Model 486,Home & Kitchen,Small Appliances,6018.83,8407.83,91,False
+583,SKU-HOM-10083,Kitchen Storage - Itaque Model 560,Home & Kitchen,Kitchen Storage,5510.71,9641.6,77,False
+584,SKU-GRO-10084,Snacks & Confectionery - Eius Model 527,Grocery & Gourmet,Snacks & Confectionery,1070.07,1377.03,45,False
+585,SKU-ELE-10085,Cameras - Autem Model 727,Electronics,Cameras,23643.46,29624.84,25,False
+586,SKU-BEA-10086,Men's Grooming - Alias Model 395,Beauty & Personal Care,Men's Grooming,1938.85,4444.5,24,True
+587,SKU-BEA-10087,Oral Care - Provident Model 635,Beauty & Personal Care,Oral Care,362.49,790.56,47,False
+588,SKU-GRO-10088,Beverages - Consectetur Model 918,Grocery & Gourmet,Beverages,392.23,490.64,47,False
+589,SKU-ELE-10089,Laptops - Deserunt Model 154,Electronics,Laptops,13094.27,17388.16,72,False
+590,SKU-BEA-10090,Fragrances - Explicabo Model 357,Beauty & Personal Care,Fragrances,1347.69,2022.4,27,False
+591,SKU-HOM-10091,Bedding - Necessitatibus Model 258,Home & Kitchen,Bedding,5406.28,9106.57,21,False
+592,SKU-APP-10092,Winter Wear - In Model 182,Apparel,Winter Wear,809.04,1511.43,47,False
+593,SKU-BEA-10093,Fragrances - Excepturi Model 495,Beauty & Personal Care,Fragrances,557.56,1214.64,64,False
+594,SKU-ELE-10094,Audio & Headphones - Perferendis Model 277,Electronics,Audio & Headphones,41448.64,55089.87,82,False
+595,SKU-HOM-10095,Bedding - Quibusdam Model 356,Home & Kitchen,Bedding,1328.62,2237.17,27,False
+596,SKU-APP-10096,Kids' Fashion - Tempore Model 743,Apparel,Kids' Fashion,1171.74,1919.15,69,False
+597,SKU-BEA-10097,Makeup - Vero Model 810,Beauty & Personal Care,Makeup,264.4,535.83,50,False
+598,SKU-GRO-10098,Gourmet Oils - Molestiae Model 577,Grocery & Gourmet,Gourmet Oils,454.77,579.36,63,True
+599,SKU-BEA-10099,Skincare - Dolores Model 885,Beauty & Personal Care,Skincare,1832.11,2796.57,63,False
+600,SKU-APP-10100,Sportswear - Inventore Model 694,Apparel,Sportswear,3187.94,6469.3,75,False
+601,SKU-SPO-10101,Team Sports - Enim Model 154,Sports & Fitness,Team Sports,10828.98,17813.81,60,False
+602,SKU-GRO-10102,Organic Foods - Architecto Model 630,Grocery & Gourmet,Organic Foods,576.86,817.44,68,False
+603,SKU-ELE-10103,Smartphones - Tempora Model 209,Electronics,Smartphones,12522.78,18106.09,52,False
+604,SKU-HOM-10104,Bedding - Aut Model 162,Home & Kitchen,Bedding,3981.38,5835.32,25,False
+605,SKU-GRO-10105,Dairy Alternatives - Fugiat Model 309,Grocery & Gourmet,Dairy Alternatives,897.66,1048.97,76,False
+606,SKU-GRO-10106,Baking Supplies - Suscipit Model 755,Grocery & Gourmet,Baking Supplies,198.23,290.06,29,False
+607,SKU-HOM-10107,Kitchen Storage - Nesciunt Model 596,Home & Kitchen,Kitchen Storage,7915.98,10316.31,89,False
+608,SKU-ELE-10108,Smartphones - Accusantium Model 223,Electronics,Smartphones,501.59,667.69,76,False
+609,SKU-APP-10109,Men's Wear - Nisi Model 554,Apparel,Men's Wear,1737.04,3589.04,60,False
+610,SKU-ELE-10110,Audio & Headphones - Nihil Model 939,Electronics,Audio & Headphones,18502.8,26733.01,40,False
+611,SKU-SPO-10111,Outdoor Recreation - Rerum Model 979,Sports & Fitness,Outdoor Recreation,9913.73,15431.65,94,False
+612,SKU-BEA-10112,Haircare - Molestias Model 938,Beauty & Personal Care,Haircare,1301.5,2192.78,94,False
+613,SKU-SPO-10113,Supplements - Cum Model 591,Sports & Fitness,Supplements,8485.66,11372.12,47,False
+614,SKU-ELE-10114,Cameras - Alias Model 500,Electronics,Cameras,22436.9,30296.77,59,False
+615,SKU-ELE-10115,Smartwatches - Minus Model 128,Electronics,Smartwatches,19051.89,24337.83,46,False
+616,SKU-SPO-10116,Cycling - Saepe Model 760,Sports & Fitness,Cycling,428.93,594.6,93,False
+617,SKU-SPO-10117,Cycling - Sunt Model 242,Sports & Fitness,Cycling,798.79,1324.53,69,False
+618,SKU-BEA-10118,Fragrances - Neque Model 612,Beauty & Personal Care,Fragrances,97.51,161.7,74,False
+619,SKU-GRO-10119,Dairy Alternatives - Exercitationem Model 771,Grocery & Gourmet,Dairy Alternatives,493.12,577.92,29,False
+620,SKU-GRO-10120,Dairy Alternatives - Occaecati Model 905,Grocery & Gourmet,Dairy Alternatives,433.58,607.15,27,False
+621,SKU-GRO-10121,Snacks & Confectionery - Ipsa Model 959,Grocery & Gourmet,Snacks & Confectionery,1111.23,1304.44,92,False
+622,SKU-BEA-10122,Men's Grooming - Sequi Model 619,Beauty & Personal Care,Men's Grooming,1345.23,2792.75,94,False
+623,SKU-APP-10123,Winter Wear - Corporis Model 456,Apparel,Winter Wear,1235.66,2674.16,84,False
+624,SKU-BEA-10124,Skincare - Dignissimos Model 262,Beauty & Personal Care,Skincare,166.26,391.05,39,False
+625,SKU-ELE-10125,Smartwatches - At Model 878,Electronics,Smartwatches,42073.41,54397.72,39,True
+626,SKU-GRO-10126,Beverages - Quas Model 845,Grocery & Gourmet,Beverages,162.3,236.68,59,False
+627,SKU-BEA-10127,Skincare - Porro Model 138,Beauty & Personal Care,Skincare,198.9,348.17,19,False
+628,SKU-HOM-10128,Bedding - Sapiente Model 278,Home & Kitchen,Bedding,5142.53,6761.04,51,False
+629,SKU-BEA-10129,Makeup - Voluptates Model 669,Beauty & Personal Care,Makeup,335.78,717.69,35,False
+630,SKU-BEA-10130,Makeup - Sunt Model 859,Beauty & Personal Care,Makeup,1383.39,2387.03,30,False
+631,SKU-SPO-10131,Yoga & Pilates - Amet Model 784,Sports & Fitness,Yoga & Pilates,1306.41,1647.26,22,False
+632,SKU-APP-10132,Men's Wear - Molestiae Model 659,Apparel,Men's Wear,1354.53,2338.49,19,False
+633,SKU-GRO-10133,Gourmet Oils - Labore Model 640,Grocery & Gourmet,Gourmet Oils,1150.98,1617.01,73,False
+634,SKU-APP-10134,Sportswear - Accusamus Model 465,Apparel,Sportswear,2922.38,5262.27,89,False
+635,SKU-APP-10135,Men's Wear - Nisi Model 994,Apparel,Men's Wear,1620.24,3079.07,19,False
+636,SKU-APP-10136,Sportswear - Autem Model 336,Apparel,Sportswear,1149.06,1717.09,16,False
+637,SKU-HOM-10137,Cookware - Fugiat Model 948,Home & Kitchen,Cookware,1986.16,3516.12,42,False
+638,SKU-HOM-10138,Cookware - Nulla Model 394,Home & Kitchen,Cookware,7011.43,9668.28,19,False
+639,SKU-APP-10139,Sportswear - Blanditiis Model 508,Apparel,Sportswear,3271.56,5888.93,89,False
+640,SKU-GRO-10140,Organic Foods - Laudantium Model 369,Grocery & Gourmet,Organic Foods,716.02,1058.22,93,False
+641,SKU-HOM-10141,Home Decor - Repellendus Model 883,Home & Kitchen,Home Decor,2271.83,3333.39,17,False
+642,SKU-SPO-10142,Supplements - Accusamus Model 999,Sports & Fitness,Supplements,4156.43,6612.07,17,False
+643,SKU-ELE-10143,Cameras - Corporis Model 883,Electronics,Cameras,40742.41,55447.46,14,False
+644,SKU-ELE-10144,Smartwatches - Corrupti Model 182,Electronics,Smartwatches,27117.57,36167.51,80,False
+645,SKU-APP-10145,Kids' Fashion - Doloremque Model 608,Apparel,Kids' Fashion,2573.15,3816.62,74,False
+646,SKU-HOM-10146,Home Decor - Ipsum Model 997,Home & Kitchen,Home Decor,3951.34,6680.81,39,False
+647,SKU-ELE-10147,Smartphones - A Model 647,Electronics,Smartphones,34925.79,48665.91,87,False
+648,SKU-GRO-10148,Gourmet Oils - Deserunt Model 153,Grocery & Gourmet,Gourmet Oils,895.99,1203.65,59,False
+649,SKU-GRO-10149,Beverages - Eaque Model 241,Grocery & Gourmet,Beverages,538.47,699.68,24,False
+650,SKU-SPO-10150,Outdoor Recreation - Beatae Model 159,Sports & Fitness,Outdoor Recreation,4415.93,6201.76,40,False
+651,SKU-SPO-10151,Gym Equipment - Nesciunt Model 927,Sports & Fitness,Gym Equipment,2957.37,4691.47,78,False
+652,SKU-ELE-10152,Accessories - Aperiam Model 158,Electronics,Accessories,11621.55,13563.11,26,False
+653,SKU-HOM-10153,Cookware - A Model 350,Home & Kitchen,Cookware,2684.48,4298.41,47,False
+654,SKU-BEA-10154,Makeup - Facere Model 178,Beauty & Personal Care,Makeup,1342.56,2895.35,42,False
+655,SKU-APP-10155,Footwear - Asperiores Model 979,Apparel,Footwear,2512.6,5152.69,38,False
+656,SKU-HOM-10156,Furniture - Ea Model 769,Home & Kitchen,Furniture,6296.62,9107.06,41,False
+657,SKU-HOM-10157,Furniture - Perspiciatis Model 155,Home & Kitchen,Furniture,5657.73,8779.23,54,False
+658,SKU-GRO-10158,Dairy Alternatives - Doloremque Model 240,Grocery & Gourmet,Dairy Alternatives,604.0,711.18,76,False
+659,SKU-GRO-10159,Dairy Alternatives - Quos Model 935,Grocery & Gourmet,Dairy Alternatives,284.49,364.24,28,False
+660,SKU-APP-10160,Winter Wear - Sit Model 216,Apparel,Winter Wear,1624.93,3268.31,12,False
+661,SKU-ELE-10161,Audio & Headphones - Quis Model 947,Electronics,Audio & Headphones,12869.55,16283.24,20,False
+662,SKU-SPO-10162,Cycling - Nesciunt Model 493,Sports & Fitness,Cycling,6095.68,9986.23,66,False
+663,SKU-APP-10163,Footwear - Quaerat Model 153,Apparel,Footwear,767.83,1339.76,94,False
+664,SKU-SPO-10164,Outdoor Recreation - Eum Model 872,Sports & Fitness,Outdoor Recreation,11265.52,18695.4,53,False
+665,SKU-HOM-10165,Bedding - Tempore Model 843,Home & Kitchen,Bedding,1928.22,2533.05,89,False
+666,SKU-BEA-10166,Oral Care - Deleniti Model 926,Beauty & Personal Care,Oral Care,1862.85,4195.88,23,False
+667,SKU-GRO-10167,Gourmet Oils - Culpa Model 647,Grocery & Gourmet,Gourmet Oils,373.41,558.92,69,False
+668,SKU-GRO-10168,Dairy Alternatives - Doloribus Model 490,Grocery & Gourmet,Dairy Alternatives,932.05,1156.71,69,False
+669,SKU-APP-10169,Women's Wear - Assumenda Model 798,Apparel,Women's Wear,3190.84,5183.71,45,False
+670,SKU-APP-10170,Sportswear - Quod Model 139,Apparel,Sportswear,1141.01,2118.7,88,False
+671,SKU-HOM-10171,Kitchen Storage - Mollitia Model 890,Home & Kitchen,Kitchen Storage,2191.48,3564.48,87,False
+672,SKU-HOM-10172,Bedding - Beatae Model 967,Home & Kitchen,Bedding,5371.02,9227.41,32,False
+673,SKU-ELE-10173,Smartwatches - Fuga Model 467,Electronics,Smartwatches,894.75,1038.9,71,False
+674,SKU-SPO-10174,Yoga & Pilates - Voluptates Model 181,Sports & Fitness,Yoga & Pilates,5080.75,7676.03,45,False
+675,SKU-SPO-10175,Outdoor Recreation - Sint Model 364,Sports & Fitness,Outdoor Recreation,11453.53,16586.98,45,False
+676,SKU-BEA-10176,Haircare - Quo Model 992,Beauty & Personal Care,Haircare,516.64,865.11,89,False
+677,SKU-APP-10177,Men's Wear - Impedit Model 618,Apparel,Men's Wear,2342.91,3625.43,66,False
+678,SKU-ELE-10178,Cameras - Dicta Model 831,Electronics,Cameras,32422.42,37877.29,43,True
+679,SKU-ELE-10179,Accessories - Minima Model 653,Electronics,Accessories,38099.43,53522.92,15,False
+680,SKU-HOM-10180,Cookware - Amet Model 623,Home & Kitchen,Cookware,850.46,1294.32,19,False
+681,SKU-HOM-10181,Bedding - Officiis Model 525,Home & Kitchen,Bedding,3128.04,5353.16,19,False
+682,SKU-HOM-10182,Small Appliances - Sit Model 468,Home & Kitchen,Small Appliances,441.38,707.75,52,True
+683,SKU-GRO-10183,Snacks & Confectionery - Nam Model 736,Grocery & Gourmet,Snacks & Confectionery,585.99,873.55,13,False
+684,SKU-ELE-10184,Audio & Headphones - Modi Model 126,Electronics,Audio & Headphones,41898.73,59645.43,23,False
+685,SKU-HOM-10185,Bedding - Sit Model 902,Home & Kitchen,Bedding,5797.2,9687.25,84,False
+686,SKU-APP-10186,Footwear - Sed Model 843,Apparel,Footwear,2932.93,4182.59,29,False
+687,SKU-GRO-10187,Organic Foods - Tempora Model 329,Grocery & Gourmet,Organic Foods,1148.01,1705.39,82,False
+688,SKU-SPO-10188,Supplements - Odio Model 850,Sports & Fitness,Supplements,6714.33,9656.12,25,False
+689,SKU-SPO-10189,Gym Equipment - Quae Model 632,Sports & Fitness,Gym Equipment,7403.09,11449.91,66,False
+690,SKU-APP-10190,Sportswear - Facilis Model 348,Apparel,Sportswear,1131.77,1805.43,56,False
+691,SKU-HOM-10191,Kitchen Storage - Dolorem Model 555,Home & Kitchen,Kitchen Storage,7786.08,12820.07,62,False
+692,SKU-HOM-10192,Bedding - Aliquid Model 769,Home & Kitchen,Bedding,4168.74,7325.8,71,False
+693,SKU-BEA-10193,Makeup - Assumenda Model 228,Beauty & Personal Care,Makeup,521.15,1213.14,78,False
+694,SKU-BEA-10194,Oral Care - Tenetur Model 366,Beauty & Personal Care,Oral Care,1202.73,1970.24,46,False
+695,SKU-ELE-10195,Smartphones - Atque Model 251,Electronics,Smartphones,18678.37,24310.04,83,False
+696,SKU-APP-10196,Women's Wear - Illo Model 223,Apparel,Women's Wear,3085.96,4358.64,63,False
+697,SKU-SPO-10197,Supplements - Blanditiis Model 229,Sports & Fitness,Supplements,11182.46,17716.2,14,False
+698,SKU-ELE-10198,Accessories - Hic Model 627,Electronics,Accessories,7928.64,9291.61,77,False
+699,SKU-BEA-10199,Fragrances - Fugit Model 347,Beauty & Personal Care,Fragrances,324.71,713.36,47,False
+700,SKU-HOM-10200,Bedding - Deleniti Model 839,Home & Kitchen,Bedding,4967.87,6725.93,15,False
+701,SKU-HOM-10201,Home Decor - Facere Model 858,Home & Kitchen,Home Decor,7307.73,11805.02,65,False
+702,SKU-BEA-10202,Oral Care - Mollitia Model 884,Beauty & Personal Care,Oral Care,338.44,569.75,85,False
+703,SKU-SPO-10203,Gym Equipment - Accusantium Model 707,Sports & Fitness,Gym Equipment,2081.4,2609.04,57,False
+704,SKU-BEA-10204,Makeup - Temporibus Model 839,Beauty & Personal Care,Makeup,695.24,1165.72,85,False
+705,SKU-ELE-10205,Laptops - Pariatur Model 677,Electronics,Laptops,13732.01,17197.08,76,False
+706,SKU-SPO-10206,Team Sports - Et Model 430,Sports & Fitness,Team Sports,10175.57,14673.28,59,False
+707,SKU-APP-10207,Women's Wear - Porro Model 848,Apparel,Women's Wear,290.48,626.29,36,False
+708,SKU-HOM-10208,Bedding - Dolores Model 455,Home & Kitchen,Bedding,7066.77,10297.58,46,False
+709,SKU-HOM-10209,Furniture - Expedita Model 273,Home & Kitchen,Furniture,4021.43,5677.52,46,False
+710,SKU-HOM-10210,Bedding - Voluptatibus Model 782,Home & Kitchen,Bedding,6089.38,10731.06,45,False
+711,SKU-APP-10211,Sportswear - Quibusdam Model 128,Apparel,Sportswear,2959.95,5931.42,86,False
+712,SKU-SPO-10212,Team Sports - Nisi Model 952,Sports & Fitness,Team Sports,9648.21,12089.2,13,False
+713,SKU-HOM-10213,Bedding - Atque Model 229,Home & Kitchen,Bedding,3555.39,5412.77,68,False
+714,SKU-ELE-10214,Accessories - Libero Model 555,Electronics,Accessories,31931.34,44813.18,65,False
+715,SKU-ELE-10215,Laptops - Repellendus Model 219,Electronics,Laptops,44691.94,61205.17,55,False
+716,SKU-GRO-10216,Beverages - Maxime Model 619,Grocery & Gourmet,Beverages,883.74,1117.48,52,False
+717,SKU-GRO-10217,Gourmet Oils - Dolores Model 823,Grocery & Gourmet,Gourmet Oils,634.9,902.81,98,False
+718,SKU-ELE-10218,Smartwatches - Quas Model 633,Electronics,Smartwatches,4969.53,6766.17,50,False
+719,SKU-SPO-10219,Supplements - Voluptatibus Model 749,Sports & Fitness,Supplements,10100.33,15471.04,90,False
+720,SKU-APP-10220,Sportswear - Iste Model 789,Apparel,Sportswear,1410.3,3038.53,35,False
+721,SKU-APP-10221,Footwear - Sapiente Model 389,Apparel,Footwear,2876.46,5715.09,26,False
+722,SKU-ELE-10222,Cameras - Voluptatum Model 103,Electronics,Cameras,38643.48,53128.36,65,False
+723,SKU-SPO-10223,Team Sports - Sapiente Model 528,Sports & Fitness,Team Sports,2740.0,3644.62,98,False
+724,SKU-BEA-10224,Oral Care - Fugit Model 595,Beauty & Personal Care,Oral Care,1201.09,2567.59,77,False
+725,SKU-APP-10225,Kids' Fashion - Odit Model 784,Apparel,Kids' Fashion,2966.32,6229.36,72,False
+726,SKU-GRO-10226,Baking Supplies - Iste Model 402,Grocery & Gourmet,Baking Supplies,733.5,983.03,22,False
+727,SKU-HOM-10227,Home Decor - Unde Model 778,Home & Kitchen,Home Decor,7762.56,11354.29,64,False
+728,SKU-BEA-10228,Fragrances - Optio Model 507,Beauty & Personal Care,Fragrances,1348.38,2491.24,100,False
+729,SKU-BEA-10229,Makeup - Voluptatem Model 129,Beauty & Personal Care,Makeup,1234.03,2699.1,47,False
+730,SKU-APP-10230,Footwear - Nostrum Model 367,Apparel,Footwear,353.69,713.55,96,False
+731,SKU-BEA-10231,Makeup - Error Model 155,Beauty & Personal Care,Makeup,896.38,1578.26,44,False
+732,SKU-APP-10232,Kids' Fashion - Porro Model 558,Apparel,Kids' Fashion,2281.49,3277.37,62,False
+733,SKU-APP-10233,Sportswear - Voluptates Model 728,Apparel,Sportswear,840.77,1597.66,88,False
+734,SKU-SPO-10234,Team Sports - Sequi Model 921,Sports & Fitness,Team Sports,533.06,839.57,58,False
+735,SKU-GRO-10235,Snacks & Confectionery - Provident Model 666,Grocery & Gourmet,Snacks & Confectionery,1098.19,1557.67,18,False
+736,SKU-SPO-10236,Yoga & Pilates - Dolores Model 260,Sports & Fitness,Yoga & Pilates,4536.54,6075.78,78,False
+737,SKU-GRO-10237,Beverages - Rerum Model 482,Grocery & Gourmet,Beverages,376.62,454.39,52,False
+738,SKU-SPO-10238,Supplements - Eum Model 965,Sports & Fitness,Supplements,3209.83,4031.99,12,False
+739,SKU-SPO-10239,Gym Equipment - Aliquam Model 143,Sports & Fitness,Gym Equipment,6167.54,9905.71,30,False
+740,SKU-ELE-10240,Laptops - Laboriosam Model 134,Electronics,Laptops,28604.22,38799.36,44,False
+741,SKU-BEA-10241,Oral Care - Ipsam Model 997,Beauty & Personal Care,Oral Care,849.44,1969.25,44,False
+742,SKU-ELE-10242,Smartphones - Praesentium Model 850,Electronics,Smartphones,22950.68,31236.95,63,False
+743,SKU-GRO-10243,Dairy Alternatives - Perferendis Model 853,Grocery & Gourmet,Dairy Alternatives,741.65,892.31,85,False
+744,SKU-APP-10244,Sportswear - Repellat Model 535,Apparel,Sportswear,3028.67,6141.59,75,False
+745,SKU-HOM-10245,Furniture - Optio Model 771,Home & Kitchen,Furniture,3806.52,5138.19,83,False
+746,SKU-HOM-10246,Home Decor - Unde Model 674,Home & Kitchen,Home Decor,971.23,1732.13,45,False
+747,SKU-GRO-10247,Dairy Alternatives - Sapiente Model 608,Grocery & Gourmet,Dairy Alternatives,627.65,805.8,60,True
+748,SKU-SPO-10248,Supplements - Temporibus Model 125,Sports & Fitness,Supplements,1567.16,2116.96,60,False
+749,SKU-BEA-10249,Fragrances - Quibusdam Model 418,Beauty & Personal Care,Fragrances,995.47,1601.66,52,False
+750,SKU-GRO-10250,Organic Foods - Eos Model 985,Grocery & Gourmet,Organic Foods,150.65,182.17,72,False
+751,SKU-ELE-10251,Laptops - Molestias Model 635,Electronics,Laptops,18442.18,25845.26,82,False
+752,SKU-ELE-10252,Smartwatches - Numquam Model 445,Electronics,Smartwatches,11715.06,14566.93,29,False
+753,SKU-GRO-10253,Dairy Alternatives - Nostrum Model 374,Grocery & Gourmet,Dairy Alternatives,734.53,1068.74,98,False
+754,SKU-SPO-10254,Cycling - Ad Model 767,Sports & Fitness,Cycling,6683.39,9295.64,40,False
+755,SKU-GRO-10255,Baking Supplies - Optio Model 850,Grocery & Gourmet,Baking Supplies,636.74,923.61,20,False
+756,SKU-BEA-10256,Oral Care - Ipsa Model 113,Beauty & Personal Care,Oral Care,228.81,372.34,30,False
+757,SKU-ELE-10257,Laptops - Sunt Model 216,Electronics,Laptops,9282.86,13097.42,14,False
+758,SKU-BEA-10258,Haircare - Consequuntur Model 243,Beauty & Personal Care,Haircare,1282.24,2596.01,80,False
+759,SKU-ELE-10259,Audio & Headphones - Animi Model 837,Electronics,Audio & Headphones,5732.46,8304.75,96,False
+760,SKU-HOM-10260,Bedding - Maxime Model 269,Home & Kitchen,Bedding,7143.97,11301.08,28,False
+761,SKU-GRO-10261,Beverages - Repudiandae Model 480,Grocery & Gourmet,Beverages,971.26,1440.57,76,False
+762,SKU-BEA-10262,Makeup - Esse Model 864,Beauty & Personal Care,Makeup,484.38,886.5,27,False
+763,SKU-GRO-10263,Baking Supplies - Sed Model 253,Grocery & Gourmet,Baking Supplies,51.39,66.59,70,False
+764,SKU-ELE-10264,Audio & Headphones - Fugit Model 196,Electronics,Audio & Headphones,31715.18,38368.4,78,False
+765,SKU-ELE-10265,Smartphones - Veniam Model 168,Electronics,Smartphones,28311.29,37606.92,54,False
+766,SKU-APP-10266,Kids' Fashion - Quidem Model 381,Apparel,Kids' Fashion,2256.55,4834.22,46,False
+767,SKU-BEA-10267,Men's Grooming - Corporis Model 885,Beauty & Personal Care,Men's Grooming,1480.3,2764.13,61,False
+768,SKU-SPO-10268,Team Sports - Ipsum Model 706,Sports & Fitness,Team Sports,7806.71,10470.08,29,False
+769,SKU-APP-10269,Kids' Fashion - Ab Model 229,Apparel,Kids' Fashion,747.39,1383.36,76,False
+770,SKU-BEA-10270,Fragrances - Hic Model 719,Beauty & Personal Care,Fragrances,1185.26,2789.39,45,True
+771,SKU-GRO-10271,Dairy Alternatives - Eum Model 272,Grocery & Gourmet,Dairy Alternatives,815.46,1072.89,10,False
+772,SKU-APP-10272,Men's Wear - Reiciendis Model 246,Apparel,Men's Wear,3263.98,6175.25,31,False
+773,SKU-ELE-10273,Audio & Headphones - Aspernatur Model 240,Electronics,Audio & Headphones,3961.54,5708.39,75,False
+774,SKU-BEA-10274,Oral Care - Ex Model 878,Beauty & Personal Care,Oral Care,985.64,1776.67,25,False
+775,SKU-BEA-10275,Makeup - Laboriosam Model 463,Beauty & Personal Care,Makeup,1565.93,3454.82,49,False
+776,SKU-HOM-10276,Bedding - Nostrum Model 319,Home & Kitchen,Bedding,856.05,1371.98,31,False
+777,SKU-HOM-10277,Kitchen Storage - Alias Model 552,Home & Kitchen,Kitchen Storage,1357.35,2061.3,72,False
+778,SKU-HOM-10278,Kitchen Storage - Deleniti Model 767,Home & Kitchen,Kitchen Storage,1181.86,2068.11,54,False
+779,SKU-HOM-10279,Home Decor - Quia Model 534,Home & Kitchen,Home Decor,6223.27,9166.85,37,False
+780,SKU-APP-10280,Footwear - Magnam Model 110,Apparel,Footwear,1403.59,3012.88,35,False
+781,SKU-SPO-10281,Yoga & Pilates - Quod Model 196,Sports & Fitness,Yoga & Pilates,365.69,508.19,57,False
+782,SKU-SPO-10282,Gym Equipment - Suscipit Model 381,Sports & Fitness,Gym Equipment,7399.26,9360.71,92,False
+783,SKU-ELE-10283,Accessories - Nemo Model 158,Electronics,Accessories,31839.77,39234.63,83,False
+784,SKU-GRO-10284,Baking Supplies - Sit Model 602,Grocery & Gourmet,Baking Supplies,1196.79,1641.14,32,False
+785,SKU-GRO-10285,Dairy Alternatives - Suscipit Model 129,Grocery & Gourmet,Dairy Alternatives,976.62,1136.17,88,False
+786,SKU-APP-10286,Winter Wear - Molestiae Model 234,Apparel,Winter Wear,2616.26,5485.59,20,False
+787,SKU-ELE-10287,Smartphones - Nisi Model 421,Electronics,Smartphones,20230.32,27577.51,22,False
+788,SKU-HOM-10288,Small Appliances - Accusantium Model 440,Home & Kitchen,Small Appliances,5327.07,8889.42,96,False
+789,SKU-HOM-10289,Kitchen Storage - Sit Model 839,Home & Kitchen,Kitchen Storage,1561.4,2799.8,56,False
+790,SKU-GRO-10290,Baking Supplies - Nihil Model 162,Grocery & Gourmet,Baking Supplies,523.0,723.68,18,False
+791,SKU-SPO-10291,Yoga & Pilates - Error Model 554,Sports & Fitness,Yoga & Pilates,8828.8,11369.6,15,False
+792,SKU-APP-10292,Winter Wear - Magnam Model 864,Apparel,Winter Wear,1843.31,2835.7,10,False
+793,SKU-SPO-10293,Outdoor Recreation - Inventore Model 956,Sports & Fitness,Outdoor Recreation,1677.26,2448.49,99,False
+794,SKU-BEA-10294,Skincare - Veritatis Model 847,Beauty & Personal Care,Skincare,303.22,482.29,21,False
+795,SKU-SPO-10295,Supplements - Omnis Model 907,Sports & Fitness,Supplements,11599.46,18501.43,11,False
+796,SKU-HOM-10296,Home Decor - Mollitia Model 352,Home & Kitchen,Home Decor,879.88,1462.48,49,False
+797,SKU-GRO-10297,Beverages - Ad Model 417,Grocery & Gourmet,Beverages,906.99,1277.35,16,False
+798,SKU-HOM-10298,Small Appliances - Placeat Model 523,Home & Kitchen,Small Appliances,2411.97,3816.99,38,False
+799,SKU-HOM-10299,Small Appliances - Itaque Model 814,Home & Kitchen,Small Appliances,1622.62,2348.69,66,False
+800,SKU-BEA-10300,Fragrances - Beatae Model 757,Beauty & Personal Care,Fragrances,1191.1,2202.18,76,False

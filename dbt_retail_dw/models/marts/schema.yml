@@ -1,0 +1,73 @@
+version: 2
+
+models:
+  - name: dim_customer
+    description: "Customer dimensional table with surrogate key"
+    columns:
+      - name: customer_key
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        tests:
+          - not_null
+
+  - name: dim_product
+    description: "Product dimension with pricing hierarchy and margin"
+    columns:
+      - name: product_key
+        tests:
+          - unique
+          - not_null
+      - name: sku
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_store
+    description: "Retail store location and channel dimension"
+    columns:
+      - name: store_key
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_date
+    description: "Conformed calendar date dimension"
+    columns:
+      - name: date_key
+        tests:
+          - unique
+          - not_null
+
+  - name: fact_sales
+    description: "Central sales fact table with line-item grain"
+    columns:
+      - name: sales_key
+        tests:
+          - unique
+          - not_null
+      - name: customer_key
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customer')
+              field: customer_key
+      - name: product_key
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_product')
+              field: product_key
+      - name: store_key
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_store')
+              field: store_key
+      - name: date_key
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: date_key

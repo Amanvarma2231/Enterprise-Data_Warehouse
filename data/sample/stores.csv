@@ -1,0 +1,21 @@
+store_id,store_name,store_type,region,city,state,square_feet,opened_date,manager_name
+1,RetailSphere Online Portal,Online Store,National,Bengaluru,Digital HQ,0,2018-01-01,E-Commerce Directorate
+2,RetailSphere Bengaluru Outlet Mall,Outlet Mall,South,Bengaluru,South Province,7518,2023-04-29,Gagan Bhandari
+3,RetailSphere Coimbatore Physical Flagship,Physical Flagship,South,Coimbatore,South Province,12704,2021-03-10,Xiti Mannan
+4,RetailSphere Patna Outlet Mall,Outlet Mall,East,Patna,East Province,14246,2021-08-16,Lopa Gandhi
+5,RetailSphere Pune Physical Standard,Physical Standard,West,Pune,West Province,9453,2019-12-02,Ladli Mukhopadhyay
+6,RetailSphere Ujjain Physical Standard,Physical Standard,Central,Ujjain,Central Province,9609,2022-06-15,Hemang Vyas
+7,RetailSphere Hyderabad Physical Standard,Physical Standard,South,Hyderabad,South Province,1715,2019-03-23,Kalpit Mall
+8,RetailSphere Noida Physical Standard,Physical Standard,North,Noida,North Province,8985,2021-09-10,Chaaya Bhat
+9,RetailSphere Kochi Physical Standard,Physical Standard,South,Kochi,South Province,10436,2021-04-16,Vivaan Nagy
+10,RetailSphere Siliguri Online Store,Online Store,East,Siliguri,East Province,6481,2021-04-20,Kashvi Khosla
+11,RetailSphere Gurugram Online Store,Online Store,North,Gurugram,North Province,1329,2020-01-05,Nakul Malhotra
+12,RetailSphere Kochi Physical Standard,Physical Standard,South,Kochi,South Province,11814,2020-08-31,Upma Setty
+13,RetailSphere Jaipur Physical Standard,Physical Standard,North,Jaipur,North Province,3866,2023-02-14,Baljiwan Sekhon
+14,RetailSphere Ranchi Outlet Mall,Outlet Mall,East,Ranchi,East Province,8392,2019-01-17,Janani Naidu
+15,RetailSphere Jabalpur Physical Standard,Physical Standard,Central,Jabalpur,Central Province,8326,2021-04-30,Udant Sunder
+16,RetailSphere Guwahati Physical Flagship,Physical Flagship,East,Guwahati,East Province,13051,2022-09-05,Ira Dubey
+17,RetailSphere Goa Physical Standard,Physical Standard,West,Goa,West Province,7772,2019-11-23,Faqid Garde
+18,RetailSphere Mumbai Online Store,Online Store,West,Mumbai,West Province,5038,2023-06-12,Ganga Mannan
+19,RetailSphere Bhopal Physical Standard,Physical Standard,Central,Bhopal,Central Province,5613,2020-05-12,Tanvi Behl
+20,RetailSphere Jabalpur Physical Flagship,Physical Flagship,Central,Jabalpur,Central Province,9591,2021-04-29,Vyanjana Nair

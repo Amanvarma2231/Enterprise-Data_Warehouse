@@ -1,0 +1,61 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: "Cleansed and deduplicated customer operational landing view"
+    columns:
+      - name: customer_id
+        description: "Primary key for customer entity"
+        tests:
+          - unique
+          - not_null
+      - name: email
+        description: "Customer verified email"
+        tests:
+          - not_null
+
+  - name: stg_products
+    description: "Cleansed product catalog with margins and tiers"
+    columns:
+      - name: product_id
+        description: "Primary key for product entity"
+        tests:
+          - unique
+          - not_null
+      - name: sku
+        description: "Stock keeping unit code"
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_orders
+    description: "Validated order headers excluding quarantined anomalies"
+    columns:
+      - name: order_id
+        description: "Primary key for order header"
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: "Foreign key reference to customer"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_id
+
+  - name: stg_order_items
+    description: "Order line items with positive quantities and valid prices"
+    columns:
+      - name: order_item_id
+        description: "Primary key for line item"
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: "Parent order header reference"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_orders')
+              field: order_id

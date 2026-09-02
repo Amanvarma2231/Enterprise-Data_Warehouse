@@ -1,0 +1,78 @@
+```mermaid
+erDiagram
+    CUSTOMER {
+        BIGINT customer_id PK
+        VARCHAR first_name
+        VARCHAR last_name
+        VARCHAR email
+        VARCHAR phone
+        VARCHAR city
+        VARCHAR state
+        VARCHAR country
+        VARCHAR postal_code
+        VARCHAR segment
+        DATE registration_date
+        BOOLEAN is_active
+    }
+    
+    PRODUCT {
+        BIGINT product_id PK
+        VARCHAR sku UK
+        VARCHAR product_name
+        VARCHAR category
+        VARCHAR subcategory
+        DECIMAL unit_cost
+        DECIMAL unit_price
+        INTEGER reorder_level
+        BOOLEAN is_discontinued
+    }
+
+    STORE {
+        BIGINT store_id PK
+        VARCHAR store_name
+        VARCHAR store_type
+        VARCHAR region
+        VARCHAR city
+        VARCHAR state
+        INTEGER square_feet
+        DATE opened_date
+        VARCHAR manager_name
+    }
+
+    ORDER {
+        BIGINT order_id PK
+        BIGINT customer_id FK
+        BIGINT store_id FK
+        DATE order_date
+        VARCHAR order_status
+        DECIMAL shipping_amount
+        DECIMAL discount_total
+        VARCHAR payment_status
+    }
+
+    ORDER_ITEM {
+        BIGINT order_item_id PK
+        BIGINT order_id FK
+        BIGINT product_id FK
+        INTEGER quantity
+        DECIMAL unit_price
+        DECIMAL discount
+        DECIMAL line_total
+    }
+
+    PAYMENT {
+        BIGINT payment_id PK
+        BIGINT order_id FK
+        VARCHAR payment_method
+        VARCHAR payment_status
+        DECIMAL payment_amount
+        TIMESTAMP payment_date
+        VARCHAR transaction_ref
+    }
+
+    CUSTOMER ||--o{ ORDER : "places"
+    STORE ||--o{ ORDER : "fulfills"
+    ORDER ||--|{ ORDER_ITEM : "contains"
+    PRODUCT ||--o{ ORDER_ITEM : "ordered in"
+    ORDER ||--o{ PAYMENT : "settled via"
+```

@@ -1,0 +1,78 @@
+```mermaid
+erDiagram
+    dim_customer {
+        BIGINT customer_key PK
+        BIGINT customer_id
+        VARCHAR full_name
+        VARCHAR email
+        VARCHAR segment
+        VARCHAR city
+        VARCHAR state
+    }
+
+    dim_product {
+        BIGINT product_key PK
+        BIGINT product_id
+        VARCHAR sku
+        VARCHAR product_name
+        VARCHAR category
+        VARCHAR subcategory
+        DECIMAL unit_price
+        VARCHAR price_tier
+    }
+
+    dim_store {
+        BIGINT store_key PK
+        BIGINT store_id
+        VARCHAR store_name
+        VARCHAR store_type
+        VARCHAR channel_group
+        VARCHAR region
+    }
+
+    dim_date {
+        INTEGER date_key PK
+        DATE full_date
+        VARCHAR year_month
+        INTEGER year_number
+        VARCHAR quarter_name
+        BOOLEAN is_weekend
+    }
+
+    fact_sales {
+        BIGINT sales_key PK
+        BIGINT order_id
+        BIGINT order_item_id
+        BIGINT customer_key FK
+        BIGINT product_key FK
+        BIGINT store_key FK
+        INTEGER date_key FK
+        INTEGER quantity
+        DECIMAL unit_price
+        DECIMAL gross_sales_amount
+        DECIMAL discount_amount
+        DECIMAL net_sales_amount
+        DECIMAL cost_amount
+        DECIMAL gross_profit_amount
+        DECIMAL profit_margin_pct
+    }
+
+    fact_payments {
+        BIGINT payment_key PK
+        BIGINT payment_id
+        BIGINT order_id
+        BIGINT customer_key FK
+        INTEGER date_key FK
+        VARCHAR payment_method
+        VARCHAR payment_status
+        DECIMAL payment_amount
+        BOOLEAN is_successful
+    }
+
+    dim_customer ||--o{ fact_sales : "evaluates"
+    dim_product ||--o{ fact_sales : "contains"
+    dim_store ||--o{ fact_sales : "originates at"
+    dim_date ||--o{ fact_sales : "recorded on"
+    dim_customer ||--o{ fact_payments : "makes"
+    dim_date ||--o{ fact_payments : "processed on"
+```

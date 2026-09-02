@@ -1,0 +1,43 @@
+name: Enterprise Data Warehouse CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-test:
+    name: Validate Data Quality & Warehouse Pipeline
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Generate Synthetic Dataset with Anomalies
+        run: |
+          python src/data_generator.py --customers 2000 --products 300 --stores 20 --orders 10000
+
+      - name: Run End-to-End Warehouse Pipeline (ETL + DQ + Star Schema)
+        run: |
+          python src/pipeline.py --mode all
+
+      - name: Run Automated PyTest Suite
+        run: |
+          pytest tests/ -v --tb=short
+
+      - name: Verify Metadata & Governance Artifacts
+        run: |
+          python src/pipeline.py --mode profile

@@ -1,0 +1,60 @@
+asset_name,table_name,column_name,data_type,business_definition,source_system,source_column,sensitivity,owner,refresh_frequency,quality_rule
+Customer Surrogate Key,dim_customer,customer_key,BIGINT,System generated unique surrogate key for warehouse customer dimension,Internal DW,ROW_NUMBER(),INTERNAL,Data Engineering,Daily Batch,PK / NOT NULL / UNIQUE
+Natural Customer ID,dim_customer,customer_id,BIGINT,Primary customer identifier assigned by CRM / ERP transactional system,CRM / POS,customers.customer_id,INTERNAL,Customer Ops,Daily Batch,NOT NULL / > 0
+First Name,dim_customer,first_name,VARCHAR(100),Given name of the registered customer,CRM,customers.first_name,CONFIDENTIAL (PII),Customer Ops,Daily Batch,NOT NULL / TRIM
+Last Name,dim_customer,last_name,VARCHAR(100),Family surname of the registered customer,CRM,customers.last_name,CONFIDENTIAL (PII),Customer Ops,Daily Batch,NOT NULL / TRIM
+Full Customer Name,dim_customer,full_name,VARCHAR(200),Concatenated full name for reporting and customer communication,Internal DW,first_name || ' ' || last_name,CONFIDENTIAL (PII),Customer Ops,Daily Batch,NOT NULL
+Email Address,dim_customer,email,VARCHAR(255),Primary contact electronic mail address,CRM,customers.email,CONFIDENTIAL (PII),Marketing,Daily Batch,Regex Email Pattern: %@%.%
+Phone Number,dim_customer,phone,VARCHAR(50),Primary contact telephone / mobile number,CRM,customers.phone,CONFIDENTIAL (PII),Customer Ops,Daily Batch,Length <= 15
+City,dim_customer,city,VARCHAR(100),Municipal billing / residential city,CRM,customers.city,INTERNAL,Sales Analytics,Daily Batch,NOT NULL
+State / Province,dim_customer,state,VARCHAR(100),Administrative provincial territory,CRM,customers.state,INTERNAL,Sales Analytics,Daily Batch,NOT NULL
+Country,dim_customer,country,VARCHAR(100),Sovereign country name of registration,CRM,customers.country,PUBLIC,Sales Analytics,Daily Batch,DEFAULT 'India'
+Postal Code,dim_customer,postal_code,VARCHAR(30),Postal / ZIP geographical routing code,CRM,customers.postal_code,INTERNAL,Logistics,Daily Batch,Standard Format
+Customer Segment,dim_customer,segment,VARCHAR(50),"Loyalty tier classification: Regular, Premium, VIP, Corporate",CRM / Marketing,customers.segment,INTERNAL,Marketing,Daily Batch,"IN ('Regular','Premium','VIP','Corporate','Occasional')"
+Registration Date,dim_customer,registration_date,DATE,Date when customer account was created,CRM,customers.registration_date,INTERNAL,Customer Ops,Daily Batch,<= CURRENT_DATE
+Active Indicator,dim_customer,is_active,BOOLEAN,Active profile flag (True/False),CRM,customers.is_active,INTERNAL,Customer Ops,Daily Batch,BOOLEAN
+Product Surrogate Key,dim_product,product_key,BIGINT,System generated unique surrogate key for product dimension,Internal DW,ROW_NUMBER(),INTERNAL,Data Engineering,Daily Batch,PK / NOT NULL / UNIQUE
+Natural Product ID,dim_product,product_id,BIGINT,Source system catalog product ID,Catalog ERP,products.product_id,INTERNAL,Merchandising,Daily Batch,NOT NULL / > 0
+Stock Keeping Unit,dim_product,sku,VARCHAR(100),Global unique merchandise identification code,Catalog ERP,products.sku,INTERNAL,Inventory Ops,Daily Batch,UNIQUE / NOT NULL
+Product Name,dim_product,product_name,VARCHAR(255),Official catalog merchandising title of the product,Catalog ERP,products.product_name,PUBLIC,Merchandising,Daily Batch,NOT NULL / LENGTH > 2
+Product Category,dim_product,category,VARCHAR(100),"Top-level department classification (e.g., Electronics, Apparel)",Catalog ERP,products.category,PUBLIC,Merchandising,Daily Batch,NOT NULL
+Product Subcategory,dim_product,subcategory,VARCHAR(100),"Granular department subcategory (e.g., Laptops, Footwear)",Catalog ERP,products.subcategory,PUBLIC,Merchandising,Daily Batch,NOT NULL
+Unit Cost,dim_product,unit_cost,"DECIMAL(12,2)",Procurement / manufacturing acquisition cost per unit (INR),Procurement ERP,products.unit_cost,RESTRICTED,Finance,Daily Batch,> 0.00
+Unit Price,dim_product,unit_price,"DECIMAL(12,2)",Standard suggested retail selling price per unit (INR),Catalog ERP,products.unit_price,PUBLIC,Pricing Strategy,Daily Batch,unit_price >= unit_cost
+Profit Margin %,dim_product,profit_margin_pct,"DECIMAL(6,2)",Base profit margin percentage ((price - cost) / price) * 100,Internal DW,((unit_price - unit_cost)/unit_price)*100,CONFIDENTIAL,Finance,Daily Batch,BETWEEN 0 AND 100
+Price Tier,dim_product,price_tier,VARCHAR(50),"Pricing bracket: Budget, Mid-Range, Premium, Luxury",Internal DW,CASE unit_price,INTERNAL,Pricing Strategy,Daily Batch,"IN ('Budget','Mid-Range','Premium','Luxury')"
+Reorder Level,dim_product,reorder_level,INTEGER,Inventory minimum threshold before triggering reorder,Inventory ERP,products.reorder_level,INTERNAL,Supply Chain,Daily Batch,>= 0
+Discontinued Flag,dim_product,is_discontinued,BOOLEAN,Lifecycle status indicating if item has been discontinued,Catalog ERP,products.is_discontinued,INTERNAL,Merchandising,Daily Batch,BOOLEAN
+Store Surrogate Key,dim_store,store_key,BIGINT,System generated surrogate key for retail store dimension,Internal DW,ROW_NUMBER(),INTERNAL,Data Engineering,Daily Batch,PK / NOT NULL / UNIQUE
+Natural Store ID,dim_store,store_id,BIGINT,Source store branch unique identifier,Retail POS ERP,stores.store_id,INTERNAL,Retail Ops,Daily Batch,NOT NULL / > 0
+Store Trading Name,dim_store,store_name,VARCHAR(255),Official retail outlet location display name,Retail POS ERP,stores.store_name,PUBLIC,Retail Ops,Daily Batch,NOT NULL
+Store Format Type,dim_store,store_type,VARCHAR(100),"Retail footprint format: Flagship, Standard, Outlet, Online",Retail POS ERP,stores.store_type,INTERNAL,Retail Ops,Daily Batch,NOT NULL
+Channel Grouping,dim_store,channel_group,VARCHAR(50),Omnichannel division: Physical Retail vs Digital Channel,Internal DW,CASE store_type,INTERNAL,Executive Strategy,Daily Batch,"IN ('Physical Retail', 'Digital Channel')"
+Sales Region,dim_store,region,VARCHAR(100),"Geographic retail operating territory (North, South, East, West, Central)",Retail POS ERP,stores.region,INTERNAL,Sales Analytics,Daily Batch,NOT NULL
+Store Square Footage,dim_store,square_feet,INTEGER,Total commercial floor area in square feet,Facilities ERP,stores.square_feet,INTERNAL,Facilities,Daily Batch,>= 0
+Store Opening Date,dim_store,opened_date,DATE,Grand opening commercial launch date,Retail POS ERP,stores.opened_date,INTERNAL,Retail Ops,Daily Batch,<= CURRENT_DATE
+Date Surrogate Key,dim_date,date_key,INTEGER,Smart integer calendar key in YYYYMMDD format,Conformed Calendar,strftime('%Y%m%d'),PUBLIC,Data Engineering,Static Pre-populated,PK / NOT NULL / 8 digits
+Full Date,dim_date,full_date,DATE,Standard calendar ISO date,Conformed Calendar,calendar_date,PUBLIC,Data Engineering,Static Pre-populated,UNIQUE / NOT NULL
+Year Month,dim_date,year_month,VARCHAR(7),Period identifier in YYYY-MM format,Conformed Calendar,strftime('%Y-%m'),PUBLIC,Data Engineering,Static Pre-populated,Regex ^[0-9]{4}-[0-9]{2}$
+Fiscal Quarter,dim_date,fiscal_quarter,VARCHAR(10),"Corporate financial reporting quarter (e.g., FY26-Q2)",Conformed Calendar,Fiscal calculation,PUBLIC,Finance,Static Pre-populated,NOT NULL
+Sales Fact Surrogate Key,fact_sales,sales_key,BIGINT,Surrogate primary key for individual order line item in fact table,Internal DW,ROW_NUMBER(),INTERNAL,Data Engineering,Daily Batch,PK / NOT NULL / UNIQUE
+Degenerate Order ID,fact_sales,order_id,BIGINT,Transaction order identifier from POS (Degenerate Dimension),POS / E-Commerce,orders.order_id,INTERNAL,Sales Analytics,Daily Batch,NOT NULL / > 0
+Degenerate Order Item ID,fact_sales,order_item_id,BIGINT,Line item identifier from order manifest,POS / E-Commerce,order_items.order_item_id,INTERNAL,Sales Analytics,Daily Batch,NOT NULL / > 0
+Customer Foreign Key,fact_sales,customer_key,BIGINT,Referential surrogate key connecting to dim_customer,Internal DW,dim_customer.customer_key,INTERNAL,Data Engineering,Daily Batch,FK -> dim_customer.customer_key
+Product Foreign Key,fact_sales,product_key,BIGINT,Referential surrogate key connecting to dim_product,Internal DW,dim_product.product_key,INTERNAL,Data Engineering,Daily Batch,FK -> dim_product.product_key
+Store Foreign Key,fact_sales,store_key,BIGINT,Referential surrogate key connecting to dim_store,Internal DW,dim_store.store_key,INTERNAL,Data Engineering,Daily Batch,FK -> dim_store.store_key
+Date Foreign Key,fact_sales,date_key,INTEGER,Referential smart key connecting to dim_date,Internal DW,dim_date.date_key,INTERNAL,Data Engineering,Daily Batch,FK -> dim_date.date_key
+Quantity Sold,fact_sales,quantity,INTEGER,Units of product sold in transaction line,POS / E-Commerce,order_items.quantity,INTERNAL,Sales Analytics,Daily Batch,quantity > 0
+Selling Unit Price,fact_sales,unit_price,"DECIMAL(12,2)",Actual selling price per unit at time of sale,POS / E-Commerce,order_items.unit_price,INTERNAL,Pricing Strategy,Daily Batch,unit_price > 0.00
+Gross Sales Amount,fact_sales,gross_sales_amount,"DECIMAL(14,2)",Gross monetary line total = quantity * unit_price,Internal DW,quantity * unit_price,INTERNAL,Finance,Daily Batch,gross_sales_amount > 0.00
+Promotional Discount,fact_sales,discount_amount,"DECIMAL(14,2)",Total discount deduction applied to line item,POS / Promotions,order_items.discount,INTERNAL,Finance,Daily Batch,discount_amount >= 0.00
+Net Sales Amount,fact_sales,net_sales_amount,"DECIMAL(14,2)",Net revenue earned after promotional discount = gross - discount,Internal DW,gross_sales_amount - discount_amount,INTERNAL,Finance,Daily Batch,net_sales_amount >= 0.00
+Cost of Goods Sold (COGS),fact_sales,cost_amount,"DECIMAL(14,2)",Total procurement cost = quantity * unit_cost,Internal DW,quantity * dim_product.unit_cost,RESTRICTED,Finance,Daily Batch,cost_amount >= 0.00
+Gross Profit Amount,fact_sales,gross_profit_amount,"DECIMAL(14,2)",Gross margin contribution = net_sales_amount - cost_amount,Internal DW,net_sales_amount - cost_amount,CONFIDENTIAL,Finance,Daily Batch,Numeric
+Profit Margin %,fact_sales,profit_margin_pct,"DECIMAL(6,2)",Realized gross profit margin percentage on transaction line,Internal DW,(gross_profit / net_sales) * 100,CONFIDENTIAL,Finance,Daily Batch,Numeric Percentage
+Payment Fact Key,fact_payments,payment_key,BIGINT,Surrogate primary key for payment transaction in warehouse,Internal DW,ROW_NUMBER(),INTERNAL,Data Engineering,Daily Batch,PK / NOT NULL / UNIQUE
+Natural Payment ID,fact_payments,payment_id,BIGINT,Payment gateway transactional settlement ID,Payment Gateway,payments.payment_id,INTERNAL,Treasury Ops,Daily Batch,NOT NULL / > 0
+Payment Tender Method,fact_payments,payment_method,VARCHAR(50),"Payment instrument: UPI, Credit Card, Debit Card, NetBanking, Cash",Payment Gateway,payments.payment_method,INTERNAL,Treasury Ops,Daily Batch,"IN ('UPI','Credit Card','Debit Card','NetBanking','PayPal','Cash on Delivery')"
+Payment Settlement Status,fact_payments,payment_status,VARCHAR(50),"Settlement outcome: Success, Failed, Refunded, Pending",Payment Gateway,payments.payment_status,INTERNAL,Treasury Ops,Daily Batch,"IN ('Success','Failed','Refunded','Pending')"
+Settled Payment Amount,fact_payments,payment_amount,"DECIMAL(14,2)",Actual transacted currency amount settled through gateway,Payment Gateway,payments.payment_amount,INTERNAL,Finance,Daily Batch,payment_amount > 0.00
+Bank Transaction Ref,fact_payments,transaction_ref,VARCHAR(100),External banking authorization reference code,Payment Gateway,payments.transaction_ref,CONFIDENTIAL,Treasury Ops,Daily Batch,NOT NULL / Standard Prefix
