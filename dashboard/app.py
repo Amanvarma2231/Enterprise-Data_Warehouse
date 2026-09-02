@@ -43,135 +43,176 @@ st.set_page_config(
 # Custom High-End Enterprise CSS Styling
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-    
-    html, body, [class*="css"] {
-        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+    html, body, [class*="css"], .stApp {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
-    /* Hero Banner */
+    /* ── Sidebar Premium Styling ─────────────────────────────────────────── */
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #0A0E1A 0%, #0F172A 60%, #0A0E1A 100%);
+        border-right: 1px solid rgba(59, 130, 246, 0.15);
+    }
+    [data-testid="stSidebar"] * { color: #CBD5E1; }
+
+    /* Sidebar nav buttons */
+    [data-testid="stSidebar"] .stButton > button {
+        width: 100%;
+        text-align: left !important;
+        justify-content: flex-start !important;
+        padding: 9px 14px !important;
+        border-radius: 8px !important;
+        font-size: 0.84rem !important;
+        font-weight: 500 !important;
+        border: 1px solid transparent !important;
+        background: transparent !important;
+        color: #94A3B8 !important;
+        margin: 1px 0 !important;
+        transition: all 0.18s ease !important;
+    }
+    [data-testid="stSidebar"] .stButton > button:hover {
+        background: rgba(59, 130, 246, 0.12) !important;
+        border-color: rgba(59, 130, 246, 0.25) !important;
+        color: #E2E8F0 !important;
+    }
+    .nav-btn-active > button {
+        background: linear-gradient(135deg, rgba(37, 99, 235, 0.25), rgba(59, 130, 246, 0.15)) !important;
+        border-color: rgba(59, 130, 246, 0.5) !important;
+        color: #FFFFFF !important;
+        font-weight: 600 !important;
+    }
+
+    /* Sidebar selectbox */
+    [data-testid="stSidebar"] .stSelectbox > div > div {
+        background: rgba(30, 41, 59, 0.8) !important;
+        border: 1px solid rgba(71, 85, 105, 0.5) !important;
+        color: #CBD5E1 !important;
+        border-radius: 8px !important;
+        font-size: 0.83rem !important;
+    }
+
+    /* ── Hero Banner ──────────────────────────────────────────────────────── */
     .hero-container {
         background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 50%, #2563EB 100%);
-        border-radius: 14px;
-        padding: 28px 32px;
+        border-radius: 16px;
+        padding: 32px 36px;
         color: white;
-        margin-bottom: 24px;
-        box-shadow: 0 10px 25px -5px rgba(30, 58, 138, 0.25);
+        margin-bottom: 28px;
+        box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+    .hero-container::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 350px;
+        height: 350px;
+        background: radial-gradient(circle, rgba(96, 165, 250, 0.12) 0%, transparent 70%);
+        pointer-events: none;
     }
     .hero-badge {
         display: inline-flex;
         align-items: center;
-        background-color: rgba(16, 185, 129, 0.2);
-        border: 1px solid #10B981;
+        gap: 6px;
+        background-color: rgba(16, 185, 129, 0.15);
+        border: 1px solid rgba(16, 185, 129, 0.4);
         color: #34D399;
-        font-size: 0.75rem;
+        font-size: 0.72rem;
         font-weight: 700;
-        padding: 4px 10px;
+        padding: 5px 12px;
         border-radius: 20px;
-        letter-spacing: 0.5px;
-        margin-bottom: 12px;
+        letter-spacing: 0.8px;
+        margin-bottom: 14px;
+        text-transform: uppercase;
     }
     .hero-title {
-        font-size: 2.2rem;
+        font-size: 2.4rem;
         font-weight: 800;
-        letter-spacing: -0.5px;
-        margin: 0 0 8px 0;
-        line-height: 1.2;
+        letter-spacing: -0.8px;
+        margin: 0 0 10px 0;
+        line-height: 1.15;
     }
     .hero-subtitle {
         font-size: 1.0rem;
-        color: #94A3B8;
-        max-width: 800px;
-        line-height: 1.5;
+        color: #93C5FD;
+        max-width: 820px;
+        line-height: 1.65;
         margin: 0;
     }
 
-    /* Feature & Stat Cards */
+    /* ── Feature Cards ────────────────────────────────────────────────────── */
     .feature-card {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(226, 232, 240, 0.2);
-        border-radius: 12px;
-        padding: 18px 16px;
-        margin-bottom: 8px;
-        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid rgba(51, 65, 85, 0.6);
+        border-radius: 14px;
+        padding: 20px 18px 14px 18px;
+        margin-bottom: 6px;
+        transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(8px);
     }
     .feature-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 20px -3px rgba(37, 99, 235, 0.15);
-        border-color: #3B82F6;
+        border-color: rgba(59, 130, 246, 0.5);
+        box-shadow: 0 8px 24px -4px rgba(37, 99, 235, 0.2);
+        transform: translateY(-2px);
     }
-    .feature-icon {
-        font-size: 1.8rem;
-        margin-bottom: 8px;
-    }
-    .feature-title {
-        font-size: 1.05rem;
-        font-weight: 700;
-        margin-bottom: 4px;
-    }
-    .feature-desc {
-        font-size: 0.82rem;
-        color: #94A3B8;
-        line-height: 1.4;
+    .feature-icon { font-size: 1.9rem; margin-bottom: 10px; display: block; }
+    .feature-title { font-size: 1.0rem; font-weight: 700; color: #F1F5F9; margin-bottom: 5px; }
+    .feature-desc  { font-size: 0.81rem; color: #64748B; line-height: 1.45; }
+
+    /* ── KPI Metric Overrides ─────────────────────────────────────────────── */
+    [data-testid="metric-container"] {
+        background: rgba(15, 23, 42, 0.7);
+        border: 1px solid rgba(51, 65, 85, 0.5);
+        border-radius: 12px;
+        padding: 18px 20px !important;
     }
 
-    /* AI Insight Callout */
-    .ai-insight-box {
-        background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
-        border: 1px solid #86EFAC;
-        border-radius: 10px;
-        padding: 16px 20px;
-        color: #14532D;
-        margin: 15px 0;
-        font-size: 0.92rem;
-        line-height: 1.5;
-    }
-
-    /* Tech Stack Badges */
+    /* ── Tech Chip Badges ─────────────────────────────────────────────────── */
     .tech-chip {
-        display: inline-block;
-        background-color: #1E293B;
-        color: #F8FAFC;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        background: rgba(30, 41, 59, 0.9);
+        color: #CBD5E1;
         font-size: 0.78rem;
         font-weight: 600;
         padding: 5px 12px;
-        border-radius: 6px;
+        border-radius: 20px;
         margin: 3px;
-        border: 1px solid #334155;
+        border: 1px solid rgba(71, 85, 105, 0.5);
     }
 
-    /* Sidebar Author Box */
-    .author-box {
-        background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
-        border: 1px solid #334155;
-        border-radius: 10px;
-        padding: 16px;
-        color: white;
-        margin-top: 20px;
+    /* ── AI Insight Box ───────────────────────────────────────────────────── */
+    .ai-insight-box {
+        background: linear-gradient(135deg, rgba(5, 46, 22, 0.8) 0%, rgba(6, 78, 59, 0.5) 100%);
+        border: 1px solid rgba(16, 185, 129, 0.35);
+        border-radius: 12px;
+        padding: 18px 22px;
+        color: #A7F3D0;
+        margin: 16px 0;
+        font-size: 0.92rem;
+        line-height: 1.6;
     }
-    .author-name {
-        font-size: 1.05rem;
+
+    /* ── Section Headers ──────────────────────────────────────────────────── */
+    .section-header {
+        font-size: 1.4rem;
         font-weight: 700;
-        color: #FFFFFF;
-        margin-bottom: 2px;
+        color: #F1F5F9;
+        margin: 24px 0 16px 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
-    .author-role {
-        font-size: 0.78rem;
-        color: #94A3B8;
-        margin-bottom: 10px;
-    }
-    .author-link {
-        display: block;
-        text-align: center;
-        background-color: #2563EB;
-        color: #FFFFFF !important;
-        font-size: 0.82rem;
-        font-weight: 600;
-        padding: 7px 12px;
-        border-radius: 6px;
-        text-decoration: none;
-    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0F172A; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #475569; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -191,7 +232,6 @@ def get_connection():
         run_governance_generation()
         profile_warehouse_tables(con_temp)
         con_temp.close()
-
     try:
         con = duckdb.connect(str(DUCKDB_PATH), read_only=True)
         con.execute("SELECT 1 FROM warehouse.fact_sales LIMIT 1")
@@ -207,64 +247,140 @@ def get_connection():
 
 con = get_connection()
 
-# Sidebar Brand & Logo
-logo_path = Path("assets/logo.png")
-if logo_path.exists():
-    st.sidebar.image(str(logo_path), use_container_width=True)
-else:
-    st.sidebar.image("https://img.icons8.com/fluency/96/shop.png", width=64)
-    st.sidebar.title("RetailSphere DW")
-
-st.sidebar.caption("Enterprise Star Schema & AI Governance Platform")
-
-# Navigation Options List
+# ──────────────────────────────────────────────────────────────────────────────
+# NAVIGATION — uses _nav_page sentinel (never writes to widget key directly)
+# ──────────────────────────────────────────────────────────────────────────────
 NAV_OPTIONS = [
     "🏠 Executive Command Center",
     "🤖 AI Data Copilot & Choice Assistant",
     "📊 Executive Sales & Margin Analytics",
-    "🏗️ Pipeline Architecture & How It Works",
     "👥 Customer & RFM Segmentation",
     "🛒 Product & Merchandising Intelligence",
     "🛡️ Data Quality & Health Scorecard",
     "📋 Pipeline Execution & Audit Logs",
-    "📖 Data Dictionary & Catalog"
+    "📖 Data Dictionary & Catalog",
 ]
 
-# Use a SEPARATE sentinel variable — never write to widget key directly (Streamlit rule)
+NAV_LABELS = {
+    "🏠 Executive Command Center":           ("🏠", "Command Center"),
+    "🤖 AI Data Copilot & Choice Assistant": ("🤖", "AI Data Copilot"),
+    "📊 Executive Sales & Margin Analytics": ("📊", "Sales Analytics"),
+    "👥 Customer & RFM Segmentation":        ("👥", "Customer & RFM"),
+    "🛒 Product & Merchandising Intelligence":("🛒","Product Intel"),
+    "🛡️ Data Quality & Health Scorecard":    ("🛡️", "Data Quality"),
+    "📋 Pipeline Execution & Audit Logs":    ("📋", "Pipeline Logs"),
+    "📖 Data Dictionary & Catalog":          ("📖", "Data Dictionary"),
+}
+
 if "_nav_page" not in st.session_state:
     st.session_state["_nav_page"] = NAV_OPTIONS[0]
 
 def set_tab(tab_name: str):
-    """Programmatically switch active navigation tab without widget-key conflict."""
+    """Route to any page without widget-key conflict."""
     if tab_name in NAV_OPTIONS:
         st.session_state["_nav_page"] = tab_name
     st.rerun()
 
-_nav_idx = NAV_OPTIONS.index(st.session_state["_nav_page"]) if st.session_state["_nav_page"] in NAV_OPTIONS else 0
+view_mode = st.session_state["_nav_page"]
 
-view_mode = st.sidebar.radio(
-    "Navigation Portal",
-    NAV_OPTIONS,
-    index=_nav_idx,
-    key="nav_radio"
-)
+# ── Sidebar Layout ────────────────────────────────────────────────────────────
+with st.sidebar:
+    # Brand logo card
+    st.markdown("""
+    <div style="background: linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%);
+                border-radius: 14px; padding: 18px 16px; margin-bottom: 18px;
+                border: 1px solid rgba(96, 165, 250, 0.25);">
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="background: white; border-radius: 10px; width: 42px; height: 42px;
+                        display: flex; align-items: center; justify-content: center; font-size: 1.4rem;">
+                🛒
+            </div>
+            <div>
+                <div style="font-size: 1.05rem; font-weight: 800; color: #fff; letter-spacing: -0.3px;">
+                    Retail<span style="color: #93C5FD;">Sphere</span>
+                </div>
+                <div style="font-size: 0.68rem; color: #93C5FD; letter-spacing: 0.5px; font-weight: 600;">
+                    ENTERPRISE DATA WAREHOUSE
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 12px;">
+            <span style="background: rgba(16,185,129,0.2); border: 1px solid #10B981; color: #34D399;
+                         font-size: 0.65rem; font-weight: 700; padding: 3px 8px; border-radius: 12px;
+                         letter-spacing: 0.5px;">● LIVE</span>
+            <span style="color: #64748B; font-size: 0.7rem; margin-left: 8px;">v2.0 · DuckDB + dbt</span>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
-# Keep sentinel in sync when user clicks sidebar directly
-st.session_state["_nav_page"] = view_mode
+    # Navigation section label
+    st.markdown("""
+    <div style="font-size: 0.68rem; font-weight: 700; color: #475569;
+                letter-spacing: 1.2px; text-transform: uppercase;
+                padding: 0 4px; margin-bottom: 6px;">
+        Navigation
+    </div>
+    """, unsafe_allow_html=True)
 
-st.sidebar.markdown("---")
-st.sidebar.subheader("Global Filter Drill-Down")
+    # Styled navigation buttons
+    for page in NAV_OPTIONS:
+        icon, label = NAV_LABELS[page]
+        is_active = (view_mode == page)
+        # Inject active class via container div trick
+        if is_active:
+            st.markdown('<div class="nav-btn-active">', unsafe_allow_html=True)
+        clicked = st.button(f"{icon}  {label}", key=f"nav_{page}", use_container_width=True)
+        if is_active:
+            st.markdown('</div>', unsafe_allow_html=True)
+        if clicked:
+            set_tab(page)
 
-regions = ["All Regions"] + [r[0] for r in con.execute("SELECT DISTINCT region FROM warehouse.dim_store ORDER BY region").fetchall()]
-selected_region = st.sidebar.selectbox("Filter by Region", regions)
+    st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
+    st.markdown("""
+    <div style="font-size: 0.68rem; font-weight: 700; color: #475569;
+                letter-spacing: 1.2px; text-transform: uppercase;
+                padding: 0 4px; margin-bottom: 8px;">
+        Global Filters
+    </div>
+    """, unsafe_allow_html=True)
 
-categories = ["All Categories"] + [c[0] for c in con.execute("SELECT DISTINCT category FROM warehouse.dim_product ORDER BY category").fetchall()]
-selected_category = st.sidebar.selectbox("Filter by Category", categories)
+    regions = ["All Regions"] + [r[0] for r in con.execute(
+        "SELECT DISTINCT region FROM warehouse.dim_store ORDER BY region").fetchall()]
+    selected_region = st.selectbox("📍 Region", regions, label_visibility="collapsed")
 
-channels = ["All Channels", "Physical Retail", "Digital Channel"]
-selected_channel = st.sidebar.selectbox("Channel Group", channels)
+    categories = ["All Categories"] + [c[0] for c in con.execute(
+        "SELECT DISTINCT category FROM warehouse.dim_product ORDER BY category").fetchall()]
+    selected_category = st.selectbox("📦 Category", categories, label_visibility="collapsed")
 
-# Dynamic SQL Filter clauses
+    channels = ["All Channels", "Physical Retail", "Digital Channel"]
+    selected_channel = st.selectbox("📡 Channel", channels, label_visibility="collapsed")
+
+    # Author card at bottom
+    st.markdown("""
+    <div style="margin-top: 20px; padding: 14px 16px;
+                background: rgba(15, 23, 42, 0.8);
+                border: 1px solid rgba(51, 65, 85, 0.6);
+                border-radius: 12px;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+            <div style="width: 36px; height: 36px; border-radius: 50%;
+                        background: linear-gradient(135deg, #2563EB, #7C3AED);
+                        display: flex; align-items: center; justify-content: center;
+                        font-weight: 800; color: white; font-size: 0.85rem;">AV</div>
+            <div>
+                <div style="font-weight: 700; color: #F1F5F9; font-size: 0.88rem;">Aman Varma</div>
+                <div style="color: #64748B; font-size: 0.72rem;">Data Modeler · Analytics Eng.</div>
+            </div>
+        </div>
+        <a href="https://github.com/Amanvarma2231/Enterprise-Data_Warehouse" target="_blank"
+           style="display: block; text-align: center; background: linear-gradient(135deg, #1D4ED8, #2563EB);
+                  color: #fff; font-size: 0.78rem; font-weight: 600; padding: 8px;
+                  border-radius: 8px; text-decoration: none; letter-spacing: 0.2px;">
+            🐙 GitHub Repository ↗
+        </a>
+    </div>
+    """, unsafe_allow_html=True)
+
+# Dynamic SQL filter clauses (used by all analytics tabs)
 where_clauses = ["1=1"]
 if selected_region != "All Regions":
     where_clauses.append(f"s.region = '{selected_region}'")
@@ -275,14 +391,7 @@ if selected_channel != "All Channels":
 
 filter_sql = " AND ".join(where_clauses)
 
-# Sidebar Author Spotlight Card
-st.sidebar.markdown("""
-<div class="author-box">
-    <div class="author-name">Aman Varma</div>
-    <div class="author-role">Data Modeler & Analytics Engineer</div>
-    <a class="author-link" href="https://github.com/Amanvarma2231/Enterprise-Data_Warehouse" target="_blank">🐙 GitHub Repository ↗</a>
-</div>
-""", unsafe_allow_html=True)
+
 
 
 # ==============================================================================
@@ -390,24 +499,26 @@ if view_mode == "🏠 Executive Command Center":
     with r2_c2:
         st.markdown("""
         <div class="feature-card">
-            <div class="feature-icon">🏗️</div>
-            <div class="feature-title">Pipeline Architecture</div>
-            <div class="feature-desc">Interactive data flow diagram from staging to marts.</div>
-        </div>
-        """, unsafe_allow_html=True)
-        if st.button("🏗️ View Architecture ➔", key="btn_hero_arch", use_container_width=True):
-            set_tab("🏗️ Pipeline Architecture & How It Works")
-
-    with r2_c3:
-        st.markdown("""
-        <div class="feature-card">
             <div class="feature-icon">📋</div>
             <div class="feature-title">Observability & Logs</div>
             <div class="feature-desc">Execution audit ledger & 1-click on-demand pipeline runner.</div>
         </div>
         """, unsafe_allow_html=True)
-        if st.button("📋 Open Execution Logs ➔", key="btn_hero_logs", use_container_width=True):
+        if st.button("📋 Open Execution Logs ➔", key="btn_hero_arch", use_container_width=True):
             set_tab("📋 Pipeline Execution & Audit Logs")
+
+
+    with r2_c3:
+        st.markdown("""
+        <div class="feature-card">
+            <div class="feature-icon">🏗️</div>
+            <div class="feature-title">Star Schema Lineage</div>
+            <div class="feature-desc">Kimball Dimensional model: 5 Dims + 2 Fact tables with full data lineage.</div>
+        </div>
+        """, unsafe_allow_html=True)
+        if st.button("📊 View Data Model ➔", key="btn_hero_logs", use_container_width=True):
+            set_tab("🛡️ Data Quality & Health Scorecard")
+
 
     with r2_c4:
         st.markdown("""
