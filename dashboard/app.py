@@ -224,20 +224,36 @@ else:
 
 st.sidebar.caption("Enterprise Star Schema & Governance Platform")
 
+# Navigation Options List
+NAV_OPTIONS = [
+    "🏠 Executive Command Center",
+    "🤖 AI Data Copilot & SQL Assistant",
+    "📊 Executive Sales & Margin Analytics",
+    "🏗️ Pipeline Architecture & How It Works",
+    "👥 Customer & RFM Segmentation",
+    "🛒 Product & Merchandising Intelligence",
+    "🛡️ Data Quality & Health Scorecard",
+    "📋 Pipeline Execution & Audit Logs",
+    "📖 Data Dictionary & Catalog"
+]
+
+if "nav_portal" not in st.session_state:
+    st.session_state.nav_portal = NAV_OPTIONS[0]
+
+def set_tab(tab_name: str):
+    """Programmatically switch active navigation tab."""
+    st.session_state.nav_portal = tab_name
+    st.rerun()
+
 view_mode = st.sidebar.radio(
     "Navigation Portal",
-    [
-        "🏠 Executive Command Center",
-        "🤖 AI Data Copilot & SQL Assistant",
-        "📊 Executive Sales & Margin Analytics",
-        "🏗️ Pipeline Architecture & How It Works",
-        "👥 Customer & RFM Segmentation",
-        "🛒 Product & Merchandising Intelligence",
-        "🛡️ Data Quality & Health Scorecard",
-        "📋 Pipeline Execution & Audit Logs",
-        "📖 Data Dictionary & Catalog"
-    ]
+    NAV_OPTIONS,
+    index=NAV_OPTIONS.index(st.session_state.nav_portal) if st.session_state.nav_portal in NAV_OPTIONS else 0,
+    key="nav_radio"
 )
+
+if view_mode != st.session_state.nav_portal:
+    st.session_state.nav_portal = view_mode
 
 st.sidebar.markdown("---")
 st.sidebar.subheader("Global Filter Drill-Down")
@@ -310,7 +326,7 @@ if view_mode == "🏠 Executive Command Center":
 
     st.markdown("---")
 
-    st.subheader("Explore Platform Modules")
+    st.subheader("⚡ Click Any Module to Launch & Explore")
     
     g1, g2, g3 = st.columns(3)
     
@@ -322,6 +338,8 @@ if view_mode == "🏠 Executive Command Center":
             <div class="feature-desc">Ask natural language business questions and get live SQL execution, data tables, and automated analytical insights.</div>
         </div>
         """, unsafe_allow_html=True)
+        if st.button("🚀 Open AI Copilot ➔", key="btn_hero_ai", use_container_width=True):
+            set_tab("🤖 AI Data Copilot & SQL Assistant")
         
     with g2:
         st.markdown("""
@@ -331,6 +349,8 @@ if view_mode == "🏠 Executive Command Center":
             <div class="feature-desc">Interactive multi-period revenue, margin velocity, AOV tracking, and regional store performance breakdown.</div>
         </div>
         """, unsafe_allow_html=True)
+        if st.button("📈 Open Sales Analytics ➔", key="btn_hero_sales", use_container_width=True):
+            set_tab("📊 Executive Sales & Margin Analytics")
         
     with g3:
         st.markdown("""
@@ -340,6 +360,8 @@ if view_mode == "🏠 Executive Command Center":
             <div class="feature-desc">Active anomaly interception isolating Null PKs, duplicate orders, and orphaned FKs into quarantine with audit reason codes.</div>
         </div>
         """, unsafe_allow_html=True)
+        if st.button("🛡️ Open Data Quality ➔", key="btn_hero_dq", use_container_width=True):
+            set_tab("🛡️ Data Quality & Health Scorecard")
 
     st.markdown("<br>", unsafe_allow_html=True)
     g4, g5, g6 = st.columns(3)
@@ -348,12 +370,25 @@ if view_mode == "🏠 Executive Command Center":
         st.markdown("""
         <div class="feature-card">
             <div class="feature-icon">🏗️</div>
-            <div class="feature-title">Kimball Star Schema Warehouse</div>
-            <div class="feature-desc">Conformed dimensions (Date 2022-2030, Customer, Product, Store) and line-item atomic fact tables with surrogate keys.</div>
+            <div class="feature-title">Pipeline Architecture & Flow</div>
+            <div class="feature-desc">Interactive data flow diagram and multi-tier ingestion guide from raw OLTP to governed Kimball Star Schema.</div>
         </div>
         """, unsafe_allow_html=True)
+        if st.button("🏗️ View Architecture Flow ➔", key="btn_hero_arch", use_container_width=True):
+            set_tab("🏗️ Pipeline Architecture & How It Works")
 
     with g5:
+        st.markdown("""
+        <div class="feature-card">
+            <div class="feature-icon">👥</div>
+            <div class="feature-title">Customer RFM Clustering</div>
+            <div class="feature-desc">Behavioral segmentation engine dividing customers into Champions, Loyalists, and At-Risk groups via NTILE(5) scoring.</div>
+        </div>
+        """, unsafe_allow_html=True)
+        if st.button("👥 Open Customer RFM ➔", key="btn_hero_rfm", use_container_width=True):
+            set_tab("👥 Customer & RFM Segmentation")
+
+    with g6:
         st.markdown("""
         <div class="feature-card">
             <div class="feature-icon">📋</div>
@@ -361,15 +396,8 @@ if view_mode == "🏠 Executive Command Center":
             <div class="feature-desc">Structured execution logger, warehouse audit ledger table, and interactive browser-based on-demand pipeline runner.</div>
         </div>
         """, unsafe_allow_html=True)
-
-    with g6:
-        st.markdown("""
-        <div class="feature-card">
-            <div class="feature-icon">📖</div>
-            <div class="feature-title">Governance & Data Catalog</div>
-            <div class="feature-desc">60+ Documented business attributes with 4-Tier Security Classifications (PII Masking) and CSV/Excel export.</div>
-        </div>
-        """, unsafe_allow_html=True)
+        if st.button("📋 Open Execution Logs ➔", key="btn_hero_logs", use_container_width=True):
+            set_tab("📋 Pipeline Execution & Audit Logs")
 
     st.markdown("---")
 
