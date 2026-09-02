@@ -28,10 +28,8 @@ def test_metadata_artifacts_exist():
     assert (DOCS_DIR / "governance.md").exists()
 
 
-def test_warehouse_tables_populated():
+def test_warehouse_tables_populated(db_conn):
     """Verify that all core star schema and mart tables have positive row counts."""
-    con = duckdb.connect(str(DUCKDB_PATH), read_only=True)
-    
     expected_tables = [
         "dim_customer",
         "dim_product",
@@ -44,7 +42,5 @@ def test_warehouse_tables_populated():
     ]
     
     for tbl in expected_tables:
-        count = con.execute(f"SELECT COUNT(*) FROM warehouse.{tbl}").fetchone()[0]
+        count = db_conn.execute(f"SELECT COUNT(*) FROM warehouse.{tbl}").fetchone()[0]
         assert count > 0, f"Table warehouse.{tbl} is unexpectedly empty!"
-        
-    con.close()

@@ -16,14 +16,6 @@ from src.validation.integrity_checks import check_foreign_key_integrity
 from src.validation.null_checks import check_null_counts
 
 
-@pytest.fixture(scope="module")
-def db_conn():
-    """Shared test database connection fixture."""
-    con = duckdb.connect(str(DUCKDB_PATH), read_only=True)
-    yield con
-    con.close()
-
-
 def test_warehouse_customer_pk_unique_and_not_null(db_conn):
     """Ensure dim_customer has 0 null PKs and 0 duplicates."""
     null_res = check_null_counts(db_conn, "warehouse.dim_customer", ["customer_key", "customer_id"])

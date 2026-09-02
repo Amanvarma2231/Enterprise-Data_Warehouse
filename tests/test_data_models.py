@@ -1,17 +1,6 @@
-"""
-Automated PyTest Suite: Data Model Schema & Metric Consistency Tests
-"""
-
 import duckdb
 import pytest
 from src.config import DUCKDB_PATH
-
-
-@pytest.fixture(scope="module")
-def db_conn():
-    con = duckdb.connect(str(DUCKDB_PATH), read_only=True)
-    yield con
-    con.close()
 
 
 def test_fact_sales_financial_math(db_conn):
